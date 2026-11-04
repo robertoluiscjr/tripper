@@ -1,0 +1,257 @@
+// Tripper — schema do banco (PostgreSQL / Neon)
+// Base: BOILERPLATE_MANUAL (User + Auth.js + plano) + entidades do produto
+// derivadas do Figma (Nova Viagem, Novo Item, Voo, Acomodação, Estimar Gastos,
+// Buscar > Passeios e Atrações > Descrição do Passeio > Seus Dados > Pagamento).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// Usuário, autenticação e assinatura
+// ─────────────────────────────────────────────
+
+enum Plan {
+  FREE
+  TRIAL
+  PRO
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+
+  // Onboarding (3 telas) — exibido apenas no primeiro acesso
+  onboardingCompletedAt DateTime?
+
+  // Assinatura (Stripe)
+  plan                   Plan      @default(FREE)
+  trialEndsAt            DateTime?
+  stripeCustomerId       String?   @unique
+  stripePriceId          String?
+  stripeSubscriptionId   String?   @unique
+  stripeCurrentPeriodEnd DateTime?
+
+  accounts Account[]
+  sessions Session[]
+  trips    Trip[]
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// ─────────────────────────────────────────────
+// Planejamento de viagem
+// ─────────────────────────────────────────────
+
+enum TripStatus {
+  PLANNING // "Próximas viagens"
+  ONGOING
+  COMPLETED // "Viagens anteriores"
+}
+
+// Tela "Nova Viagem": nome + duração (datas início/fim OU quantidade de dias)
+model Trip {
+  id          String     @id @default(cuid())
+  userId      String
+  name        String // ex.: "Rio de Janeiro"
+  destination String?
+  coverImage  String?
+  startDate   DateTime?
+  endDate     DateTime?
+  daysCount   Int // sempre preenchido (calculado a partir das datas, se houver)
+  status      TripStatus @default(PLANNING)
+
+  // "Estimar Gastos": quanto o usuário deseja gastar
+  plannedBudget Decimal? @db.Decimal(12, 2)
+  currency      String   @default("BRL")
+
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items    TripItem[]
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// Menu "Novo Item" da Tela da Viagem
+enum ItemCategory {
+  TRANSPORT // Transportes
+  ACCOMMODATION // Acomodações
+  TOUR // Passeios e Atrações
+  FOOD // Comer e Beber
+  CAR_RENTAL // Aluguel de Carro
+  CUSTOM // Atividades Personalizadas
+}
+
+// Dropdown da tela "Transportes" (substituiu radio buttons após 2º teste)
+enum TransportMode {
+  PLANE
+  BUS
+  TRAIN
+  SHIP
+  OWN_CAR
+}
+
+// Item da linha do tempo (roteiro). Arrastar e soltar altera dayNumber/position.
+model TripItem {
+  id         String       @id @default(cuid())
+  tripId     String
+  category   ItemCategory
+  title      String // ex.: "Voo 3883", "Hotel Copa (check-in)"
+  dayNumber  Int // 1..daysCount
+  position   Int          @default(0) // ordem dentro do dia
+  startAt    DateTime?
+  endAt      DateTime?
+  cost       Decimal?     @db.Decimal(12, 2)
+  notes      String?      @db.Text // "Anotações"
+  imageUrl   String?
+
+  // Localização (mapa da Tela da Viagem)
+  address   String?
+  latitude  Float?
+  longitude Float?
+
+  // Transporte / Voo
+  transportMode   TransportMode?
+  carrier         String? // Companhia aérea / empresa
+  code            String? // Número do voo / código da reserva
+  originName      String? // Aeroporto / local de origem
+  destinationName String? // Aeroporto / local de destino
+
+  // Acomodação: check-in = startAt, check-out = endAt
+  // Compra feita dentro do app (Passeios e Atrações)
+  bookingId String? @unique
+
+  trip    Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  booking Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tripId, dayNumber, position])
+}
+
+// ─────────────────────────────────────────────
+// Buscar / compras (Passeios e Atrações)
+// ─────────────────────────────────────────────
+
+model Destination {
+  id       String  @id @default(cuid())
+  name     String // "Rio de Janeiro"
+  state    String?
+  country  String  @default("Brasil")
+  imageUrl String?
+  tours    Tour[]
+
+  @@unique([name, state])
+}
+
+model Tour {
+  id                 String   @id @default(cuid())
+  destinationId      String
+  title              String
+  summary            String?
+  description        String?  @db.Text
+  imageUrls          String[]
+  durationLabel      String? // "Passeio de dia inteiro"
+  rating             Float? // 4.9
+  reviewsCount       Int      @default(0)
+  priceFrom          Decimal  @db.Decimal(12, 2)
+  freeCancellation   Boolean  @default(false)
+  isPromotion        Boolean  @default(false)
+
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  bookings    Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([destinationId])
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+// Fluxo: Descrição do Passeio > Seus Dados > Dados de Pagamento > Adicionar a Viagem
+model Booking {
+  id          String        @id @default(cuid())
+  userId      String
+  tourId      String
+  tripId      String?
+  date        DateTime
+  people      Int           @default(1)
+  totalAmount Decimal       @db.Decimal(12, 2)
+  status      BookingStatus @default(PENDING)
+
+  // "Seus Dados" (contato)
+  contactFirstName String
+  contactLastName  String
+  contactEmail     String
+  contactPhone     String?
+
+  stripeCheckoutSessionId String? @unique
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tour     Tour      @relation(fields: [tourId], references: [id])
+  trip     Trip?     @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  tripItem TripItem?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
