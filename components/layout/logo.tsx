@@ -47,12 +47,15 @@ export function Logo({
   );
 }
 
-/** Pássaro isolado (ícone do header das Homes, 24px). */
+/**
+ * Pássaro isolado (Figma "Ícones / Tipo=Bird", 24,03px): o mesmo pássaro do
+ * logo, girado −11,43° — por isso a caixa de 24,03px para o vetor de 20,39px.
+ */
 export function BirdIcon({ className }: { className?: string }) {
   return (
-    <span aria-hidden className={cn("flex size-6 items-center justify-center", className)}>
+    <span aria-hidden className={cn("flex size-[24.03px] shrink-0 items-center justify-center", className)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/brand/bird-icon.svg" alt="" width={20.3929} height={20.3929} className="block max-w-none" />
+      <img src="/brand/bird-icon.svg" alt="" width={20.3929} height={20.3929} className="block max-w-none -rotate-[11.43deg]" />
     </span>
   );
 }

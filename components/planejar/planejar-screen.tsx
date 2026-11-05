@@ -52,9 +52,9 @@ export function PlanejarScreen({
           <PlanejarBenefits />
           <Link
             href="/login?callbackUrl=/app/planejar"
-            className="relative mx-[37px] mt-12 flex h-[38px] items-center justify-end rounded-[20px] border border-primary bg-white pr-4 pl-3 text-p16 leading-[1.2] font-medium text-primary transition-colors hover:bg-tripper-blue-300/5"
+            className="mx-auto mt-12 flex h-[38px] w-[319px] max-w-[calc(100%-48px)] items-center justify-center gap-[6px] rounded-[20px] border border-primary bg-white pr-4 pl-3 text-p16 leading-[1.2] font-medium whitespace-nowrap text-primary transition-colors hover:bg-tripper-blue-300/5"
           >
-            <BirdIcon className="absolute top-[6px] left-[14px]" />
+            <BirdIcon />
             Faça login para acessar suas viagens
           </Link>
         </div>
