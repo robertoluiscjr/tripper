@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import { Slot } from "radix-ui"
 
 const buttonVariants = cva(
@@ -35,8 +35,12 @@ const buttonVariants = cva(
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
         // CTA padrão do app: mesma dimensão em todas as telas (feedback do 2º teste de usabilidade)
-        cta: "h-12 w-full gap-2 px-6 text-base",
-        fab: "size-14 shadow-lg [&_svg:not([class*='size-'])]:size-6",
+        // Figma "Button with CTA": 56px de altura, texto 20px Medium
+        cta: "h-14 w-full gap-2 px-6 text-h5 font-medium",
+        // Figma "Button with icon": botão redondo de 56px (ex.: + novo item)
+        fab: "size-14 p-4 [&_svg:not([class*='size-'])]:size-7",
+        // Figma "Button with text and icon": "+ nova viagem"
+        pill: "h-14 gap-2 pt-3 pr-[21px] pb-4 pl-4 text-h5 font-medium",
       },
     },
     defaultVariants: {

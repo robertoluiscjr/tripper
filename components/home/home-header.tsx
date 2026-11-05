@@ -43,6 +43,17 @@ export function HomeHeader({ name, image }: { name?: string | null; image?: stri
   );
 }
 
+/** Enquanto a sessão carrega: o mesmo header azul, sem a saudação. */
+export function HomeHeaderSkeleton() {
+  return (
+    <header className="absolute inset-x-0 top-0 h-[221px] bg-primary px-6">
+      <BirdIcon className="absolute top-10 right-[24.5px]" />
+      <div className="absolute top-[79px] left-6 h-7 w-44 animate-pulse rounded-full bg-white/20" />
+      <div className="absolute top-[135px] left-6 h-5 w-64 animate-pulse rounded-full bg-white/15" />
+    </header>
+  );
+}
+
 function Avatar({ image }: { image?: string | null }) {
   if (!image) {
     // eslint-disable-next-line @next/next/no-img-element

@@ -27,6 +27,7 @@
   --color-tripper-light-100: #ffffff;
   --color-tripper-light-300: #f0f0f0;
   --color-tripper-light-500: #e5e5e5;
+  --color-tripper-divider: #d9d9d9; /* Divider do Figma */
 
   /* Tokens semânticos (shadcn/ui) */
   --color-background: var(--background);

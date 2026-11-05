@@ -19,7 +19,7 @@ const TABS: { id: Tab; href: string; label: string }[] = [
 
 function activeTab(pathname: string): Tab {
   if (pathname.startsWith("/app/buscar")) return "buscar";
-  if (pathname.startsWith("/app/planejar")) return "planejar";
+  if (pathname.startsWith("/app/planejar") || pathname.startsWith("/app/viagens")) return "planejar";
   if (pathname.startsWith("/app/conta") || pathname.startsWith("/settings")) return "conta";
   return "home";
 }
@@ -54,6 +54,13 @@ function TabIcon({ tab, active, userImage }: { tab: Tab; active: boolean; userIm
         <img src="/icons/conta.svg" alt="" width={32} height={32} className={cn(active && "rounded-full ring-2 ring-primary")} />
       );
   }
+}
+
+/** Barra vazia (mesmo tamanho) exibida por instantes enquanto a sessão carrega. */
+export function TabBarPlaceholder() {
+  return (
+    <div aria-hidden className="sticky bottom-0 z-40 mt-auto h-[72px] w-full bg-white shadow-[0px_-1px_4px_0px_rgba(0,0,0,0.1)]" />
+  );
 }
 
 export function TabBar({ userImage }: { userImage?: string | null }) {

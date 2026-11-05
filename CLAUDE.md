@@ -29,6 +29,14 @@ TanStack Query · Prisma 6 + PostgreSQL (Neon) · Zod 4 · Auth.js v5 (Google + 
   baixe os assets para `public/` (fotos grandes → WebP com sharp) e reproduza o recorte das imagens do Figma.
   Conferir com print 393×852 (Edge headless dentro de um iframe de 393px).
 - Componentes de layout: `MobileShell` (moldura mobile), `TabBar`, `Logo` (wordmark oficial, tamanho via font-size).
+- **`cn` sempre de `@/lib/utils`** (nunca do pacote "cn"): ele registra os tamanhos `text-h1…small`; sem isso
+  `text-h5` é tratado como cor e apaga `text-white`/`text-primary-foreground`.
+- **Suspense por página**: cada `page.tsx` que lê sessão/dados envolve essa parte em `<Suspense>` com skeleton
+  (validação de navegação instantânea do Next 16). `getCurrentUser()` já chama `connection()`.
+- **Login de teste local**: `http://localhost:3000/api/dev/login` entra como a persona "Ana Medeiros"
+  (só em `next dev`; em produção responde 404).
+- Viagens: foto de capa + coordenadas vêm da Wikipédia (`lib/destination.ts`); mapa = Leaflet + OpenStreetMap.
+- Botões: `size="cta"` (56px, texto 20), `size="pill"` (+ nova viagem), `size="fab"` (+ item). Bottom sheet = `Drawer`.
 
 ## Estrutura
 ```

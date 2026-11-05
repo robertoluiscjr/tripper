@@ -35,7 +35,8 @@ export function HomeCard({
               src={image}
               alt=""
               fill
-              priority={priority}
+              loading={priority ? "eager" : "lazy"}
+              fetchPriority={priority ? "high" : "auto"}
               sizes="(max-width: 448px) 92vw, 400px"
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />

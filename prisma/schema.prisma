@@ -105,7 +105,10 @@ model Trip {
   userId      String
   name        String // ex.: "Rio de Janeiro"
   destination String?
-  coverImage  String?
+  coverImage  String? // foto do destino (Wikipédia/Wikimedia) usada no card de Planejar
+  coverCredit String? // atribuição da foto
+  latitude    Float? // centro do mapa da Tela da Viagem
+  longitude   Float?
   startDate   DateTime?
   endDate     DateTime?
   daysCount   Int // sempre preenchido (calculado a partir das datas, se houver)

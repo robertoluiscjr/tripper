@@ -26,6 +26,8 @@ export const createTripSchema = z
         ctx.addIssue({ code: "custom", path: ["startDate"], message: "Informe as datas inicial e final" });
       } else if (data.endDate < data.startDate) {
         ctx.addIssue({ code: "custom", path: ["endDate"], message: "A data final deve ser depois da inicial" });
+      } else if ((data.endDate.getTime() - data.startDate.getTime()) / 86_400_000 + 1 > 90) {
+        ctx.addIssue({ code: "custom", path: ["endDate"], message: "A viagem pode ter no máximo 90 dias" });
       }
     } else if (!data.daysCount) {
       ctx.addIssue({ code: "custom", path: ["daysCount"], message: "Informe a quantidade de dias" });

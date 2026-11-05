@@ -100,7 +100,7 @@ export function OnboardingCarousel() {
             style={{ height: slide.photoHeight }}
           >
             <div className="absolute" style={slide.frame}>
-              <Image src={slide.image} alt="" fill priority={i === 0} sizes="(max-width: 448px) 150vw, 650px" className="object-cover" />
+              <Image src={slide.image} alt="" fill loading="eager" fetchPriority={i === 0 ? "high" : "low"} sizes="(max-width: 448px) 150vw, 650px" className="object-cover" />
             </div>
           </div>
           {/* Gradiente */}
