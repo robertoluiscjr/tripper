@@ -7,6 +7,8 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "preview": "node scripts/preview.mjs",
+    "env:push": "node scripts/env-push.mjs",
+    "setup:login": "node scripts/setup.mjs AUTH_GOOGLE_ID AUTH_GOOGLE_SECRET AUTH_RESEND_KEY",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "setup": "node scripts/setup.mjs",

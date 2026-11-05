@@ -15,7 +15,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "database" },
   trustHost: true,
   providers: [
-    Google,
+    // E-mails do Google já são verificados: liga a conta Google a um cadastro feito antes por e-mail
+    Google({ allowDangerousEmailAccountLinking: true }),
     Resend({
       from: process.env.EMAIL_FROM ?? "Tripper <onboarding@resend.dev>",
     }),
@@ -23,6 +24,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     signIn: "/login",
     verifyRequest: "/login/verificar",
+    error: "/login", // erros (link expirado etc.) voltam ao login com ?error=...
   },
   events: {
     // Primeiro login → plan=TRIAL e trialEndsAt=agora+14 dias

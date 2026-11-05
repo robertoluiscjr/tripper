@@ -25,8 +25,12 @@ const keys = Object.keys(parse(example));
 const rl = createInterface({ input, output });
 console.log("\n✈️  Tripper — configuração do .env (Enter mantém o valor atual)\n");
 
+// `node scripts/setup.mjs CHAVE1 CHAVE2` pergunta só essas chaves (mantém as demais)
+const only = process.argv.slice(2);
+const asked = only.length ? keys.filter((k) => only.includes(k)) : keys;
+
 const values = { ...current };
-for (const key of keys) {
+for (const key of asked) {
   if (key === "AUTH_SECRET" && !values[key]) {
     values[key] = randomBytes(32).toString("base64");
     console.log(`${key}: gerado automaticamente`);
@@ -38,6 +42,9 @@ for (const key of keys) {
   values[key] ??= parse(example)[key] ?? "";
 }
 rl.close();
+
+// A mesma chave do Resend serve para o login por e-mail e para os e-mails do app
+if (values.AUTH_RESEND_KEY && !values.RESEND_API_KEY) values.RESEND_API_KEY = values.AUTH_RESEND_KEY;
 
 const out = keys.map((k) => `${k}="${values[k] ?? ""}"`).join("\n") + "\n";
 writeFileSync(".env", out);
