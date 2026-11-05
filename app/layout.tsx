@@ -13,7 +13,7 @@ const jost = Jost({
 // Fonte do wordmark "tripper" (logo)
 const montserratAlternates = Montserrat_Alternates({
   variable: "--font-montserrat-alt",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"], // latin-ext traz o "ı" sem pingo do wordmark
   weight: ["700"],
 });
 

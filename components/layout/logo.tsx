@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 
 /**
  * Logo oficial do Tripper (Figma: componente "Logo", node 2265:2204).
- * Wordmark "tripper" em Montserrat Alternates Bold; um quadrado da cor do
- * fundo cobre o pingo do "i" e o pássaro laranja (bird.svg) ocupa o lugar.
+ * Wordmark "tripper" em Montserrat Alternates Bold, com "ı" sem pingo; o
+ * pássaro laranja (bird.svg) ocupa o lugar do pingo.
  * Tudo em `em`, então o tamanho é controlado pelo font-size (padrão do Figma: 64px).
  */
 export function Logo({
@@ -31,16 +31,10 @@ export function Logo({
           onBlue ? "text-white" : "text-primary",
         )}
       >
-        tripper
+        {/* "ı" (i sem pingo, U+0131): o pássaro ocupa o lugar do pingo, sem
+            precisar de retângulo de cobertura — funciona sobre qualquer fundo. */}
+        tr{"ı"}pper
       </span>
-      {/* Retângulo que esconde o pingo do "i" */}
-      <span
-        aria-hidden
-        className={cn(
-          "absolute top-[calc(50%-0.28125em)] left-[calc(50%-0.7734em)] size-[0.234375em] -translate-x-1/2 -translate-y-1/2",
-          onBlue ? "bg-primary" : "bg-background",
-        )}
-      />
       {/* Pássaro */}
       <span
         aria-hidden
