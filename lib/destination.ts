@@ -1,3 +1,5 @@
+import { findDestinationPhoto } from "@/lib/destination-photos";
+
 /**
  * Busca foto e coordenadas do destino na Wikipédia (pt) — gratuito, sem chave.
  * Usado ao criar/renomear uma viagem: a foto vira a capa do card em Planejar e
@@ -19,7 +21,17 @@ type WikiPage = {
   coordinates?: { lat: number; lon: number }[];
 };
 
+/**
+ * Foto + coordenadas do destino. Se o destino tem foto no protótipo (Figma),
+ * ela é usada como capa; a Wikipédia fornece as coordenadas (e a foto dos demais).
+ */
 export async function lookupDestination(query: string): Promise<DestinationInfo> {
+  const wiki = await lookupWikipedia(query);
+  const figmaPhoto = findDestinationPhoto(query);
+  return figmaPhoto ? { ...wiki, coverImage: figmaPhoto.src, coverCredit: null } : wiki;
+}
+
+async function lookupWikipedia(query: string): Promise<DestinationInfo> {
   const q = query.trim();
   if (q.length < 2) return EMPTY;
 

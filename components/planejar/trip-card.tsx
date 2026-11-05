@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { daysLabel, type TripDTO } from "@/lib/trips";
+import { coverPosition } from "@/lib/destination-photos";
 
 /**
  * "Card + Nome + Duração" do Figma (Planejar): foto 345 × 169 com raio 12,
@@ -18,6 +19,7 @@ export function TripCard({ trip, priority }: { trip: TripDTO; priority?: boolean
             loading={priority ? "eager" : "lazy"}
             fetchPriority={priority ? "high" : "auto"}
             sizes="(max-width: 448px) 92vw, 400px"
+            style={{ objectPosition: coverPosition(trip.coverImage) }}
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (

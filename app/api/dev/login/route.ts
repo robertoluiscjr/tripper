@@ -1,17 +1,25 @@
 import { randomBytes } from "node:crypto";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import { db } from "@/lib/db";
 import { TRIAL_DAYS } from "@/lib/plans";
 
 /**
- * ⚠️ SOMENTE DESENVOLVIMENTO — login de teste com a persona "Ana Medeiros".
+ * ⚠️ SOMENTE LOCAL — login de teste com a persona "Ana Medeiros".
  * Permite testar as telas logadas no localhost sem Google/Resend configurados.
- * Em produção (NODE_ENV=production, como na Vercel) responde 404.
+ * Liberado em `npm run dev` e em `npm run preview` (TRIPPER_DEV_LOGIN=1).
+ * Na Vercel (VERCEL=1) responde sempre 404.
  *
  * Uso: http://localhost:3000/api/dev/login  (opcional: ?next=/app/planejar)
  */
+function devLoginAllowed() {
+  if (process.env.VERCEL) return false;
+  return process.env.NODE_ENV === "development" || process.env.TRIPPER_DEV_LOGIN === "1";
+}
+
 export async function GET(req: Request) {
-  if (process.env.NODE_ENV !== "development") {
+  await connection(); // decide em tempo de requisição (nunca pré-renderizado no build)
+  if (!devLoginAllowed()) {
     return new Response("Not found", { status: 404 });
   }
 
