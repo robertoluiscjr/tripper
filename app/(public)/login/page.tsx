@@ -26,12 +26,12 @@ async function signInWithEmail(formData: FormData) {
 export default function LoginPage() {
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-8 px-6 py-8">
-      <Link href="/" aria-label="Voltar" className="text-foreground">
+      <Link href="/app" aria-label="Voltar" className="text-foreground">
         <ChevronLeft className="size-6" />
       </Link>
 
       <div className="flex flex-col items-center gap-6 text-center">
-        <Logo />
+        <Logo variant="blue" className="text-[40px]" />
         <h1 className="text-h4 font-semibold text-foreground">
           Entre para começar a planejar sua próxima viagem
         </h1>

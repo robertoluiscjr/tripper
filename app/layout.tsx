@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Jost } from "next/font/google";
+import { Jost, Montserrat_Alternates } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -8,6 +8,13 @@ const jost = Jost({
   variable: "--font-jost",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+// Fonte do wordmark "tripper" (logo)
+const montserratAlternates = Montserrat_Alternates({
+  variable: "--font-montserrat-alt",
+  subsets: ["latin"],
+  weight: ["700"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +35,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${jost.variable} h-full antialiased`}>
+    <html lang="pt-BR" className={`${jost.variable} ${montserratAlternates.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <Providers>{children}</Providers>
       </body>

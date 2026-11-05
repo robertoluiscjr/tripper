@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Planos" };
 export default function PricingPage() {
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-10">
-      <Link href="/"><Logo /></Link>
+      <Link href="/sobre" aria-label="Tripper"><Logo variant="blue" className="text-[40px]" /></Link>
       <div className="flex flex-col gap-2">
         <h1 className="text-h2 font-semibold text-foreground">Escolha seu plano</h1>
         <p className="text-p15 text-muted-foreground">

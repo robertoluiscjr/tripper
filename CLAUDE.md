@@ -25,11 +25,16 @@ TanStack Query · Prisma 6 + PostgreSQL (Neon) · Zod 4 · Auth.js v5 (Google + 
 - Toasts: `sonner` (o toast do shadcn foi depreciado).
 - Prisma 6 (não 7). Após mudar o schema: `npm run db:push` (dev) ou `npm run db:migrate`.
 - Monetização ainda **provisória**: limites/preço em `lib/plans.ts`.
+- **Fidelidade ao Figma**: use `get_design_context` com o node ID (tabela em `.claude/context/design-system.md`),
+  baixe os assets para `public/` (fotos grandes → WebP com sharp) e reproduza o recorte das imagens do Figma.
+  Conferir com print 393×852 (Edge headless dentro de um iframe de 393px).
+- Componentes de layout: `MobileShell` (moldura mobile), `TabBar`, `Logo` (wordmark oficial, tamanho via font-size).
 
 ## Estrutura
 ```
-app/(public)/      landing, login, pricing
-app/(auth)/        área logada: /app (Home, Planejar, Buscar, Conta) e /settings/billing
+app/(public)/      / (Splash), /onboarding, /login, /pricing, /sobre (landing)
+app/(app)/         /app com tab bar: Home, Buscar, Planejar, Conta — acessível sem login (variações "pré-login")
+app/(auth)/        exige login: /settings/billing (proxy também protege /app/viagens/*)
 app/api/           auth, stripe (checkout, portal, webhook), trips
 components/ui/     shadcn/ui customizado com o styleguide
 components/layout/ logo, tab bar, headers
