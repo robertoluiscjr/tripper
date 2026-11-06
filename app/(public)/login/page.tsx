@@ -123,6 +123,12 @@ function LoginForms({ callbackUrl, error }: { callbackUrl: string; error?: strin
           </p>
         </form>
       )}
+
+      <p className="text-center text-small text-muted-foreground">
+        Ao continuar, você concorda com os{" "}
+        <Link href="/termos" className="underline underline-offset-4 hover:text-foreground">Termos de uso</Link> e a{" "}
+        <Link href="/privacidade" className="underline underline-offset-4 hover:text-foreground">Política de Privacidade</Link>.
+      </p>
     </div>
   );
 }

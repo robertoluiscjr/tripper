@@ -56,8 +56,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="mt-auto border-t px-6 py-6 text-center text-small text-muted-foreground">
-        Tripper · Estudo de caso de UX/UI e Product Design — Roberto Luís Coelho
+      <footer className="mt-auto flex flex-col items-center gap-2 border-t px-6 py-6 text-center text-small text-muted-foreground">
+        <p>Tripper · Estudo de caso de UX/UI e Product Design — Roberto Luís Coelho</p>
+        <nav className="flex gap-4">
+          <Link href="/privacidade" className="underline underline-offset-4 hover:text-foreground">Privacidade</Link>
+          <Link href="/termos" className="underline underline-offset-4 hover:text-foreground">Termos de uso</Link>
+        </nav>
       </footer>
     </main>
   );
