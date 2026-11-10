@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { initials } from "@/lib/initials";
 
 /**
  * Bottom Menu (Figma: "Bottom Menu (Home|Buscar|Planejar)", 393 × 72).
@@ -25,7 +26,7 @@ function activeTab(pathname: string): Tab {
 }
 
 /* eslint-disable @next/next/no-img-element */
-function TabIcon({ tab, active, userImage }: { tab: Tab; active: boolean; userImage?: string | null }) {
+function TabIcon({ tab, active, userImage, userName }: { tab: Tab; active: boolean; userImage?: string | null; userName?: string | null }) {
   switch (tab) {
     case "home":
       return <img src={active ? "/icons/home-active.svg" : "/icons/home.svg"} alt="" width={32} height={32} />;
@@ -41,7 +42,22 @@ function TabIcon({ tab, active, userImage }: { tab: Tab; active: boolean; userIm
         </span>
       );
     }
-    case "conta":
+    case "conta": {
+      const letters = initials(userName);
+      if (!userImage && letters) {
+        return (
+          <span className="flex size-8 items-center justify-center">
+            <span
+              className={cn(
+                "flex size-[26px] items-center justify-center rounded-full text-small leading-none font-semibold text-white",
+                active ? "bg-primary" : "bg-tripper-dark-700",
+              )}
+            >
+              {letters}
+            </span>
+          </span>
+        );
+      }
       return userImage ? (
         <span className="flex size-8 items-center justify-center">
           <img
@@ -53,6 +69,7 @@ function TabIcon({ tab, active, userImage }: { tab: Tab; active: boolean; userIm
       ) : (
         <img src="/icons/conta.svg" alt="" width={32} height={32} className={cn(active && "rounded-full ring-2 ring-primary")} />
       );
+    }
   }
 }
 
@@ -63,7 +80,7 @@ export function TabBarPlaceholder() {
   );
 }
 
-export function TabBar({ userImage }: { userImage?: string | null }) {
+export function TabBar({ userImage, userName }: { userImage?: string | null; userName?: string | null }) {
   const current = activeTab(usePathname());
 
   return (
@@ -81,7 +98,7 @@ export function TabBar({ userImage }: { userImage?: string | null }) {
                 aria-current={active ? "page" : undefined}
                 className="flex flex-1 flex-col items-center justify-start gap-0 pt-4"
               >
-                <TabIcon tab={tab.id} active={active} userImage={userImage} />
+                <TabIcon tab={tab.id} active={active} userImage={userImage} userName={userName} />
                 <span className={cn("text-small leading-none", active ? "text-primary" : "text-muted-foreground")}>
                   {tab.label}
                 </span>

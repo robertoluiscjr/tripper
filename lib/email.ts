@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { APP_URL } from "@/lib/site";
 
 let _resend: Resend | null = null;
 
@@ -41,4 +42,66 @@ export function welcomeEmail(name?: string | null) {
       <p>Seu período de teste de 14 dias já começou.</p>
     </div>`,
   };
+}
+
+/**
+ * E-mail do link de acesso (login sem senha). HTML simples em tabelas + versão em texto,
+ * em pt-BR e com a identidade do Tripper — e-mails genéricos tendem a cair no spam.
+ * Cores em hex porque clientes de e-mail não leem os tokens do CSS do app.
+ */
+export function magicLinkEmail({ url, hours = 24 }: { url: string; hours?: number }) {
+  const blue = "#2765C2";
+  const text700 = "#454545";
+  const text500 = "#696969";
+  const preheader = "Toque no botão para entrar no Tripper. O link vale por " + hours + " horas.";
+
+  const html = `<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Seu link de acesso ao Tripper</title></head>
+<body style="margin:0;padding:0;background:#F0F0F0;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">${preheader}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F0F0F0;padding:32px 16px;">
+  <tr><td align="center">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#FFFFFF;border-radius:16px;font-family:Arial,Helvetica,sans-serif;">
+      <tr><td style="background:${blue};border-radius:16px 16px 0 0;padding:18px 32px;">
+        <img src="${APP_URL}/brand/logo-email-white.png" width="116" height="38" alt="Tripper" style="display:block;border:0;outline:none;width:116px;height:38px;color:#FFFFFF;font-size:24px;font-weight:700;">
+      </td></tr>
+      <tr><td style="padding:32px;">
+        <h1 style="margin:0 0 12px;font-size:20px;line-height:1.3;color:${text700};">Seu link de acesso chegou!</h1>
+        <p style="margin:0 0 24px;font-size:16px;line-height:1.5;color:${text500};">
+          Toque no botão abaixo para entrar no Tripper e continuar planejando sua próxima viagem.
+        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="border-radius:999px;background:${blue};">
+          <a href="${url.replace(/&/g, "&amp;")}" target="_blank" style="display:inline-block;padding:12px 40px;font-size:16px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:999px;">Entrar</a>
+        </td></tr></table>
+        <p style="margin:24px 0 0;font-size:14px;line-height:1.5;color:${text500};">
+          O link vale por ${hours} horas e só pode ser usado uma vez. Abra no mesmo aparelho e navegador em que você quer usar o Tripper.
+        </p>
+        <p style="margin:16px 0 0;font-size:14px;line-height:1.5;color:${text500};">
+          Se você não pediu este acesso, pode ignorar este e-mail com tranquilidade: ninguém entra na sua conta sem clicar no link.
+        </p>
+      </td></tr>
+      <tr><td style="padding:20px 32px;border-top:1px solid #E5E5E5;font-size:12px;line-height:1.5;color:${text500};">
+        Tripper · Planeje sua próxima viagem<br>Este é um e-mail automático, enviado porque alguém pediu um link de acesso com este endereço.
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>`;
+
+  const text = [
+    "Seu link de acesso ao Tripper",
+    "",
+    "Abra o link abaixo para entrar no Tripper:",
+    url,
+    "",
+    `O link vale por ${hours} horas e só pode ser usado uma vez. Abra no mesmo aparelho e navegador em que você quer usar o Tripper.`,
+    "",
+    "Se você não pediu este acesso, pode ignorar este e-mail: ninguém entra na sua conta sem clicar no link.",
+    "",
+    "Tripper · Planeje sua próxima viagem",
+  ].join("\n");
+
+  return { subject: "Seu link de acesso ao Tripper", html, text };
 }

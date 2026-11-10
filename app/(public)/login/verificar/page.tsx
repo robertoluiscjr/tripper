@@ -13,6 +13,10 @@ export default function VerifyRequestPage() {
       <p className="text-p15 text-muted-foreground">
         Enviamos um link de acesso para você. Clique nele para entrar no Tripper.
       </p>
+      <ul className="flex flex-col gap-2 rounded-xl bg-muted p-4 text-left text-p14 text-muted-foreground">
+        <li>Abra o link no mesmo aparelho e navegador em que você quer usar o Tripper.</li>
+        <li>Não chegou? Confira a caixa de spam ou lixo eletrônico. O link vale por 24 horas.</li>
+      </ul>
       <Button asChild variant="outline" size="cta">
         <Link href="/login">Voltar</Link>
       </Button>

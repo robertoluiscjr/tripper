@@ -41,9 +41,17 @@ async function ContaContent() {
 
   return (
     <>
-      <p className="text-p15 text-muted-foreground">
-        {user.name ?? "Viajante"} · {user.email}
-      </p>
+      <div className="flex items-start justify-between gap-4">
+        <p className="text-p15 text-muted-foreground">
+          {user.name ?? "Viajante"} · {user.email}
+        </p>
+        <Link
+          href="/boas-vindas?editar=1&next=/app/conta"
+          className="shrink-0 text-p14 font-medium text-primary underline-offset-4 hover:underline"
+        >
+          {user.name ? "Alterar nome" : "Adicionar nome"}
+        </Link>
+      </div>
       <Button asChild variant="outline" size="cta">
         <Link href="/settings/billing">Meu plano</Link>
       </Button>

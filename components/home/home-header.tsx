@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BirdIcon } from "@/components/layout/logo";
+import { initials } from "@/lib/initials";
 
 /**
  * Header azul das Homes (Figma "Header", 393 × 221).
@@ -15,7 +16,7 @@ export function HomeHeader({ name, image }: { name?: string | null; image?: stri
 
       {loggedIn ? (
         <div className="absolute top-[75px] left-6 flex items-center gap-2">
-          <Avatar image={image} />
+          <Avatar image={image} name={name} />
           <h1 className="text-h3 leading-[1.5] font-medium tracking-[-0.03em]">Olá, {firstName}!</h1>
         </div>
       ) : (
@@ -54,7 +55,18 @@ export function HomeHeaderSkeleton() {
   );
 }
 
-function Avatar({ image }: { image?: string | null }) {
+function Avatar({ image, name }: { image?: string | null; name?: string | null }) {
+  const letters = initials(name);
+  if (!image && letters) {
+    // Sem foto (login por e-mail): iniciais do nome no mesmo círculo da foto
+    return (
+      <span className="flex size-8 items-center justify-center">
+        <span aria-hidden className="flex size-[26px] items-center justify-center rounded-full bg-white text-small leading-none font-semibold text-primary">
+          {letters}
+        </span>
+      </span>
+    );
+  }
   if (!image) {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src="/icons/account-white.svg" alt="" width={32} height={32} />;

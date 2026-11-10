@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { signIn } from "@/lib/auth";
+import { safeCallback } from "@/lib/safe-redirect";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,12 +15,6 @@ export const metadata: Metadata = { title: "Entrar" };
 const GOOGLE_ENABLED = !!(process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET);
 const EMAIL_ENABLED = !!process.env.AUTH_RESEND_KEY;
 
-/** Só aceita caminhos internos (evita redirecionar para outro site). */
-function safeCallback(value: FormDataEntryValue | string | string[] | null | undefined) {
-  const v = Array.isArray(value) ? value[0] : value;
-  return typeof v === "string" && v.startsWith("/") && !v.startsWith("//") ? v : "/app";
-}
-
 async function signInWithGoogle(formData: FormData) {
   "use server";
   await signIn("google", { redirectTo: safeCallback(formData.get("callbackUrl")) });
@@ -27,9 +22,11 @@ async function signInWithGoogle(formData: FormData) {
 
 async function signInWithEmail(formData: FormData) {
   "use server";
+  // Quem entra por e-mail não traz nome: passa por /boas-vindas (pergunta o nome só se faltar)
+  const next = safeCallback(formData.get("callbackUrl"));
   await signIn("resend", {
     email: formData.get("email"),
-    redirectTo: safeCallback(formData.get("callbackUrl")),
+    redirectTo: `/boas-vindas?next=${encodeURIComponent(next)}`,
   });
 }
 
@@ -37,6 +34,7 @@ const ERRORS: Record<string, string> = {
   OAuthAccountNotLinked: "Este e-mail já está ligado a outra forma de acesso. Entre como da primeira vez.",
   Verification: "O link de acesso expirou ou já foi usado. Peça um novo abaixo.",
   AccessDenied: "Acesso negado. Tente novamente.",
+  EmailSignin: "Não conseguimos enviar o e-mail agora. Confira o endereço e tente novamente.",
   Configuration: "O login está temporariamente indisponível. Tente novamente em instantes.",
 };
 
