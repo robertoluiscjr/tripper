@@ -63,8 +63,8 @@ export function magicLinkEmail({ url, hours = 24 }: { url: string; hours?: numbe
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F0F0F0;padding:32px 16px;">
   <tr><td align="center">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#FFFFFF;border-radius:16px;font-family:Arial,Helvetica,sans-serif;">
-      <tr><td style="background:${blue};border-radius:16px 16px 0 0;padding:24px 32px;">
-        <img src="${APP_URL}/brand/logo-email-white.png" width="152" height="50" alt="Tripper" style="display:block;border:0;outline:none;width:152px;height:50px;color:#FFFFFF;font-size:28px;font-weight:700;">
+      <tr><td style="background:${blue};border-radius:16px 16px 0 0;padding:18px 32px;">
+        <img src="${APP_URL}/brand/logo-email-white.png" width="116" height="38" alt="Tripper" style="display:block;border:0;outline:none;width:116px;height:38px;color:#FFFFFF;font-size:24px;font-weight:700;">
       </td></tr>
       <tr><td style="padding:32px;">
         <h1 style="margin:0 0 16px;font-size:24px;line-height:1.3;color:${text700};">Seu link de acesso chegou!</h1>

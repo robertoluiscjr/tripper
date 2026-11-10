@@ -50,7 +50,7 @@ function TabIcon({ tab, active, userImage, userName }: { tab: Tab; active: boole
             <span
               className={cn(
                 "flex size-[26px] items-center justify-center rounded-full text-small leading-none font-semibold text-white",
-                active ? "bg-primary" : "bg-tripper-dark-500",
+                active ? "bg-primary" : "bg-tripper-dark-700",
               )}
             >
               {letters}
