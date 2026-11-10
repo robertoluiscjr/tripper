@@ -30,8 +30,10 @@ for (const key of KEYS) {
   for (const target of ["production", "preview"]) {
     // remove o valor antigo (se houver) e grava o novo
     spawnSync(vercel, ["vercel", "env", "rm", key, target, "--yes"], { stdio: "ignore", shell: process.platform === "win32" });
-    const args = ["vercel", "env", "add", key, target, "--value", value, "--yes", SECRET.has(key) ? "--sensitive" : "--no-sensitive"];
-    const r = spawnSync(vercel, args, { stdio: "ignore", shell: process.platform === "win32" });
+    // O valor vai pela entrada padrão (stdin), não na linha de comando: assim caracteres
+    // como < > & não são interpretados pelo Windows e a chave não aparece na lista de processos.
+    const args = ["vercel", "env", "add", key, target, "--yes", SECRET.has(key) ? "--sensitive" : "--no-sensitive"];
+    const r = spawnSync(vercel, args, { input: value, stdio: ["pipe", "ignore", "ignore"], shell: process.platform === "win32" });
     console.log(`${r.status === 0 ? "✓" : "✗"} ${key} → ${target}`);
     if (r.status === 0) sent++;
   }
