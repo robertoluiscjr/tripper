@@ -21,5 +21,5 @@ export default function AppLayout({ children }: LayoutProps<"/">) {
 
 async function TabBarWithUser() {
   const user = await getCurrentUser();
-  return <TabBar userImage={user?.image} />;
+  return <TabBar userImage={user?.image} userName={user?.name} />;
 }

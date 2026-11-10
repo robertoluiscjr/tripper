@@ -4,6 +4,7 @@ import Resend from "next-auth/providers/resend";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
 import { TRIAL_DAYS } from "@/lib/plans";
+import { magicLinkEmail } from "@/lib/email";
 
 /**
  * Auth.js v5 — Google OAuth + Magic Link por e-mail (Resend).
@@ -19,6 +20,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Google({ allowDangerousEmailAccountLinking: true }),
     Resend({
       from: process.env.EMAIL_FROM ?? "Tripper <onboarding@resend.dev>",
+      // E-mail próprio em pt-BR (o padrão do Auth.js é genérico, em inglês, e cai mais no spam)
+      async sendVerificationRequest({ identifier: to, provider, url }) {
+        const { subject, html, text } = magicLinkEmail({ url });
+        const res = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${provider.apiKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ from: provider.from, to, subject, html, text }),
+        });
+        if (!res.ok) throw new Error(`Resend: ${res.status} ${await res.text()}`);
+      },
     }),
   ],
   pages: {

@@ -101,3 +101,12 @@ export const bookingContactSchema = z.object({
   contactEmail: z.email("Digite seu melhor e-mail"),
   contactPhone: z.string().trim().min(8, "Digite seu número de telefone").optional(),
 });
+
+// Boas-vindas / Conta: como a pessoa quer ser chamada (login por e-mail não traz o nome)
+export const profileNameSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Digite pelo menos 2 letras")
+    .max(60, "Use no máximo 60 caracteres"),
+});
