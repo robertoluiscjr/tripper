@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { APP_URL } from "@/lib/site";
 
 let _resend: Resend | null = null;
 
@@ -62,8 +63,8 @@ export function magicLinkEmail({ url, hours = 24 }: { url: string; hours?: numbe
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F0F0F0;padding:32px 16px;">
   <tr><td align="center">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#FFFFFF;border-radius:16px;font-family:Arial,Helvetica,sans-serif;">
-      <tr><td style="background:${blue};border-radius:16px 16px 0 0;padding:28px 32px;">
-        <span style="font-size:32px;line-height:1;font-weight:700;color:#FFFFFF;letter-spacing:-0.5px;">tripper</span>
+      <tr><td style="background:${blue};border-radius:16px 16px 0 0;padding:24px 32px;">
+        <img src="${APP_URL}/brand/logo-email-white.png" width="152" height="50" alt="Tripper" style="display:block;border:0;outline:none;width:152px;height:50px;color:#FFFFFF;font-size:28px;font-weight:700;">
       </td></tr>
       <tr><td style="padding:32px;">
         <h1 style="margin:0 0 16px;font-size:24px;line-height:1.3;color:${text700};">Seu link de acesso chegou!</h1>
@@ -71,7 +72,7 @@ export function magicLinkEmail({ url, hours = 24 }: { url: string; hours?: numbe
           Toque no botão abaixo para entrar no Tripper e continuar planejando sua próxima viagem.
         </p>
         <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="border-radius:999px;background:${blue};">
-          <a href="${url.replace(/&/g, "&amp;")}" target="_blank" style="display:inline-block;padding:16px 32px;font-size:18px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:999px;">Entrar no Tripper</a>
+          <a href="${url.replace(/&/g, "&amp;")}" target="_blank" style="display:inline-block;padding:16px 48px;font-size:18px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:999px;">Entrar</a>
         </td></tr></table>
         <p style="margin:24px 0 0;font-size:14px;line-height:1.5;color:${text500};">
           O link vale por ${hours} horas e só pode ser usado uma vez. Abra no mesmo aparelho e navegador em que você quer usar o Tripper.

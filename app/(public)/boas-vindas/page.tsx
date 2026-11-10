@@ -7,7 +7,7 @@ import { Logo } from "@/components/layout/logo";
 import { Skeleton } from "@/components/ui/skeleton";
 import { NameForm } from "./name-form";
 
-export const metadata: Metadata = { title: "Boas-vindas" };
+export const metadata: Metadata = { title: "Bem-vindo(a)" };
 
 /**
  * Depois do login por e-mail: o link não traz o nome da pessoa (o Google traz),
@@ -37,7 +37,7 @@ async function WelcomeContent({ searchParams }: Pick<PageProps<"/boas-vindas">, 
     <>
       <div className="flex flex-col gap-3 text-center">
         <h1 className="text-h4 font-semibold text-foreground">
-          {editing ? "Alterar nome" : "Boas-vindas ao Tripper!"}
+          {editing ? "Alterar nome" : "Seja bem-vindo(a) ao Tripper!"}
         </h1>
         <p className="text-p15 text-muted-foreground">
           {editing
