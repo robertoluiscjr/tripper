@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BirdIcon } from "@/components/layout/logo";
-import { ApiError, useCreateTrip, useTrips, type TripFormInput } from "@/hooks/use-trips";
-import { saveTripDraft, takeTripDraft } from "@/lib/trip-draft";
+import { ApiError, useCreateTrip, useTrips } from "@/hooks/use-trips";
+import { useNewTripSubmit } from "@/hooks/use-new-trip";
+import { takeTripDraft } from "@/lib/trip-draft";
 import { isPastTrip, type TripDTO } from "@/lib/trips";
 import { PlanejarHeader, type PlanejarTab } from "./planejar-tabs";
 import { PlanejarBenefits } from "./planejar-benefits";
@@ -60,15 +61,7 @@ export function PlanejarScreen({
       });
   }, [loggedIn, resumeDraft, createTrip, router]);
 
-  async function onSubmitTrip(input: TripFormInput) {
-    if (!loggedIn) {
-      saveTripDraft(input);
-      router.push(`/login?callbackUrl=${encodeURIComponent("/app/planejar?rascunho=1")}`);
-      return;
-    }
-    const trip = await createTrip.mutateAsync(input);
-    router.push(`/app/viagens/${trip.id}`);
-  }
+  const newTrip = useNewTripSubmit(loggedIn);
 
   return (
     <main className="relative flex flex-1 flex-col pb-8">
@@ -108,8 +101,8 @@ export function PlanejarScreen({
       <TripFormSheet
         open={sheetOpen}
         onOpenChange={setSheetOpen}
-        pending={createTrip.isPending}
-        onSubmit={onSubmitTrip}
+        pending={newTrip.pending}
+        onSubmit={newTrip.submit}
       />
     </main>
   );
