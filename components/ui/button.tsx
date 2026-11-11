@@ -35,8 +35,8 @@ const buttonVariants = cva(
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
         // CTA padrão do app: mesma dimensão em todas as telas (feedback do 2º teste de usabilidade)
-        // Figma "Button with CTA": 56px de altura, texto 20px Medium
-        cta: "h-14 w-full gap-2 px-6 text-h5 font-medium",
+        // Figma "Button with CTA": 313 × 56, centralizado, texto 20px Medium
+        cta: "mx-auto flex h-14 w-[313px] max-w-full gap-2 px-6 text-h5 font-medium",
         // Figma "Button with icon": botão redondo de 56px (ex.: + novo item)
         fab: "size-14 p-4 [&_svg:not([class*='size-'])]:size-7",
         // Figma "Button with text and icon": "+ nova viagem"

@@ -13,8 +13,8 @@ export function NameForm({ defaultName, next, editing }: { defaultName: string; 
   return (
     <form action={action} className="flex flex-col gap-6">
       <input type="hidden" name="next" value={next} />
-      <div className="flex flex-col gap-2">
-        <Label htmlFor="name">Seu nome</Label>
+      <div className="mt-2 flex flex-col gap-2">
+        <Label htmlFor="name" className="sr-only">Seu nome</Label>
         <Input
           id="name"
           name="name"
@@ -24,10 +24,9 @@ export function NameForm({ defaultName, next, editing }: { defaultName: string; 
           autoComplete="name"
           autoFocus
           defaultValue={state.name ?? defaultName}
-          placeholder="Ex.: Ana Medeiros"
+          placeholder="Seu nome"
           aria-invalid={!!state.error}
           aria-describedby={state.error ? "name-error" : undefined}
-          className="h-12 rounded-xl"
         />
         {state.error && (
           <p id="name-error" role="alert" className="text-small text-destructive">
