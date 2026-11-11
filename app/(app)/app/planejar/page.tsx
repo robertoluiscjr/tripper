@@ -7,7 +7,10 @@ import { PlanejarScreen, PlanejarSkeleton } from "@/components/planejar/planejar
 
 export const metadata: Metadata = { title: "Planejar" };
 
-/** /app/planejar?nova=1 abre direto o bottom sheet "Nova Viagem" (card da Home). */
+/**
+ * /app/planejar?nova=1 abre direto o bottom sheet "Nova Viagem" (card da Home), com ou sem login.
+ * ?rascunho=1: volta do login e cria a viagem preenchida antes de entrar.
+ */
 export default function PlanejarPage({ searchParams }: PageProps<"/app/planejar">) {
   return (
     <Suspense fallback={<PlanejarSkeleton />}>
@@ -29,7 +32,8 @@ async function PlanejarData({ searchParams }: Pick<PageProps<"/app/planejar">, "
     <PlanejarScreen
       loggedIn={!!user}
       initialTrips={trips.map(toTripDTO)}
-      openNewTrip={!!user && params.nova === "1"}
+      openNewTrip={params.nova === "1"}
+      resumeDraft={!!user && params.rascunho === "1"}
     />
   );
 }

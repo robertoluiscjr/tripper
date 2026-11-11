@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BirdIcon } from "@/components/layout/logo";
-import { useCreateTrip, useTrips } from "@/hooks/use-trips";
+import { ApiError, useCreateTrip, useTrips, type TripFormInput } from "@/hooks/use-trips";
+import { saveTripDraft, takeTripDraft } from "@/lib/trip-draft";
 import { isPastTrip, type TripDTO } from "@/lib/trips";
 import { PlanejarHeader, type PlanejarTab } from "./planejar-tabs";
 import { PlanejarBenefits } from "./planejar-benefits";
@@ -17,15 +19,19 @@ import { TripFormSheet } from "./trip-form-sheet";
 
 /**
  * Planejar — Figma "Planejar" (214:2250) e "Planejar (pré-login)" (3622:4431).
+ * Pré-login, "Nova Viagem" abre o bottom sheet normalmente; ao tocar em Criar, o rascunho é guardado,
+ * a pessoa faz login e volta com ?rascunho=1 — aí a viagem é criada e a Tela da Viagem abre.
  */
 export function PlanejarScreen({
   loggedIn,
   initialTrips,
   openNewTrip = false,
+  resumeDraft = false,
 }: {
   loggedIn: boolean;
   initialTrips?: TripDTO[];
   openNewTrip?: boolean;
+  resumeDraft?: boolean;
 }) {
   const router = useRouter();
   const [tab, setTab] = useState<PlanejarTab>("proximas");
@@ -35,12 +41,33 @@ export function PlanejarScreen({
 
   const list = (trips.data ?? []).filter((t) => (tab === "anteriores" ? isPastTrip(t) : !isPastTrip(t)));
 
-  function onNewTrip() {
-    if (!loggedIn) {
-      router.push("/login?callbackUrl=/app/planejar");
+  // Depois do login: cria a viagem que foi preenchida antes de entrar (uma vez só)
+  const resumed = useRef(false);
+  useEffect(() => {
+    if (!loggedIn || !resumeDraft || resumed.current) return;
+    resumed.current = true;
+    const draft = takeTripDraft();
+    if (!draft) {
+      router.replace("/app/planejar");
       return;
     }
-    setSheetOpen(true);
+    createTrip
+      .mutateAsync(draft)
+      .then((trip) => router.replace(`/app/viagens/${trip.id}`))
+      .catch((err) => {
+        toast.error(err instanceof ApiError ? err.message : "Não foi possível criar a viagem.");
+        router.replace("/app/planejar");
+      });
+  }, [loggedIn, resumeDraft, createTrip, router]);
+
+  async function onSubmitTrip(input: TripFormInput) {
+    if (!loggedIn) {
+      saveTripDraft(input);
+      router.push(`/login?callbackUrl=${encodeURIComponent("/app/planejar?rascunho=1")}`);
+      return;
+    }
+    const trip = await createTrip.mutateAsync(input);
+    router.push(`/app/viagens/${trip.id}`);
   }
 
   return (
@@ -72,7 +99,7 @@ export function PlanejarScreen({
 
       {/* "+ nova viagem" (Figma 214:2300) — fixo acima da tab bar */}
       <div className="pointer-events-none sticky bottom-[104px] z-30 mt-auto pt-8 flex justify-end px-6">
-        <Button size="pill" onClick={onNewTrip} className="pointer-events-auto">
+        <Button size="pill" onClick={() => setSheetOpen(true)} className="pointer-events-auto">
           <img src="/icons/add-white.svg" alt="" width={28} height={28} />
           nova viagem
         </Button>
@@ -82,10 +109,7 @@ export function PlanejarScreen({
         open={sheetOpen}
         onOpenChange={setSheetOpen}
         pending={createTrip.isPending}
-        onSubmit={async (input) => {
-          const trip = await createTrip.mutateAsync(input);
-          router.push(`/app/viagens/${trip.id}`);
-        }}
+        onSubmit={onSubmitTrip}
       />
     </main>
   );

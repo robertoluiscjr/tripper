@@ -20,7 +20,7 @@ export function HomeHeader({ name, image }: { name?: string | null; image?: stri
           <h1 className="text-h3 leading-[1.5] font-medium tracking-[-0.03em]">Olá, {firstName}!</h1>
         </div>
       ) : (
-        <Link href="/login" className="absolute top-[75px] left-6 flex items-center gap-2">
+        <Link href="/login" className="absolute top-[75px] left-6 z-10 flex items-center gap-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icons/account-white.svg" alt="" width={32} height={32} />
           <h1 className="text-h3 leading-[1.5] font-medium tracking-[-0.03em]">Olá, tripper!</h1>
@@ -32,7 +32,7 @@ export function HomeHeader({ name, image }: { name?: string | null; image?: stri
           Gerencie suas viagens para aproveitá-las ao máximo
         </p>
       ) : (
-        <p className="absolute top-[135px] right-6 left-6 text-h6 leading-[1.2] font-medium">
+        <p className="absolute top-[135px] right-6 left-6 z-10 text-h6 leading-[1.2] font-medium">
           Faça{" "}
           <Link href="/login" className="font-semibold text-secondary underline-offset-4 hover:underline">
             login
