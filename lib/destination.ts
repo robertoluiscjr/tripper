@@ -50,7 +50,7 @@ async function lookupWikipedia(query: string): Promise<DestinationInfo> {
 
   try {
     const res = await fetch(url, {
-      headers: { "User-Agent": "TripperApp/1.0 (projeto de portfolio; https://tripper-lovat.vercel.app)" },
+      headers: { "User-Agent": "TripperApp/1.0 (projeto de portfolio; https://tripper.robertoluis.com.br)" },
       signal: AbortSignal.timeout(4000),
     });
     if (!res.ok) return EMPTY;
