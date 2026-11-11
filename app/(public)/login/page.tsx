@@ -125,13 +125,13 @@ function LoginForms({ callbackUrl, error }: { callbackUrl: string; error?: strin
           <input type="hidden" name="callbackUrl" value={callbackUrl} />
           <Label htmlFor="email" className="sr-only">E-mail</Label>
           <Input id="email" name="email" type="email" required autoComplete="email" placeholder="E-mail" />
-          <p className="mt-3 text-p14 leading-[1.2] text-foreground">
+          <p className="mt-8 text-center text-p14 leading-[1.2] text-foreground">
             Enviaremos um link para você entrar sem senha.
           </p>
-          <Button type="submit" size="cta" className="mt-8">
+          <Terms className="mt-auto pt-8" />
+          <Button type="submit" size="cta" className="mt-6">
             Receber link de acesso
           </Button>
-          <Terms className="mt-auto pt-8" />
         </form>
       ) : (
         <Terms className="mt-8" />
