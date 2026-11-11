@@ -14,7 +14,7 @@ export const metadata: Metadata = { title: "Home" };
  */
 export default function HomePage() {
   return (
-    <main className="relative flex-1 pb-6">
+    <main className="relative flex-1 pb-10">
       <Suspense fallback={<HomeHeaderSkeleton />}>
         <HomeHeaderWithUser />
       </Suspense>
