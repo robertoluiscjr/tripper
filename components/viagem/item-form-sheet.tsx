@@ -318,11 +318,18 @@ function TransportPicker({ onPick }: { onPick: (mode: TransportMode) => void }) 
         <img src="/icons/itens/down.svg" alt="" width={22} height={22} className={cn("transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        // Figma "Container": branco, sombra, cantos inferiores de 4px; itens a cada 47px
-        <ul role="listbox" aria-label="Tipos de Transporte" className="flex flex-col rounded-b-[4px] bg-white pt-[21px] pb-6 shadow-[0px_1px_4px_1px_rgba(0,0,0,0.25)]">
-          {TRANSPORT_MODES.map(({ mode, label, icon }) => (
+        // Figma "Container": branco, sombra, cantos inferiores de 4px; itens a cada 47px;
+        // 21px antes do primeiro ícone e 22px depois do último
+        <ul role="listbox" aria-label="Tipos de Transporte" className="flex flex-col rounded-b-[4px] bg-white pt-[21px] pb-[22px] shadow-[0px_1px_4px_1px_rgba(0,0,0,0.25)]">
+          {TRANSPORT_MODES.map(({ mode, label, icon }, i) => (
             <li key={mode}>
-              <button type="button" role="option" aria-selected={false} onClick={() => onPick(mode)} className="flex h-[47px] w-full items-start gap-3 px-3 text-left">
+              <button
+                type="button"
+                role="option"
+                aria-selected={false}
+                onClick={() => onPick(mode)}
+                className={cn("flex w-full items-start gap-3 px-3 text-left", i === TRANSPORT_MODES.length - 1 ? "h-6" : "h-[47px]")}
+              >
                 <img src={icon} alt="" width={24} height={24} />
                 <span className="pt-[3px] text-p16 leading-[1.2] text-muted-foreground">{label}</span>
               </button>
