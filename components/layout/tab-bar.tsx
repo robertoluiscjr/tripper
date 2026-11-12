@@ -67,7 +67,7 @@ function TabIcon({ tab, active, userImage, userName }: { tab: Tab; active: boole
           />
         </span>
       ) : (
-        <img src="/icons/conta.svg" alt="" width={32} height={32} className={cn(active && "rounded-full ring-2 ring-primary")} />
+        <img src={active ? "/icons/conta-active.svg" : "/icons/conta.svg"} alt="" width={32} height={32} />
       );
     }
   }

@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { getCurrentUser } from "@/lib/session";
 import { HomeHeader, HomeHeaderSkeleton } from "@/components/home/home-header";
 import { HomeCard } from "@/components/home/home-card";
+import { NewTripCard } from "@/components/home/new-trip-card";
 
 export const metadata: Metadata = { title: "Home" };
 
@@ -13,14 +14,13 @@ export const metadata: Metadata = { title: "Home" };
  */
 export default function HomePage() {
   return (
-    <main className="relative flex-1 pb-6">
+    <main className="relative flex-1 pb-14">
       <Suspense fallback={<HomeHeaderSkeleton />}>
         <HomeHeaderWithUser />
       </Suspense>
 
       <div className="relative flex flex-col gap-6 px-6 pt-[189px]">
-        <HomeCard
-          href="/app/planejar?nova=1"
+        <NewTripCard
           title="Planeje uma nova viagem"
           description="Comece a planejar sua próxima experiência de viagem, elaborando o roteiro, estimando os gastos e muito mais"
           image="/images/home/planeje.webp"

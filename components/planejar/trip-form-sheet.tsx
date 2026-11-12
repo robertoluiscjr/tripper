@@ -142,7 +142,7 @@ function TripForm({
       </div>
       {errors.daysCount && <FieldError>{errors.daysCount}</FieldError>}
 
-      <Button type="submit" size="cta" disabled={pending} className="mx-4 mt-[47px] w-auto">
+      <Button type="submit" size="cta" disabled={pending} className="mt-[47px]">
         {pending ? "Salvando..." : submitLabel}
       </Button>
       {footer}

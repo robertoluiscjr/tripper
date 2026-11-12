@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
 import { signIn } from "@/lib/auth";
 import { safeCallback } from "@/lib/safe-redirect";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/layout/logo";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Entrar" };
 
@@ -30,6 +30,8 @@ async function signInWithEmail(formData: FormData) {
   });
 }
 
+/* eslint-disable @next/next/no-img-element */
+
 const ERRORS: Record<string, string> = {
   OAuthAccountNotLinked: "Este e-mail já está ligado a outra forma de acesso. Entre como da primeira vez.",
   Verification: "O link de acesso expirou ou já foi usado. Peça um novo abaixo.",
@@ -44,21 +46,21 @@ const ERRORS: Record<string, string> = {
  * Volta para a tela de origem (?callbackUrl=/app/planejar) após entrar.
  */
 export default function LoginPage({ searchParams }: PageProps<"/login">) {
+  // Medidas do Figma "Login" (3544:3125): voltar a 64px do topo, logo 48px, título 24px Medium
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-8 px-6 py-8">
-      <Link href="/app" aria-label="Voltar" className="text-foreground">
-        <ChevronLeft className="size-6" />
+    <main className="flex flex-1 flex-col px-6 pt-16 pb-8">
+      <Link href="/app" aria-label="Voltar" className="self-start">
+        <img src="/icons/back.svg" alt="" width={24} height={24} />
       </Link>
 
-      <div className="flex flex-col items-center gap-6 text-center">
-        <Logo variant="blue" className="text-[40px]" />
-        <h1 className="text-h4 font-semibold text-foreground">
-          Entre para começar a planejar sua próxima viagem
-        </h1>
-        <p className="text-p14 text-muted-foreground">
-          Acesse usando uma de suas contas ou seu e-mail para continuar
-        </p>
-      </div>
+      <Logo variant="blue" className="mt-8 self-center text-[48px]" />
+
+      <h1 className="mt-[60px] text-h3 leading-[1.2] font-medium text-foreground">
+        Entre para começar a planejar sua próxima viagem
+      </h1>
+      <p className="mt-10 text-p16 leading-[1.2] text-foreground">
+        Acesse usando uma de suas contas ou seu e-mail para continuar
+      </p>
 
       <Suspense fallback={<LoginForms callbackUrl="/app" />}>
         <LoginFormsWithParams searchParams={searchParams} />
@@ -73,19 +75,30 @@ async function LoginFormsWithParams({ searchParams }: Pick<PageProps<"/login">, 
   return <LoginForms callbackUrl={safeCallback(params.callbackUrl)} error={error ? (ERRORS[error] ?? ERRORS.Configuration) : undefined} />;
 }
 
+const legalLink = "font-medium text-primary underline-offset-4 hover:underline";
+
+function Terms({ className }: { className?: string }) {
+  return (
+    <p className={cn("text-center text-p14 leading-[1.2] text-foreground", className)}>
+      Ao continuar, você concorda com os <Link href="/termos" className={legalLink}>Termos de uso</Link> e a{" "}
+      <Link href="/privacidade" className={legalLink}>Política de Privacidade</Link>.
+    </p>
+  );
+}
+
 function LoginForms({ callbackUrl, error }: { callbackUrl: string; error?: string }) {
   if (!GOOGLE_ENABLED && !EMAIL_ENABLED) {
     return (
-      <p className="rounded-xl bg-muted p-4 text-center text-p14 text-muted-foreground">
+      <p className="mt-8 rounded-xl bg-muted p-4 text-center text-p14 text-foreground">
         O login ainda está sendo configurado. Volte em breve!
       </p>
     );
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="mt-5 flex flex-1 flex-col">
       {error && (
-        <p role="alert" className="rounded-xl bg-destructive/10 p-3 text-center text-p14 text-destructive">
+        <p role="alert" className="mb-6 rounded-xl bg-destructive/10 p-3 text-center text-p14 text-destructive">
           {error}
         </p>
       )}
@@ -101,32 +114,29 @@ function LoginForms({ callbackUrl, error }: { callbackUrl: string; error?: strin
       )}
 
       {GOOGLE_ENABLED && EMAIL_ENABLED && (
-        <div className="flex items-center gap-3 text-small text-muted-foreground">
-          <span className="h-px flex-1 bg-border" /> ou <span className="h-px flex-1 bg-border" />
+        // Figma: duas linhas de 140px (#B9B9B9) com "ou" 14px no meio
+        <div className="mt-[47px] flex items-center gap-6 text-p14 leading-[1.2] text-foreground">
+          <span className="h-px flex-1 bg-input" /> ou <span className="h-px flex-1 bg-input" />
         </div>
       )}
 
-      {EMAIL_ENABLED && (
-        <form action={signInWithEmail} className="flex flex-col gap-4">
+      {EMAIL_ENABLED ? (
+        <form action={signInWithEmail} className="mt-[47px] flex flex-1 flex-col">
           <input type="hidden" name="callbackUrl" value={callbackUrl} />
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="email">E-mail</Label>
-            <Input id="email" name="email" type="email" required autoComplete="email" placeholder="Digite seu melhor e-mail" className="h-12 rounded-xl" />
-          </div>
-          <Button type="submit" size="cta">
+          <Label htmlFor="email" className="sr-only">E-mail</Label>
+          <Input id="email" name="email" type="email" required autoComplete="email" placeholder="E-mail" />
+          <p className="mt-8 text-center text-p14 leading-[1.2] text-foreground">
+            Enviaremos um link para você entrar sem senha.
+          </p>
+          {/* Figma "Login (app atual)" 4780:5183: termos logo após o apoio; botão no rodapé */}
+          <Terms className="mt-6 mb-8" />
+          <Button type="submit" size="cta" className="mt-auto">
             Receber link de acesso
           </Button>
-          <p className="text-center text-small text-muted-foreground">
-            Enviaremos um link para você entrar sem precisar de senha.
-          </p>
         </form>
+      ) : (
+        <Terms className="mt-8" />
       )}
-
-      <p className="text-center text-small text-muted-foreground">
-        Ao continuar, você concorda com os{" "}
-        <Link href="/termos" className="underline underline-offset-4 hover:text-foreground">Termos de uso</Link> e a{" "}
-        <Link href="/privacidade" className="underline underline-offset-4 hover:text-foreground">Política de Privacidade</Link>.
-      </p>
     </div>
   );
 }
