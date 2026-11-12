@@ -26,6 +26,11 @@ export type TripItemDTO = {
   code: string | null;
   originName: string | null;
   destinationName: string | null;
+  /** Pino no mapa (lib/place-lookup.ts) */
+  latitude: number | null;
+  longitude: number | null;
+  /** Foto real do lugar (Wikipédia/Wikimedia), quando encontrada */
+  imageUrl: string | null;
 };
 
 export function toTripItemDTO(item: TripItem): TripItemDTO {
@@ -46,6 +51,9 @@ export function toTripItemDTO(item: TripItem): TripItemDTO {
     code: item.code,
     originName: item.originName,
     destinationName: item.destinationName,
+    latitude: item.latitude,
+    longitude: item.longitude,
+    imageUrl: item.imageUrl,
   };
 }
 
@@ -78,8 +86,21 @@ export function itemBadgeIcon(item: Pick<TripItemDTO, "category" | "transportMod
   return `/icons/itens/white/${slug(item.category)}.svg`;
 }
 
-/** Foto do "Small Card": as do protótipo para voo e hospedagem; demais itens usam o ícone. */
-export function itemPhoto(item: Pick<TripItemDTO, "category" | "transportMode">): string | null {
+/** Ícone (branco, 15px) dentro do pino do mapa — Figma "Location (W200)" + set "Ícones". */
+export function itemPinIcon(item: Pick<TripItemDTO, "category" | "transportMode">) {
+  const name =
+    item.category === "TRANSPORT"
+      ? ({ PLANE: "plane", BUS: "bus", TRAIN: "train", SHIP: "ship", OWN_CAR: "car" } as const)[item.transportMode ?? "PLANE"]
+      : ({ TRANSPORT: "plane", ACCOMMODATION: "bed", TOUR: "tour", FOOD: "food", CAR_RENTAL: "car", CUSTOM: "custom" } as const)[item.category];
+  return `/icons/itens/pin/${name}.svg`;
+}
+
+/**
+ * Foto do "Small Card": a foto real do lugar (aeroporto de destino, cidade, hospedagem…) quando
+ * encontrada; senão as do protótipo para voo e hospedagem; demais itens usam o ícone.
+ */
+export function itemPhoto(item: Pick<TripItemDTO, "category" | "transportMode" | "imageUrl">): string | null {
+  if (item.imageUrl) return item.imageUrl;
   if (item.category === "ACCOMMODATION") return "/images/itens/hotel.webp";
   if (item.category === "TRANSPORT" && (item.transportMode ?? "PLANE") === "PLANE") return "/images/itens/aeroporto.webp";
   return null;

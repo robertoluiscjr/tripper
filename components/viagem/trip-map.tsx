@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
+import { itemPinIcon, type TripItemDTO } from "@/lib/trip-items";
+import type { MapPin } from "./trip-map-leaflet";
 
 const LeafletMap = dynamic(() => import("./trip-map-leaflet"), {
   ssr: false,
@@ -12,8 +14,22 @@ const LeafletMap = dynamic(() => import("./trip-map-leaflet"), {
 // Sem coordenadas do destino: mostra o Brasil inteiro
 const BRASIL = { lat: -14.24, lng: -51.93, zoom: 3 };
 
-export function TripMap({ latitude, longitude }: { latitude: number | null; longitude: number | null }) {
+export function TripMap({
+  latitude,
+  longitude,
+  items = [],
+}: {
+  latitude: number | null;
+  longitude: number | null;
+  /** Itens do roteiro: cada um com localização vira um pino */
+  items?: TripItemDTO[];
+}) {
   const hasCoords = latitude !== null && longitude !== null;
+  const pins: MapPin[] = items.flatMap((item) =>
+    item.latitude !== null && item.longitude !== null
+      ? [{ id: item.id, lat: item.latitude, lng: item.longitude, icon: itemPinIcon(item), label: item.title }]
+      : [],
+  );
   // O Next 16 guarda páginas já visitadas escondidas (React <Activity>): ao esconder, o Leaflet
   // destrói o mapa; ao voltar, a TileLayer tentava usar o mapa destruído. Montar o mapa só
   // enquanto a página está visível faz o Leaflet recriar tudo do zero a cada volta.
@@ -31,6 +47,7 @@ export function TripMap({ latitude, longitude }: { latitude: number | null; long
           lat={hasCoords ? latitude : BRASIL.lat}
           lng={hasCoords ? longitude : BRASIL.lng}
           zoom={hasCoords ? 12 : BRASIL.zoom}
+          pins={pins}
         />
       ) : (
         <Skeleton className="size-full rounded-none" />

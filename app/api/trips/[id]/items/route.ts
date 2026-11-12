@@ -48,6 +48,7 @@ export async function POST(req: Request, ctx: RouteContext<"/api/trips/[id]/item
   }
 
   const position = await db.tripItem.count({ where: { tripId: id, dayNumber: result.data.dayNumber } });
+  // Pino e foto: buscados logo depois, em /items/[itemId]/place (o salvar não espera o mapa)
   const item = await db.tripItem.create({ data: { ...result.data, tripId: id, position } });
   return Response.json({ item: toTripItemDTO(item) }, { status: 201 });
 }

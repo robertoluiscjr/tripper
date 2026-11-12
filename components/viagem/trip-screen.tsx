@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import type { ItemCategory } from "@prisma/client";
 import { useDeleteTrip, useTrip, useUpdateTrip } from "@/hooks/use-trips";
-import { useTripItems } from "@/hooks/use-trip-items";
+import { useResolvePlaces, useTripItems } from "@/hooks/use-trip-items";
 import type { TripItemDTO } from "@/lib/trip-items";
 import { daysLabel, type TripDTO } from "@/lib/trips";
 import { TripFormSheet } from "@/components/planejar/trip-form-sheet";
@@ -41,6 +41,7 @@ export function TripScreen({
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [dayFilter, setDayFilter] = useState<number | "all">("all");
   const { data: items = initialItems } = useTripItems(initialTrip.id, initialItems);
+  useResolvePlaces(initialTrip.id, items); // pinos no mapa e fotos reais dos itens
   const [menuOpen, setMenuOpen] = useState(false);
   const [itemSheet, setItemSheet] = useState<{ category: ItemCategory; item?: TripItemDTO } | null>(
     openCategory ? { category: openCategory } : null,
@@ -75,7 +76,7 @@ export function TripScreen({
       </div>
 
       <div className="mt-2">
-        <TripMap latitude={trip.latitude} longitude={trip.longitude} />
+        <TripMap latitude={trip.latitude} longitude={trip.longitude} items={items} />
       </div>
 
       {/* Estimar Gastos | Ver Progresso */}

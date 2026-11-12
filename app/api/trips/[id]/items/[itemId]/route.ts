@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 import { tripItemSchema } from "@/lib/validations";
 import { itemDataFromInput, toTripItemDTO } from "@/lib/trip-items";
+import { placeKey } from "@/lib/place-lookup";
 
 async function findOwnItem(tripId: string, itemId: string) {
   const user = await getCurrentUser();
@@ -29,7 +30,10 @@ export async function PATCH(req: Request, ctx: RouteContext<"/api/trips/[id]/ite
     return Response.json({ error: result.error, issues: [{ path: [result.field], message: result.error }] }, { status: 422 });
   }
 
-  const item = await db.tripItem.update({ where: { id: itemId }, data: result.data });
+  // Mudou o lugar: apaga pino e foto para o app buscar de novo (/items/[itemId]/place)
+  const moved = placeKey({ ...found.item, ...result.data }) !== placeKey(found.item);
+  const reset = moved ? { latitude: null, longitude: null, imageUrl: null } : {};
+  const item = await db.tripItem.update({ where: { id: itemId }, data: { ...result.data, ...reset } });
   return Response.json({ item: toTripItemDTO(item) });
 }
 
