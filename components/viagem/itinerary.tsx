@@ -15,10 +15,13 @@ import { itemBadgeIcon, itemCardIcon, itemLines, itemPhoto, itineraryForDay, typ
 export function Itinerary({
   days,
   items,
+  cityPhoto,
   onOpenItem,
 }: {
   days: number[];
   items: TripItemDTO[];
+  /** Foto do destino (capa da viagem): usada na hospedagem sem foto própria */
+  cityPhoto?: string | null;
   onOpenItem: (item: TripItemDTO) => void;
 }) {
   // Itens que chegaram depois da 1ª renderização (acabaram de ser salvos) entram com dissolve
@@ -69,7 +72,7 @@ export function Itinerary({
                     ) : (
                       hasAfter(d) && !last && <Line className="top-[52px] h-[61px]" />
                     )}
-                    <ItemRow entry={entry} onOpen={() => onOpenItem(entry.item)} />
+                    <ItemRow entry={entry} cityPhoto={cityPhoto} onOpen={() => onOpenItem(entry.item)} />
                   </li>
                 ))}
               </ul>
@@ -86,10 +89,10 @@ function Line({ className }: { className?: string }) {
 }
 
 /** "Item do roteiro" (Figma 2109:1874). */
-function ItemRow({ entry, onOpen }: { entry: ItineraryEntry; onOpen: () => void }) {
+function ItemRow({ entry, cityPhoto, onOpen }: { entry: ItineraryEntry; cityPhoto?: string | null; onOpen: () => void }) {
   const { item } = entry;
   const lines = itemLines(entry);
-  const photo = itemPhoto(item);
+  const photo = itemPhoto(item, cityPhoto);
 
   return (
     <button type="button" onClick={onOpen} aria-label={`Editar ${lines.title}`} className="relative flex h-16 w-full items-center pl-2 text-left">

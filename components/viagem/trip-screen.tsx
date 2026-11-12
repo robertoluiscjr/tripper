@@ -105,7 +105,7 @@ export function TripScreen({
       </div>
 
       {/* Roteiro */}
-      <Itinerary days={visibleDays} items={items} onOpenItem={(item) => setItemSheet({ category: item.category, item })} />
+      <Itinerary days={visibleDays} items={items} cityPhoto={trip.coverImage} onOpenItem={(item) => setItemSheet({ category: item.category, item })} />
 
       {/* + Novo item (Figma "Button with icon"); aberto, vira "×" escuro acima do fundo do menu */}
       <div className={cn("pointer-events-none sticky bottom-[104px] mt-auto flex justify-end px-6 pt-8", menuOpen ? "z-[36]" : "z-30")}>

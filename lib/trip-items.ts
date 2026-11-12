@@ -96,12 +96,13 @@ export function itemPinIcon(item: Pick<TripItemDTO, "category" | "transportMode"
 }
 
 /**
- * Foto do "Small Card": a foto real do lugar (aeroporto de destino, cidade, hospedagem…) quando
- * encontrada; senão as do protótipo para voo e hospedagem; demais itens usam o ícone.
+ * Foto do "Small Card": a foto real do lugar (aeroporto de destino, atração, hospedagem…) quando
+ * encontrada. Hospedagem sem foto pública usa a foto da cidade de destino (capa da viagem).
+ * Sem nada disso: as do protótipo para voo e hospedagem; demais itens usam o ícone.
  */
-export function itemPhoto(item: Pick<TripItemDTO, "category" | "transportMode" | "imageUrl">): string | null {
+export function itemPhoto(item: Pick<TripItemDTO, "category" | "transportMode" | "imageUrl">, cityPhoto?: string | null): string | null {
   if (item.imageUrl) return item.imageUrl;
-  if (item.category === "ACCOMMODATION") return "/images/itens/hotel.webp";
+  if (item.category === "ACCOMMODATION") return cityPhoto || "/images/itens/hotel.webp";
   if (item.category === "TRANSPORT" && (item.transportMode ?? "PLANE") === "PLANE") return "/images/itens/aeroporto.webp";
   return null;
 }
