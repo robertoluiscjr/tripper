@@ -112,10 +112,21 @@ export function TripScreen({
           size="fab"
           aria-label={menuOpen ? "Fechar menu de itens" : "Adicionar item ao roteiro"}
           aria-expanded={menuOpen}
-          className={cn("pointer-events-auto", menuOpen && "bg-tripper-dark-700 hover:bg-tripper-dark-700 active:bg-tripper-dark-700")}
+          className={cn(
+            "pointer-events-auto relative",
+            // Abre com o mesmo "Dissolve" de 300ms do menu; fecha na hora
+            menuOpen && "bg-tripper-dark-700 transition-colors duration-300 ease-figma-out hover:bg-tripper-dark-700 active:bg-tripper-dark-700",
+          )}
           onClick={() => setMenuOpen((o) => !o)}
         >
-          <img src={menuOpen ? "/icons/itens/close-white.svg" : "/icons/add-fab.svg"} alt="" width={28} height={28} />
+          <img src="/icons/add-fab.svg" alt="" width={28} height={28} className={cn(menuOpen && "opacity-0 transition-opacity duration-300 ease-figma-out")} />
+          <img
+            src="/icons/itens/close-white.svg"
+            alt=""
+            width={28}
+            height={28}
+            className={cn("absolute", menuOpen ? "opacity-100 transition-opacity duration-300 ease-figma-out" : "opacity-0")}
+          />
         </Button>
       </div>
 

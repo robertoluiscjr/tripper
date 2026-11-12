@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { itemBadgeIcon, itemCardIcon, itemLines, itemPhoto, itineraryForDay, type ItineraryEntry, type TripItemDTO } from "@/lib/trip-items";
 
@@ -9,6 +10,7 @@ import { itemBadgeIcon, itemCardIcon, itemLines, itemPhoto, itineraryForDay, typ
  * Roteiro dia a dia — Figma "Tela da Viagem 2" (2098:2018) e "3" (2109:1868).
  * Cada item: círculo escuro de 40px com o ícone, foto de 64px e 3 linhas de texto (14px Medium).
  * A "Linha do Tempo" (5px, #454545) liga um item ao próximo, inclusive atravessando dias vazios.
+ * Item recém-adicionado aparece com dissolve de 250ms (Smart animate do Figma ao salvar).
  */
 export function Itinerary({
   days,
@@ -19,6 +21,21 @@ export function Itinerary({
   items: TripItemDTO[];
   onOpenItem: (item: TripItemDTO) => void;
 }) {
+  // Itens que chegaram depois da 1ª renderização (acabaram de ser salvos) entram com dissolve
+  const [seen, setSeen] = useState(() => new Set(items.map((i) => i.id)));
+  const [fresh, setFresh] = useState<Set<string>>(() => new Set());
+  const added = items.filter((i) => !seen.has(i.id));
+  if (added.length) {
+    setSeen(new Set([...seen, ...added.map((i) => i.id)]));
+    setFresh(new Set([...fresh, ...added.map((i) => i.id)]));
+  }
+  const settle = (id: string) =>
+    setFresh((f) => {
+      const next = new Set(f);
+      next.delete(id);
+      return next;
+    });
+
   const byDay = new Map(days.map((d) => [d, itineraryForDay(items, d)]));
   // Dias (de toda a viagem) que têm itens — para saber se a linha continua antes/depois de cada dia
   const allDays = Array.from(new Set(items.flatMap((i) => [i.dayNumber, ...(i.endDayNumber ? [i.endDayNumber] : [])])));
@@ -41,7 +58,11 @@ export function Itinerary({
             ) : (
               <ul className="mt-4 flex flex-col gap-8">
                 {entries.map((entry, j) => (
-                  <li key={`${entry.item.id}-${entry.kind}`} className="relative">
+                  <li
+                    key={`${entry.item.id}-${entry.kind}`}
+                    className={cn("relative", fresh.has(entry.item.id) && "animate-in duration-250 ease-figma-out fade-in")}
+                    onAnimationEnd={(e) => e.target === e.currentTarget && settle(entry.item.id)}
+                  >
                     {j === 0 && hasBefore(d) && <Line className="-top-3 h-[25px]" />}
                     {j < entries.length - 1 ? (
                       <Line className="top-[50px] h-[60px]" />

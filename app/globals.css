@@ -88,6 +88,9 @@
   --text-p15: 0.9375rem;
   --text-p14: 0.875rem;
   --text-small: 0.75rem;
+
+  /* Animações do protótipo (Figma): "Ease out" = cubic-bezier(0, 0, 0.58, 1) → ease-figma-out */
+  --ease-figma-out: cubic-bezier(0, 0, 0.58, 1);
 }
 
 :root {
@@ -181,4 +184,65 @@
   html {
     @apply font-sans;
   }
+}
+
+/* ---------------------------------------------------------------------------------------------
+ * Animações do protótipo do Figma
+ * ------------------------------------------------------------------------------------------- */
+
+/* Bottom sheets: "Move in" de baixo, 250ms, Ease out (Nova Viagem, Transportes, Acomodação…).
+   Mais específico que o CSS que o vaul injeta (que usa 500ms). */
+[data-slot="drawer-content"][data-vaul-drawer] {
+  animation-duration: 250ms;
+  animation-timing-function: var(--ease-figma-out);
+  transition: transform 250ms var(--ease-figma-out);
+}
+[data-slot="drawer-overlay"][data-vaul-overlay][data-vaul-snap-points] {
+  animation-duration: 250ms;
+  animation-timing-function: var(--ease-figma-out);
+}
+/* Salvar um item: no Figma o sheet sai com "Smart animate" (dissolve) em vez de descer */
+[data-slot="drawer-content"][data-vaul-drawer][data-vaul-drawer-direction][data-exit="fade"][data-state="closed"] {
+  animation-name: tripper-fade-out;
+}
+
+/* "Dissolve" de 300ms entre páginas (Splash → Onboarding → Home): navegações marcadas com
+   transitionTypes: ["dissolve"] + <Dissolve> (components/layout/dissolve.tsx) */
+::view-transition-group(.dissolve) {
+  animation-duration: 300ms;
+  animation-timing-function: var(--ease-figma-out);
+}
+::view-transition-old(.dissolve) {
+  animation: 300ms var(--ease-figma-out) both tripper-fade-out;
+}
+::view-transition-new(.dissolve) {
+  animation: 300ms var(--ease-figma-out) both tripper-fade-in;
+}
+
+@keyframes tripper-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes tripper-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="drawer-content"][data-vaul-drawer] {
+    animation-duration: 1ms;
+    transition-duration: 1ms;
+  }
+  ::view-transition-old(.dissolve),
+  ::view-transition-new(.dissolve) {
+    animation-duration: 1ms;
+  }
+}
+/* O resto da tela (fora do <Dissolve>) acompanha o mesmo tempo — só há view transitions de dissolve */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
+  animation-timing-function: var(--ease-figma-out);
 }

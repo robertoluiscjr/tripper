@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
 import type { ItemCategory, TransportMode } from "@prisma/client";
@@ -107,12 +107,58 @@ export function ItemFormSheet({
   onClose: () => void;
 }) {
   const open = !!category;
+  // Mantém o formulário na tela enquanto o sheet sai (antes ele esvaziava durante a animação)
+  const [shown, setShown] = useState<{ category: ItemCategory; item?: TripItemDTO | null } | null>(category ? { category, item } : null);
+  // Salvou/excluiu: no Figma o sheet sai com "Smart animate" (dissolve); arrastar/fechar continua descendo
+  const [fadeExit, setFadeExit] = useState(false);
+  if (category && (category !== shown?.category || item !== shown?.item)) {
+    setShown({ category, item });
+    setFadeExit(false);
+  }
+
   return (
     <Drawer open={open} onOpenChange={(o) => !o && onClose()}>
-      <DrawerContent>
-        {open && <ItemForm key={item?.id ?? category} trip={trip} category={category} item={item ?? undefined} onDone={onClose} />}
+      <DrawerContent data-exit={fadeExit ? "fade" : undefined}>
+        <AnimatedHeight>
+          {shown && (
+            <ItemForm
+              key={shown.item?.id ?? shown.category}
+              trip={trip}
+              category={shown.category}
+              item={shown.item ?? undefined}
+              onDone={() => {
+                setFadeExit(true);
+                onClose();
+              }}
+            />
+          )}
+        </AnimatedHeight>
       </DrawerContent>
     </Drawer>
+  );
+}
+
+/**
+ * "Smart animate" de 250ms (Ease out) do protótipo: quando o conteúdo do sheet muda de tamanho
+ * (abrir "Tipos de Transporte", trocar para o formulário Voo), a altura acompanha suavemente.
+ */
+function AnimatedHeight({ children }: { children: React.ReactNode }) {
+  const innerRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<number>();
+  useEffect(() => {
+    const el = innerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(() => setHeight(el.offsetHeight));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <div
+      style={{ height }}
+      className={cn("shrink-0 overflow-hidden", height !== undefined && "transition-[height] duration-250 ease-figma-out motion-reduce:transition-none")}
+    >
+      <div ref={innerRef}>{children}</div>
+    </div>
   );
 }
 
@@ -121,11 +167,20 @@ function ItemForm({ trip, category, item, onDone }: { trip: TripDTO; category: I
   const [values, setValues] = useState<Values>(() => (item ? (inputFromItem(item, trip.startDate) as Values) : {}));
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [confirmDelete, setConfirmDelete] = useState(false);
+  // Veio da lista "Tipos de Transporte": o formulário entra com dissolve (Smart animate do Figma)
+  const [picked, setPicked] = useState(false);
   const save = useSaveTripItem(trip.id, item?.id);
   const remove = useDeleteTripItem(trip.id);
 
   // "Transportes": primeiro escolhe o tipo (Figma 192:316 · 2062:1662)
-  if (category === "TRANSPORT" && !mode) return <TransportPicker onPick={setMode} />;
+  if (category === "TRANSPORT" && !mode) return (
+      <TransportPicker
+        onPick={(m) => {
+          setMode(m);
+          setPicked(true);
+        }}
+      />
+    );
 
   const spec = formSpec(category, mode);
   const set = (name: string, value: string) => {
@@ -184,7 +239,11 @@ function ItemForm({ trip, category, item, onDone }: { trip: TripDTO; category: I
       : 0;
 
   return (
-    <form onSubmit={submit} noValidate className="flex flex-col px-6 pt-[31px] pb-10">
+    <form
+      onSubmit={submit}
+      noValidate
+      className={cn("flex flex-col px-6 pt-[31px] pb-10", picked && "animate-in duration-250 ease-figma-out fade-in")}
+    >
       <DrawerTitle className="text-h5 leading-[1.2] font-medium text-foreground">{spec.title}</DrawerTitle>
       <DrawerDescription className="sr-only">Preencha os dados do item do roteiro</DrawerDescription>
 
@@ -315,12 +374,16 @@ function TransportPicker({ onPick }: { onPick: (mode: TransportMode) => void }) 
         className={cn("mt-8 flex h-6 w-full items-center justify-between border-b text-left", open ? "border-foreground" : "border-input")}
       >
         <span className="text-p16 leading-[1.2] text-muted-foreground">Tipos de Transporte</span>
-        <img src="/icons/itens/down.svg" alt="" width={22} height={22} className={cn("transition-transform", open && "rotate-180")} />
+        <img src="/icons/itens/down.svg" alt="" width={22} height={22} className={cn("transition-transform duration-250 ease-figma-out", open && "rotate-180")} />
       </button>
       {open && (
         // Figma "Container": branco, sombra, cantos inferiores de 4px; itens a cada 47px;
-        // 21px antes do primeiro ícone e 22px depois do último
-        <ul role="listbox" aria-label="Tipos de Transporte" className="flex flex-col rounded-b-[4px] bg-white pt-[21px] pb-[22px] shadow-[0px_1px_4px_1px_rgba(0,0,0,0.25)]">
+        // 21px antes do primeiro ícone e 22px depois do último. Abre com "Smart animate" de 250ms
+        <ul
+          role="listbox"
+          aria-label="Tipos de Transporte"
+          className="flex animate-in flex-col duration-250 ease-figma-out fade-in rounded-b-[4px] bg-white pt-[21px] pb-[22px] shadow-[0px_1px_4px_1px_rgba(0,0,0,0.25)]"
+        >
           {TRANSPORT_MODES.map(({ mode, label, icon }, i) => (
             <li key={mode}>
               <button
