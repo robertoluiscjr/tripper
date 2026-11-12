@@ -29,7 +29,8 @@ export function GastosScreen({ initialTrip, initialItems }: { initialTrip: TripD
   const balance = planned !== null ? planned - total : null;
 
   return (
-    <main className="flex flex-1 flex-col px-6 pt-16 pb-10">
+    // pb-16: no Figma, 64px entre o último card e o fim da tela (aqui, o topo da tab bar)
+    <main className="flex flex-1 flex-col px-6 pt-16 pb-16">
       <Link href={`/app/viagens/${trip.id}`} aria-label="Voltar para a viagem" className="self-start">
         <img src="/icons/back.svg" alt="" width={24} height={24} />
       </Link>
