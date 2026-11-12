@@ -53,12 +53,12 @@ export default function LoginPage({ searchParams }: PageProps<"/login">) {
         <img src="/icons/back.svg" alt="" width={24} height={24} />
       </Link>
 
-      <Logo variant="blue" className="mt-[37px] self-center text-[48px]" />
+      <Logo variant="blue" className="mt-8 self-center text-[48px]" />
 
       <h1 className="mt-[60px] text-h3 leading-[1.2] font-medium text-foreground">
         Entre para começar a planejar sua próxima viagem
       </h1>
-      <p className="mt-8 text-p16 leading-[1.2] text-foreground">
+      <p className="mt-10 text-p16 leading-[1.2] text-foreground">
         Acesse usando uma de suas contas ou seu e-mail para continuar
       </p>
 
@@ -96,7 +96,7 @@ function LoginForms({ callbackUrl, error }: { callbackUrl: string; error?: strin
   }
 
   return (
-    <div className="mt-6 flex flex-1 flex-col">
+    <div className="mt-5 flex flex-1 flex-col">
       {error && (
         <p role="alert" className="mb-6 rounded-xl bg-destructive/10 p-3 text-center text-p14 text-destructive">
           {error}
@@ -115,21 +115,22 @@ function LoginForms({ callbackUrl, error }: { callbackUrl: string; error?: strin
 
       {GOOGLE_ENABLED && EMAIL_ENABLED && (
         // Figma: duas linhas de 140px (#B9B9B9) com "ou" 14px no meio
-        <div className="mt-8 flex items-center gap-6 text-p14 leading-[1.2] text-foreground">
+        <div className="mt-[47px] flex items-center gap-6 text-p14 leading-[1.2] text-foreground">
           <span className="h-px flex-1 bg-input" /> ou <span className="h-px flex-1 bg-input" />
         </div>
       )}
 
       {EMAIL_ENABLED ? (
-        <form action={signInWithEmail} className="mt-12 flex flex-1 flex-col">
+        <form action={signInWithEmail} className="mt-[47px] flex flex-1 flex-col">
           <input type="hidden" name="callbackUrl" value={callbackUrl} />
           <Label htmlFor="email" className="sr-only">E-mail</Label>
           <Input id="email" name="email" type="email" required autoComplete="email" placeholder="E-mail" />
           <p className="mt-8 text-center text-p14 leading-[1.2] text-foreground">
             Enviaremos um link para você entrar sem senha.
           </p>
-          <Terms className="mt-auto pt-8" />
-          <Button type="submit" size="cta" className="mt-6">
+          {/* Figma "Login (app atual)" 4780:5183: termos logo após o apoio; botão no rodapé */}
+          <Terms className="mt-6 mb-8" />
+          <Button type="submit" size="cta" className="mt-auto">
             Receber link de acesso
           </Button>
         </form>
