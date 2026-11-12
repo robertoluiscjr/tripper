@@ -15,7 +15,7 @@ export class ApiError extends Error {
   }
 }
 
-async function api<T>(path: string, init?: RequestInit): Promise<T> {
+export async function api<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
     ...init,
     headers: { "Content-Type": "application/json", ...init?.headers },
@@ -65,6 +65,19 @@ export function useUpdateTrip(id: string) {
   return useMutation({
     mutationFn: (input: TripFormInput) =>
       api<{ trip: TripDTO }>(`/api/trips/${id}`, { method: "PATCH", body: JSON.stringify(input) }).then((d) => d.trip),
+    onSuccess: (trip) => {
+      qc.setQueryData(tripKeys.detail(id), trip);
+      qc.invalidateQueries({ queryKey: tripKeys.all });
+    },
+  });
+}
+
+/** "Estimar Gastos": Valor Total Planejado. */
+export function useUpdateBudget(id: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (plannedBudget: number) =>
+      api<{ trip: TripDTO }>(`/api/trips/${id}/budget`, { method: "PATCH", body: JSON.stringify({ plannedBudget }) }).then((d) => d.trip),
     onSuccess: (trip) => {
       qc.setQueryData(tripKeys.detail(id), trip);
       qc.invalidateQueries({ queryKey: tripKeys.all });

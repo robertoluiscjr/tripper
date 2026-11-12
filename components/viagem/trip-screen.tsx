@@ -6,10 +6,16 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import type { ItemCategory } from "@prisma/client";
 import { useDeleteTrip, useTrip, useUpdateTrip } from "@/hooks/use-trips";
+import { useTripItems } from "@/hooks/use-trip-items";
+import type { TripItemDTO } from "@/lib/trip-items";
 import { daysLabel, type TripDTO } from "@/lib/trips";
 import { TripFormSheet } from "@/components/planejar/trip-form-sheet";
 import { TripMap } from "./trip-map";
+import { Itinerary } from "./itinerary";
+import { NewItemMenu } from "./new-item-menu";
+import { ItemFormSheet } from "./item-form-sheet";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -18,7 +24,15 @@ import { TripMap } from "./trip-map";
  * Ver Progresso, filtro de dias e roteiro dia a dia ("Adicione itens neste
  * dia" em todos os dias — feedback do 1º teste de usabilidade).
  */
-export function TripScreen({ initialTrip }: { initialTrip: TripDTO }) {
+export function TripScreen({
+  initialTrip,
+  initialItems,
+  openCategory,
+}: {
+  initialTrip: TripDTO;
+  initialItems: TripItemDTO[];
+  openCategory?: ItemCategory;
+}) {
   const router = useRouter();
   const { data: trip = initialTrip } = useTrip(initialTrip.id, initialTrip);
   const updateTrip = useUpdateTrip(trip.id);
@@ -26,6 +40,17 @@ export function TripScreen({ initialTrip }: { initialTrip: TripDTO }) {
   const [editOpen, setEditOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [dayFilter, setDayFilter] = useState<number | "all">("all");
+  const { data: items = initialItems } = useTripItems(initialTrip.id, initialItems);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [itemSheet, setItemSheet] = useState<{ category: ItemCategory; item?: TripItemDTO } | null>(
+    openCategory ? { category: openCategory } : null,
+  );
+  // A página pode voltar do cache do Next com o estado antigo: abre o formulário quando ?novo= muda
+  const [lastOpenCategory, setLastOpenCategory] = useState(openCategory);
+  if (openCategory !== lastOpenCategory) {
+    setLastOpenCategory(openCategory);
+    if (openCategory) setItemSheet({ category: openCategory });
+  }
 
   const days = Array.from({ length: trip.daysCount }, (_, i) => i + 1);
   const visibleDays = dayFilter === "all" ? days : days.filter((d) => d === dayFilter);
@@ -55,10 +80,10 @@ export function TripScreen({ initialTrip }: { initialTrip: TripDTO }) {
 
       {/* Estimar Gastos | Ver Progresso */}
       <div className="relative mt-2 grid h-8 grid-cols-2">
-        <button type="button" onClick={() => comingSoon("Estimar Gastos")} className="flex items-center justify-center gap-1">
+        <Link href={`/app/viagens/${trip.id}/gastos`} className="flex items-center justify-center gap-1">
           <img src="/icons/calculate.svg" alt="" width={24} height={24} />
           <span className="text-p16 leading-[1.2] font-medium text-foreground">Estimar Gastos</span>
-        </button>
+        </Link>
         <span aria-hidden className="absolute top-0 left-1/2 h-8 w-px bg-tripper-divider" />
         <button type="button" onClick={() => comingSoon("Ver Progresso")} className="flex items-center justify-center gap-1">
           <img src="/icons/progresso.svg" alt="" width={24} height={24} />
@@ -79,21 +104,39 @@ export function TripScreen({ initialTrip }: { initialTrip: TripDTO }) {
       </div>
 
       {/* Roteiro */}
-      <ol className="mt-[30px] flex flex-col gap-6 px-6">
-        {visibleDays.map((d, i) => (
-          <li key={d} className={cn("flex flex-col", i < visibleDays.length - 1 && "border-b border-tripper-divider pb-6")}>
-            <h2 className="text-h3 leading-[1.2] font-medium text-foreground">Dia {d}</h2>
-            <p className="mt-2 text-p16 leading-[1.2] text-muted-foreground">Adicione itens neste dia</p>
-          </li>
-        ))}
-      </ol>
+      <Itinerary days={visibleDays} items={items} onOpenItem={(item) => setItemSheet({ category: item.category, item })} />
 
-      {/* + Novo item (Figma "Button with icon") */}
-      <div className="pointer-events-none sticky bottom-[104px] z-30 mt-auto flex justify-end px-6 pt-8">
-        <Button size="fab" aria-label="Adicionar item ao roteiro" className="pointer-events-auto" onClick={() => comingSoon("Adicionar itens")}>
-          <img src="/icons/add-fab.svg" alt="" width={28} height={28} />
+      {/* + Novo item (Figma "Button with icon"); aberto, vira "×" escuro acima do fundo do menu */}
+      <div className={cn("pointer-events-none sticky bottom-[104px] mt-auto flex justify-end px-6 pt-8", menuOpen ? "z-[36]" : "z-30")}>
+        <Button
+          size="fab"
+          aria-label={menuOpen ? "Fechar menu de itens" : "Adicionar item ao roteiro"}
+          aria-expanded={menuOpen}
+          className={cn("pointer-events-auto", menuOpen && "bg-tripper-dark-700 hover:bg-tripper-dark-700 active:bg-tripper-dark-700")}
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          <img src={menuOpen ? "/icons/itens/close-white.svg" : "/icons/add-fab.svg"} alt="" width={28} height={28} />
         </Button>
       </div>
+
+      <NewItemMenu
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onPick={(category) => {
+          setMenuOpen(false);
+          setItemSheet({ category });
+        }}
+      />
+      <ItemFormSheet
+        trip={trip}
+        category={itemSheet?.category ?? null}
+        item={itemSheet?.item}
+        onClose={() => {
+          setItemSheet(null);
+          // Veio do Estimar Gastos (?novo=...): limpa a URL para não reabrir ao recarregar
+          if (openCategory) router.replace(`/app/viagens/${trip.id}`, { scroll: false });
+        }}
+      />
 
       <TripFormSheet
         open={editOpen}
