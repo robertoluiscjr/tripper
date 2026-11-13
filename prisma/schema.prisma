@@ -118,6 +118,10 @@ model Trip {
   plannedBudget Decimal? @db.Decimal(12, 2)
   currency      String   @default("BRL")
 
+  // "Ver Progresso": categorias que a viagem vai ter e quantos itens em cada
+  // ex.: {"TRANSPORT":2,"ACCOMMODATION":1}. Categoria ausente = desligada; null = ainda não configurado
+  progressPlan Json?
+
   user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   items    TripItem[]
   bookings Booking[]

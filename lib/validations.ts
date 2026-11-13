@@ -116,6 +116,11 @@ export const moveTripItemSchema = z.object({
 });
 export type MoveTripItemInput = z.infer<typeof moveTripItemSchema>;
 
+// "Ver Progresso": categoria ligada → quantos itens previstos (categoria ausente = desligada)
+export const progressPlanSchema = z.object({
+  plan: z.partialRecord(itemCategorySchema, z.number().int().min(1, "Mínimo de 1 item").max(30, "Máximo de 30 itens")),
+});
+
 // "Estimar Gastos": quanto o usuário deseja gastar
 export const updateBudgetSchema = z.object({
   plannedBudget: z.coerce.number().min(0, "O valor não pode ser negativo"),

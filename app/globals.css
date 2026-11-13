@@ -12,6 +12,7 @@
  */
 @theme inline {
   /* Paleta da marca — use como bg-tripper-blue-500, text-tripper-orange-500 etc. */
+  --color-tripper-blue-100: #e9eef6; /* trilho da barra de progresso (Figma "Progresso da viagem") */
   --color-tripper-blue-300: #3d7edf; /* Active */
   --color-tripper-blue-500: #2765c2; /* Primary */
   --color-tripper-blue-700: #114697; /* Hover */
