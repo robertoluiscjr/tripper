@@ -30,10 +30,13 @@ export function TripScreen({
   initialTrip,
   initialItems,
   openCategory,
+  prefill,
 }: {
   initialTrip: TripDTO;
   initialItems: TripItemDTO[];
   openCategory?: ItemCategory;
+  /** "Adicionar à viagem" (aba Buscar): nome e endereço do passeio já preenchidos */
+  prefill?: { title?: string; address?: string };
 }) {
   const router = useRouter();
   const { data: trip = initialTrip } = useTrip(initialTrip.id, initialTrip);
@@ -189,6 +192,7 @@ export function TripScreen({
         trip={trip}
         category={itemSheet?.category ?? null}
         item={itemSheet?.item}
+        prefill={itemSheet && !itemSheet.item && itemSheet.category === openCategory ? prefill : undefined}
         onClose={() => {
           setItemSheet(null);
           // Veio do Estimar Gastos (?novo=...): limpa a URL para não reabrir ao recarregar

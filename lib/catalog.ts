@@ -1,0 +1,140 @@
+import attractionsData from "@/data/attractions.json";
+import { flightsUrl, hotelsUrl, packagesUrl, toursUrl } from "@/lib/partners";
+
+/**
+ * Catálogo da aba Buscar: destinos do protótipo (Figma "Buscar" e "Passeios e Atrações")
+ * e atrações reais de cada um. Resumo e foto das atrações vêm da Wikipédia
+ * (gerados por `node scripts/catalog.mjs` em data/attractions.json).
+ * Sem preços nem avaliações: isso só com dados de parceiros.
+ */
+export type Destination = {
+  slug: string;
+  name: string;
+  state: string;
+  /** busca nos parceiros (ex.: "Bonito, Mato Grosso do Sul") */
+  query: string;
+  /** aeroporto mais próximo (IATA) para a busca de passagens */
+  airport: string;
+  photo: string;
+  photoPosition?: string;
+  lat: number;
+  lon: number;
+};
+
+export type Attraction = {
+  destination: string;
+  slug: string;
+  name: string;
+  subtitle: string | null;
+  summary: string;
+  image: string;
+  wikiUrl: string;
+};
+
+const D = (d: Destination) => d;
+
+export const DESTINATIONS: Destination[] = [
+  D({ slug: "rio-de-janeiro", name: "Rio de Janeiro", state: "RJ", query: "Rio de Janeiro, Rio de Janeiro", airport: "GIG", photo: "/images/destinos/rio-de-janeiro.webp", photoPosition: "center top", lat: -22.9068, lon: -43.1729 }),
+  D({ slug: "salvador", name: "Salvador", state: "BA", query: "Salvador, Bahia", airport: "SSA", photo: "/images/destinos/salvador.webp", lat: -12.9714, lon: -38.5014 }),
+  D({ slug: "fortaleza", name: "Fortaleza", state: "CE", query: "Fortaleza, Ceará", airport: "FOR", photo: "/images/destinos/fortaleza.webp", lat: -3.7319, lon: -38.5267 }),
+  D({ slug: "gramado", name: "Gramado", state: "RS", query: "Gramado, Rio Grande do Sul", airport: "POA", photo: "/images/destinos/gramado.webp", lat: -29.3787, lon: -50.8741 }),
+  D({ slug: "florianopolis", name: "Florianópolis", state: "SC", query: "Florianópolis, Santa Catarina", airport: "FLN", photo: "/images/destinos/florianopolis.webp", lat: -27.5954, lon: -48.548 }),
+  D({ slug: "lencois-maranhenses", name: "Lençóis Maranhenses", state: "MA", query: "Barreirinhas, Maranhão", airport: "SLZ", photo: "/images/destinos/lencois-maranhenses.webp", lat: -2.7569, lon: -42.8263 }),
+  D({ slug: "foz-do-iguacu", name: "Foz do Iguaçu", state: "PR", query: "Foz do Iguaçu, Paraná", airport: "IGU", photo: "/images/destinos/foz-do-iguacu.webp", lat: -25.5469, lon: -54.5882 }),
+  D({ slug: "manaus", name: "Manaus", state: "AM", query: "Manaus, Amazonas", airport: "MAO", photo: "/images/destinos/manaus.webp", lat: -3.119, lon: -60.0217 }),
+  D({ slug: "fernando-de-noronha", name: "Fernando de Noronha", state: "PE", query: "Fernando de Noronha, Pernambuco", airport: "FEN", photo: "/images/destinos/fernando-de-noronha.webp", lat: -3.8547, lon: -32.4247 }),
+  D({ slug: "bonito", name: "Bonito", state: "MS", query: "Bonito, Mato Grosso do Sul", airport: "BYO", photo: "/images/destinos/bonito.webp", lat: -21.1261, lon: -56.4836 }),
+  D({ slug: "campos-do-jordao", name: "Campos do Jordão", state: "SP", query: "Campos do Jordão, São Paulo", airport: "GRU", photo: "/images/destinos/campos-do-jordao.webp", lat: -22.7394, lon: -45.5914 }),
+];
+
+// Descrição curta do Wikidata: só quando é uma frase útil (algumas vêm como "… de nível Federal, localizado (a) em …")
+const usefulSubtitle = (s: string | null) => (s && s.length <= 70 && !/localizad[oa] \(a\)|página de desambiguação/i.test(s) ? s : null);
+
+export const ATTRACTIONS: Attraction[] = (attractionsData as Attraction[]).map((a) => ({ ...a, subtitle: usefulSubtitle(a.subtitle) }));
+
+export function getDestination(slug: string) {
+  return DESTINATIONS.find((d) => d.slug === slug);
+}
+
+export function attractionsOf(destination: string) {
+  return ATTRACTIONS.filter((a) => a.destination === destination);
+}
+
+export function getAttraction(destination: string, slug: string) {
+  return ATTRACTIONS.find((a) => a.destination === destination && a.slug === slug);
+}
+
+/** "Rio de Janeiro", "rio  de janeiro!", "São Luís" → comparação sem acento/caixa */
+export function normalizeText(text: string) {
+  return text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/** Destinos cujo nome (ou estado) contém o texto digitado. */
+export function searchDestinations(text: string) {
+  const q = normalizeText(text);
+  if (!q) return DESTINATIONS;
+  return DESTINATIONS.filter((d) => normalizeText(`${d.name} ${d.state}`).includes(q));
+}
+
+/** Distância em km (fórmula de Haversine) — "Destinos Próximos". */
+export function distanceKm(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
+  const rad = (x: number) => (x * Math.PI) / 180;
+  const h = Math.sin(rad(b.lat - a.lat) / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(rad(b.lon - a.lon) / 2) ** 2;
+  return 6371 * 2 * Math.asin(Math.sqrt(h));
+}
+
+/* Seções da tela Buscar (Figma 214:2332): um carrossel por tipo, cada card abre o parceiro. */
+export type BuscarSection = {
+  id: "pacotes" | "passagens" | "hospedagens";
+  title: string;
+  icon: string;
+  kind: string;
+  partner: string;
+  /** "na Decolar", "no Skyscanner" */
+  partnerPrep: "na" | "no";
+  cards: { destination: string; photo?: string }[];
+};
+
+export const BUSCAR_SECTIONS: BuscarSection[] = [
+  {
+    id: "pacotes",
+    title: "Viaje com esses pacotes",
+    icon: "/icons/buscar/pacotes.svg",
+    kind: "Pacotes",
+    partner: "Decolar",
+    partnerPrep: "na",
+    cards: [{ destination: "rio-de-janeiro", photo: "/images/destinos/rio-copacabana.webp" }, { destination: "lencois-maranhenses" }, { destination: "foz-do-iguacu" }],
+  },
+  {
+    id: "passagens",
+    title: "Passagens aéreas",
+    icon: "/icons/buscar/flight.svg",
+    kind: "Passagens",
+    partner: "Skyscanner",
+    partnerPrep: "no",
+    cards: [{ destination: "salvador" }, { destination: "florianopolis" }, { destination: "manaus" }],
+  },
+  {
+    id: "hospedagens",
+    title: "Hospedagens",
+    icon: "/icons/buscar/bed.svg",
+    kind: "Diárias",
+    partner: "Booking.com",
+    partnerPrep: "no",
+    cards: [{ destination: "fernando-de-noronha" }, { destination: "bonito" }, { destination: "campos-do-jordao" }],
+  },
+];
+
+export function sectionUrl(section: BuscarSection["id"], d: Destination) {
+  if (section === "passagens") return flightsUrl(d.airport);
+  if (section === "hospedagens") return hotelsUrl(d.query);
+  return packagesUrl();
+}
+
+export function attractionToursUrl(a: Attraction) {
+  const d = getDestination(a.destination);
+  return toursUrl(d && !a.name.includes(d.name) ? `${a.name} ${d.name}` : a.name);
+}
+
+/** "Destinos mais procurados" (Figma "Passeios e Atrações"). */
+export const MOST_SEARCHED = ["rio-de-janeiro", "salvador", "fortaleza", "gramado", "florianopolis"];

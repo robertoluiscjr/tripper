@@ -36,6 +36,10 @@ TanStack Query · Prisma 6 + PostgreSQL (Neon) · Zod 4 · Auth.js v5 (Google + 
 - **Login de teste local**: `http://localhost:3000/api/dev/login` entra como a persona "Ana Medeiros"
   (só em `next dev`; em produção responde 404).
 - Viagens: foto de capa + coordenadas vêm da Wikipédia (`lib/destination.ts`); mapa = Leaflet + OpenStreetMap.
+- Aba Buscar: sem compra no app (checkout/pagamento do Figma ficam para depois). Destinos em `lib/catalog.ts`;
+  atrações em `data/attractions.json`, geradas da Wikipédia por `node scripts/catalog.mjs` (lista em
+  `scripts/catalog-titles.json`). Links de parceiros (Booking, GetYourGuide, Skyscanner, Decolar) em `lib/partners.ts`
+  — é lá que entram os códigos de afiliado. Sem preços/avaliações inventados.
 - Botões: `size="cta"` (56px, texto 20), `size="pill"` (+ nova viagem), `size="fab"` (+ item). Bottom sheet = `Drawer`.
 
 ## Estrutura

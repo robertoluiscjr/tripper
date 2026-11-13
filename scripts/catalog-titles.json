@@ -1,0 +1,13 @@
+{
+  "rio-de-janeiro": ["Cristo Redentor", ["Pão de Açúcar", "Monumento Natural dos Morros do Pão de Açúcar e da Urca"], "Escadaria Selarón", "Museu do Amanhã", "Parque Nacional da Tijuca", "Praia de Copacabana", ["Ipanema", "Ipanema"], "Jardim Botânico do Rio de Janeiro", ["Arcos da Lapa", "Aqueduto da Carioca"], ["Maracanã", "Estádio Jornalista Mário Filho"]],
+  "salvador": ["Elevador Lacerda", ["Pelourinho e Centro Histórico", "Centro Histórico de Salvador"], ["Mercado Modelo", "Mercado Modelo"], ["Igreja e Convento de São Francisco", "Igreja e Convento de São Francisco (Salvador)"], ["Igreja do Senhor do Bonfim", "Igreja Nosso Senhor do Bonfim"], "Museu de Arte Moderna da Bahia", ["Forte e Farol da Barra", "Forte de Santo Antônio da Barra"], "Praia do Porto da Barra", "Dique do Tororó"],
+  "fortaleza": ["Praia de Iracema", "Beach Park", ["Dragão do Mar", "Centro Dragão do Mar de Arte e Cultura"], "Mercado Central de Fortaleza", "Theatro José de Alencar", "Praia do Futuro", "Catedral Metropolitana de Fortaleza", "Praia de Cumbuco"],
+  "gramado": ["Lago Negro", "Mini Mundo", "Cascata do Caracol", "Parque Estadual do Caracol", ["Igreja Matriz São Pedro", "Paróquia São Pedro (Gramado)"]],
+  "florianopolis": ["Ponte Hercílio Luz", "Lagoa da Conceição", "Praia da Joaquina", "Mercado Público de Florianópolis", ["Jurerê", "Jurerê"], ["Fortaleza de Anhatomirim", "Fortaleza de Santa Cruz de Anhatomirim"], "Praia dos Ingleses", "Praia do Campeche"],
+  "lencois-maranhenses": ["Parque Nacional dos Lençóis Maranhenses", "Barreirinhas", "Atins", "Santo Amaro do Maranhão", "Rio Preguiças"],
+  "foz-do-iguacu": ["Cataratas do Iguaçu", "Parque Nacional do Iguaçu", ["Usina de Itaipu", "Usina Hidrelétrica de Itaipu"], "Parque das Aves", "Ponte Internacional da Amizade", ["Parque Nacional Iguazú (Argentina)", "Parque Nacional do Iguaçu (Argentina)"]],
+  "manaus": ["Teatro Amazonas", ["Encontro das Águas", "Encontro das águas"], "Mercado Municipal Adolpho Lisboa", "Museu da Amazônia", "Palácio Rio Negro", "Ponte Rio Negro", "Parque Nacional de Anavilhanas", "Praia da Ponta Negra (Manaus)"],
+  "fernando-de-noronha": ["Parque Nacional Marinho de Fernando de Noronha", "Baía dos Porcos", ["Forte de Nossa Senhora dos Remédios", "Forte de Nossa Senhora dos Remédios (Fernando de Noronha)"]],
+  "bonito": [["Gruta do Lago Azul", "Monumento Natural da Gruta do Lago Azul"], ["Buraco das Araras", "Reserva Particular do Patrimônio Natural Buraco das Araras"], ["Rio da Prata", "Rio da Prata (Mato Grosso do Sul)"], "Parque Nacional da Serra da Bodoquena"],
+  "campos-do-jordao": ["Palácio Boa Vista", "Parque Estadual de Campos do Jordão", "Pico do Itapeva", "Estrada de Ferro Campos do Jordão", ["Parque Amantikir", "Parque Amantikir"]]
+}

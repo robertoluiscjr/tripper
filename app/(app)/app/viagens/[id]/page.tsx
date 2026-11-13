@@ -22,8 +22,13 @@ export default function TripPage({ params, searchParams }: PageProps<"/app/viage
 async function TripData({ params, searchParams }: Pick<PageProps<"/app/viagens/[id]">, "params" | "searchParams">) {
   const { id } = await params;
   // "Adicionar itens" do Estimar Gastos: ?novo=FOOD abre o formulário daquela categoria
-  const novo = (await searchParams).novo;
-  const openCategory = itemCategorySchema.safeParse(Array.isArray(novo) ? novo[0] : novo).data;
+  // "Adicionar à viagem" da aba Buscar: ?novo=TOUR&titulo=...&endereco=... já preenche o formulário
+  const query = await searchParams;
+  const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
+  const openCategory = itemCategorySchema.safeParse(first(query.novo)).data;
+  const title = first(query.titulo)?.slice(0, 120);
+  const address = first(query.endereco)?.slice(0, 200);
+  const prefill = openCategory && (title || address) ? { title, address } : undefined;
   const user = await getCurrentUser();
   if (!user) redirect(`/login?callbackUrl=/app/viagens/${id}`);
 
@@ -33,7 +38,7 @@ async function TripData({ params, searchParams }: Pick<PageProps<"/app/viagens/[
   });
   if (!trip) notFound();
 
-  return <TripScreen initialTrip={toTripDTO(trip)} initialItems={trip.items.map(toTripItemDTO)} openCategory={openCategory} />;
+  return <TripScreen initialTrip={toTripDTO(trip)} initialItems={trip.items.map(toTripItemDTO)} openCategory={openCategory} prefill={prefill} />;
 }
 
 function TripSkeleton() {

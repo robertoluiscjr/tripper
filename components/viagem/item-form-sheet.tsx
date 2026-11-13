@@ -97,6 +97,7 @@ export function ItemFormSheet({
   trip,
   category,
   item,
+  prefill,
   onClose,
 }: {
   trip: TripDTO;
@@ -104,6 +105,8 @@ export function ItemFormSheet({
   category: ItemCategory | null;
   /** Item existente (editar) */
   item?: TripItemDTO | null;
+  /** Item novo já preenchido (ex.: "Adicionar à viagem" da aba Buscar: nome e endereço do passeio) */
+  prefill?: { title?: string; address?: string };
   onClose: () => void;
 }) {
   const open = !!category;
@@ -126,6 +129,7 @@ export function ItemFormSheet({
               trip={trip}
               category={shown.category}
               item={shown.item ?? undefined}
+              prefill={shown.item ? undefined : prefill}
               onDone={() => {
                 setFadeExit(true);
                 onClose();
@@ -162,9 +166,23 @@ function AnimatedHeight({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ItemForm({ trip, category, item, onDone }: { trip: TripDTO; category: ItemCategory; item?: TripItemDTO; onDone: () => void }) {
+function ItemForm({
+  trip,
+  category,
+  item,
+  prefill,
+  onDone,
+}: {
+  trip: TripDTO;
+  category: ItemCategory;
+  item?: TripItemDTO;
+  prefill?: { title?: string; address?: string };
+  onDone: () => void;
+}) {
   const [mode, setMode] = useState<TransportMode | undefined>(item?.transportMode ?? undefined);
-  const [values, setValues] = useState<Values>(() => (item ? (inputFromItem(item, trip.startDate) as Values) : {}));
+  const [values, setValues] = useState<Values>(() =>
+    item ? (inputFromItem(item, trip.startDate) as Values) : prefill ? ({ title: prefill.title ?? "", address: prefill.address ?? "" } as Values) : {},
+  );
   const [errors, setErrors] = useState<Record<string, string>>({});
   // Veio da lista "Tipos de Transporte": o formulário entra com dissolve (Smart animate do Figma)
   const [picked, setPicked] = useState(false);

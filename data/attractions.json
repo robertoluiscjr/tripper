@@ -1,0 +1,641 @@
+[
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "cristo-redentor",
+    "name": "Cristo Redentor",
+    "subtitle": "Estátua art déco no Rio de Janeiro",
+    "summary": "Cristo Redentor é uma estátua que retrata Jesus Cristo, localizada no topo do morro do Corcovado, a 709 metros acima do nível do mar, dentro do Parque Nacional da Tijuca. Tem vista para parte considerável da cidade brasileira do Rio de Janeiro, sendo a frente da estátua voltada para a Baía de Guanabara e as costas para a Floresta da Tijuca. Feito de concreto armado e pedra-sabão, tem trinta metros de altura (uma das maiores estátuas do mundo), sem contar os oito metros do pedestal, sendo a mais alta estátua do mundo no estilo Art Déco. Seus braços se esticam por 28 metros de largura e a estrutura pesa 1 145 toneladas. \nO monumento é um santuário católico e a Arquidiocese do Rio de Janeiro administra a estátua e a capela localizada dentro do seu pedestal, além de também ser responsável pelas celebrações e manutenção do conjunto. O direito de gerenciar a estátua foi concedido pela União à Arquidiocese do Rio na década de 1930, mas o acesso à estátua e a administração do platô onde ela se localiza são realizados pelo Parque Nacional da Tijuca, uma Unidade de Conservação federal gerida pelo Instituto Chico Mendes de Conservação da Biodiversidade (ICMBio).\nA ideia de construir uma grande estátua no alto do Corcovado foi sugerida pela primeira vez em meados do século XIX, mas foi o Círculo Católico do Rio de Janeiro que conseguiu as doações necessárias para colocar a ideia em prática no início do século XX. O monumento foi construído na França a partir de 1922 através de uma colaboração entre os brasileiros Heitor da Silva Costa e Carlos Oswald, os franceses Paul Landowski e Albert Caquot e o romeno Gheorghe Leonida. Sua inauguração ocorreu no dia 12 de outubro de 1931, dia de Nossa Senhora Aparecida.\nSímbolo do cristianismo, o Cristo Redentor também se tornou um ícone cultural do Rio de Janeiro, do Brasil e da América Latina como um todo, sendo retratado no cinema, na televisão e em músicas. O Corcovado é um importante ponto turístico, que recebe, em média, 2 milhões de visitantes por ano. Em 2007, foi eleito informalmente como uma das sete maravilhas do mundo moderno e, em 2012, a UNESCO considerou o Cristo Redentor como parte da paisagem do Rio de Janeiro incluída na lista de Patrimônios da Humanidade.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Christ_the_Redeemer_-_Cristo_Redentor.jpg/1280px-Christ_the_Redeemer_-_Cristo_Redentor.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Cristo_Redentor"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "pao-de-acucar",
+    "name": "Pão de Açúcar",
+    "subtitle": null,
+    "summary": "Monumento Natural dos Morros do Pão de Açúcar e da Urca é um complexo de morros localizado no bairro da Urca, na cidade do Rio de Janeiro, no Brasil. É composto pelo Morro do Pão de Açúcar (que dá nome ao complexo) e pelo Morro da Urca. Junto com a estátua do Cristo Redentor, é o maior cartão-postal da cidade do Rio de Janeiro e um dos mais famosos do Brasil. Pelas características únicas, margeado pelas águas da baía de Guanabara, constitui-se em uma referência turística internacional para a cidade.\nPossui, como atração complementar, o passeio de teleférico interligando a Praia Vermelha, o Morro da Urca e o Morro do Pão de Açúcar. Conhecido como Bondinho do Pão de Açúcar, o teleférico foi idealizado em 1908 e inaugurado em 1912, tornando-se o primeiro teleférico instalado no país e o terceiro do mundo. Nesses mais de cem anos de existência, já transportou mais de quarenta milhões de pessoas. Na última estação do bondinho, tem-se a vista panorâmica das cidades do Rio de Janeiro e de Niterói.\nO Pão de Açúcar e o Monumento Natural da Colina da Urca têm uma área de 91,5 hectares. Entre as atrações da área, além do bondinho, estão a pista Cláudio Coutinho para corrida ou caminhada, a trilha do Morro da Urca com vista para Corcovado, Copacabana, Botafogo e Baía de Guanabara e muitas rotas de escalada.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Vista_do_Morro_Dona_Marta.jpg/1280px-Vista_do_Morro_Dona_Marta.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Monumento_Natural_dos_Morros_do_P%C3%A3o_de_A%C3%A7%C3%BAcar_e_da_Urca"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "escadaria-selaron",
+    "name": "Escadaria Selarón",
+    "subtitle": "Obra arquitetônica na cidade do Rio de Janeiro",
+    "summary": "A Escadaria Selarón é uma obra arquitetônica localizada entre os bairros de Santa Teresa e Lapa, no Rio de Janeiro, Brasil, decorada pelo artista chileno radicado no Brasil de longa data, Jorge Selarón, que declarou-a como uma \"homenagem ao povo brasileiro\".\nA obra do artista chileno é considerada a terceira atração turística mais buscada pelos turistas do Rio de Janeiro, atrás somente do Cristo Redentor e do Pão de Açúcar.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Escadaria_Selar%C3%B3n_-_Rio_de_Janeiro_-_20240417062601.jpg/1280px-Escadaria_Selar%C3%B3n_-_Rio_de_Janeiro_-_20240417062601.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Escadaria_Selar%C3%B3n"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "museu-do-amanha",
+    "name": "Museu do Amanhã",
+    "subtitle": "Museu de ciências no Rio de Janeiro",
+    "summary": "O Museu do Amanhã é um museu construído no município do Rio de Janeiro, no Brasil. O prédio, projeto do arquiteto espanhol Santiago Calatrava, foi erguido ao lado da Praça Mauá, na zona portuária (mais precisamente no Píer Mauá). Sua construção teve o apoio da Fundação Roberto Marinho e teve o custo total de cerca de 230 milhões de reais. O edifício foi inaugurado em 17 de dezembro de 2015 com a presença da então presidente do Brasil Dilma Rousseff e recebeu cerca de 25 mil visitantes em seu primeiro fim de semana de funcionamento.\nO antigo píer desativado passou a abrigar uma construção pós-moderna, orgânica e sustentável que, atualmente, é um ícone da identidade local e cultural da cidade do Rio de Janeiro. A proposta da instituição é ser um museu de artes e ciências, além de contar com mostras que alertam sobre os perigos das mudanças climáticas, da degradação ambiental e do colapso social. O edifício conta com espinhas solares que se movem ao longo da claraboia, projetadas para adaptar-se às mudanças das condições ambientais. A exposição principal é majoritariamente digital e foca em ideias ao invés de objetos. O museu tem parcerias com importantes universidades brasileiras e instituições científicas globais e coleta de dados em tempo real sobre o clima e a população de agências espaciais e das Nações Unidas. A instituição também tem consultores de várias áreas, como astronautas, cientistas sociais e climatologistas.\nComo uma das âncoras do projeto de revitalização urbana chamado Porto Maravilha, o museu recebeu, em 2015, como doação antes de sua inauguração, a escultura Puffed Star II, do renomado artista norte-americano Frank Stella. O trabalho consiste de uma estrela de vinte pontas e seis metros de diâmetro que foi instalado no espelho d'água do museu, em frente à Baía de Guanabara. A escultura metálica, antes da doação para acervo permanente a céu aberto do museu, esteve em exposição na cidade de Nova York.\nUm dos objetivos da construção do museu foi fortalecer a identidade cultural e internacional da cidade do Rio de Janeiro. A cidade do Cristo Redentor sempre foi muito conhecida pelas suas praias e eventos, como o carnaval, mas havia a necessidade do fortalecimento da paradiplomacia cultural. Outras cidades, como Londres e Paris, também são muito conhecidas por seus acervos culturais. O Museu foi apresentado como um ícone da reurbanização da zona portuária.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "parque-nacional-da-tijuca",
+    "name": "Parque Nacional da Tijuca",
+    "subtitle": "Parque Nacional da Tijuca de nível Federal, localizado (a) em Rio de Janeiro (RJ)",
+    "summary": "Parque Nacional da Tijuca é uma unidade de conservação brasileira de proteção integral da natureza localizada integralmente na cidade do Rio de Janeiro.\nEntre os pontos turísticos do parque, trilhas, grutas e cachoeiras, encontram-se marcos famosos da cidade, como a Pedra da Gávea, o Corcovado, e o Pico da Tijuca, ponto mais alto do parque, elevando-se 1 022 metros acima do nível do mar. De relevo montanhoso, inclui áreas do Maciço da Tijuca. É administrado pelo Instituto Chico Mendes de Conservação da Biodiversidade (ICMBio).\nA área é composta por vegetação secundária, uma vez que é fruto de um reflorestamento promovido à época do Segundo Reinado, quando se tornou patente que o desmatamento causado pelas fazendas de café estava prejudicando o abastecimento de água potável da então capital do Império. Vivem, no parque, mais de 230 espécies de animais e aves: entre eles, macaco-prego, quati, cutia, cachorro-do-mato, sagui, beija-flor e sabiá.\nO parque, que possui 3 972 hectares, é a quarta maior área verde urbana do país, superada apenas pelo Parque Estadual da Cantareira (7 916,52 hectares), da Reserva Floresta Adolfo Ducke (10 000 hectares) em Manaus e do Parque Estadual da Pedra Branca (12 500 hectares).",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/Floresta_da_Tijuca_60.jpg/1280px-Floresta_da_Tijuca_60.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Nacional_da_Tijuca"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "praia-de-copacabana",
+    "name": "Praia de Copacabana",
+    "subtitle": "Praia localizada no bairro de Copacabana, Rio de Janeiro, Brasil",
+    "summary": "A praia de Copacabana é uma praia localizada no bairro de Copacabana, na Zona Sul da cidade do Rio de Janeiro, no Brasil. É considerada uma das praias mais famosas do mundo. Limitada pela Avenida Atlântica, Copacabana é sede de eventos de grande porte, como campeonatos mundiais de futebol de areia, campeonatos mundiais de vôlei, shows, dentre outros eventos.\nO reveillon de Copacabana reúne grande público e conta com ampla queima de fogos de artifício, motivo porque é considerado um dos maiores do mundo. Em razão da projeção internacional como cartão-postal e destino turístico, a praia recebeu, no decorrer dos anos, a alcunha de \"princesinha do mar\".",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Aerial_view_of_Copacabana_beach.jpg/1280px-Aerial_view_of_Copacabana_beach.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_de_Copacabana"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "ipanema",
+    "name": "Ipanema",
+    "subtitle": "Bairro de Ipanema, Rio de Janeiro, RJ, Brasil",
+    "summary": "Ipanema é um bairro nobre da Zona Sul do município do Rio de Janeiro, fundado em 1894 por José Antônio Moreira, Conde de Ipanema. Limita com os bairros de Copacabana, Leblon e Lagoa.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/57/Ipaneman_beach_Rio_de_Janeirossa.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Ipanema"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "jardim-botanico-do-rio-de-janeiro",
+    "name": "Jardim Botânico do Rio de Janeiro",
+    "subtitle": "Parque do Jardim Botânico, área de preservação ambiental do Estado do Rio de Janeiro no Brasil",
+    "summary": "Jardim Botânico do Rio de Janeiro, oficialmente Instituto de Pesquisas Jardim Botânico do Rio de Janeiro, é um instituto de pesquisas e jardim botânico localizado no bairro do Jardim Botânico, na zona sul do município do Rio de Janeiro, no Brasil.\nUma das mais belas e bem preservadas áreas verdes da cidade, é um exemplo da diversidade da flora brasileira e estrangeira. Nele podem ser observadas cerca de 6 500 espécies (algumas ameaçadas de extinção), distribuídas por uma área de 54 hectares, ao ar livre e em estufas. A instituição é responsável pela coordenação da Lista de Espécies da Flora do Brasil e pela avaliação de risco de extinção destas espécies.\nA instituição abriga, ainda, monumentos de valor histórico, artístico e arqueológico e a mais completa biblioteca do país especializada em botânica, com mais de 32 000 volumes e o maior herbário do Brasil, que possui 600 mil amostras desidratadas (número de 2014, com uma média de 20 mil novas amostras incorporadas anualmente) completamente informatizadas e disponíveis para o público na página da instituição.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Corcovado%2C_veduta_02_giardin_botanico.JPG/1280px-Corcovado%2C_veduta_02_giardin_botanico.JPG",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Jardim_Bot%C3%A2nico_do_Rio_de_Janeiro"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "arcos-da-lapa",
+    "name": "Arcos da Lapa",
+    "subtitle": "Patrimônio localizado no Brasil",
+    "summary": "Os Arcos da Lapa localizam-se na região da Lapa, no bairro da Lapa, na Zona Central do município do Rio de Janeiro, no Brasil. \nConsiderada como a obra arquitetônica de maior porte empreendida no Brasil durante o período colonial, é hoje um dos cartões-postais da cidade, símbolo mais representativo do Rio de Janeiro antigo preservado na região boêmia da Lapa.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/2018_Rio_de_Janeiro_-_Aqueduto_da_Carioca.jpg/1280px-2018_Rio_de_Janeiro_-_Aqueduto_da_Carioca.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Aqueduto_da_Carioca"
+  },
+  {
+    "destination": "rio-de-janeiro",
+    "slug": "maracana",
+    "name": "Maracanã",
+    "subtitle": "Estádio de jogos de futebol e eventos localizado no bairro do Maracanã, no Rio de Janeiro",
+    "summary": "Estádio Jornalista Mário Filho, apelidado como Maracanã, ou carinhosamente como Maraca, é um estádio de futebol localizado no bairro de nome homônimo, na Zona Norte da cidade do Rio de Janeiro, capital do estado homônimo, construído pela prefeitura da cidade do Rio de Janeiro, então Distrito Federal, inaugurado em 1950, inicialmente com o nome de Estádio Municipal, para ser utilizado na Copa do Mundo daquele ano. No ano de sua inauguração, a capacidade oficial era de 155 mil lugares, que fez o Maracanã superar o Hampden Park, de Glasgow, e se tornar o maior estádio do mundo naquela época.\nDesde então, o Maracanã foi palco de grandes momentos do futebol brasileiro e mundial, como duas finais de Copa do Mundo FIFA, uma final de Copa do Mundo de Clubes da FIFA, diversas finais de Campeonato Brasileiro, Campeonato Carioca, Copa Libertadores da América, a final da Copa América de 2021, além de competições internacionais e partidas da Seleção Brasileira. Com o passar do tempo, no entanto, o estádio passou a assumir caráter de espaço multiuso ao receber outros eventos como espetáculos e partidas de outros esportes, como o voleibol em uma oportunidade. Após diversas obras de modernização, a capacidade do estádio atualmente é de 78 838 espectadores, sendo o maior estádio do Brasil.\nO estádio foi um dos locais de competição dos Jogos Pan-Americanos de 2007, recebendo o futebol, as cerimônias de abertura e de encerramento. Igualmente sediou as partidas de futebol e as cerimônias de abertura e de encerramento das Olimpíadas Rio 2016, ambos eventos realizados na cidade do Rio de Janeiro. Foi também o palco das partidas finais da Copa das Confederações FIFA de 2013 e da Copa do Mundo FIFA de 2014. Receberá também algumas partidas, incluindo a inaugural e o encerramento da Copa do Mundo de Futebol Feminino de 2027.\nO estádio é o centro do Complexo Esportivo do Maracanã, que também tem um ginásio poliesportivo, um parque aquático e uma pista de atletismo.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/Maracan%C3%A3_%282025%29_logo.png",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Est%C3%A1dio_Jornalista_M%C3%A1rio_Filho"
+  },
+  {
+    "destination": "salvador",
+    "slug": "elevador-lacerda",
+    "name": "Elevador Lacerda",
+    "subtitle": "Transporte vertical público em Salvador, no Brasil",
+    "summary": "O Elevador Lacerda é um sistema de transporte público da cidade de Salvador, capital do estado brasileiro da Bahia. Trata-se do primeiro elevador urbano do mundo. Em 8 de dezembro de 1873, quando a primeira torre foi inaugurada, era o elevador mais alto do mundo, com 63 metros. A estrutura atual, de 1930, tem 72 metros de altura. Faz o transporte de pessoas entre a Praça Cairu, na Cidade Baixa, e a Praça Tomé de Sousa, na Cidade Alta. É um dos principais pontos turísticos e cartão-postal da cidade. Do alto de suas torres, descortina-se a vista para a Baía de Todos-os-Santos, o Mercado Modelo e, ao fundo, o Forte de São Marcelo.\nSão duas torres: uma que sai da rocha e perfura a Ladeira da Montanha, equilibrando as cabines, e outra, mais visível, que se articula à primeira torre, descendo até ao nível da Cidade Baixa. O elevador mais famoso da Bahia chega a transportar 900 mil passageiros por mês ou, em média, 28 mil pessoas por dia ao custo de quinze centavos de real por passageiro, num percurso de trinta segundos de duração. Em 16 de janeiro de 2019, o Elevador bateu seu recorde de viagens em um único dia, com 33.850 passageiros.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Elevador_Lacerda_7610.jpg/1280px-Elevador_Lacerda_7610.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Elevador_Lacerda"
+  },
+  {
+    "destination": "salvador",
+    "slug": "pelourinho-e-centro-historico",
+    "name": "Pelourinho e Centro Histórico",
+    "subtitle": "Bem tombado pelo Instituto do Patrimônio Artístico e Cultural da Bahia na cidade de Salvador",
+    "summary": "Centro Histórico de Salvador (CHS), ou simplesmente Centro Histórico, é um bairro brasileiro localizado na cidade de Salvador, na Bahia. Compreende a área do assentamento inicial da primeira capital do Brasil, com ruas e monumentos arquitetônicos do período colonial. Abrange áreas do Pelourinho, praça da Sé, Terreiro de Jesus, Largo do São Francisco e Santo Antônio Além do Carmo. A via principal de acesso é a tradicional Rua Chile, que inicia na Praça Castro Alves e termina na Praça da Sé. \nTem o maior conjunto arquitetônico do período colonial preservado na América Latina, sendo um local altamente turístico com museus, lojas, centros culturais, igrejas, apresentações musicais, variadas opções gastronômicas e de hospedagem e comércio de souvenirs em meio aos diversos casarões e sobrados coloniais.\nA região é extremamente rica em monumentos históricos que datam do século XVII até o início do século XX. Isso porque Salvador foi a primeira capital colonial do Brasil e a cidade é uma das mais antigas do Novo Mundo (fundada em 1549 por colonizadores portugueses). Foi também um dos primeiros mercados de escravos do continente, que chegaram para trabalhar nas plantações de açúcar e, posteriormente, para a extração de ouro nas Minas Gerais.\nEssa área mais antiga da cidade está entre a Cidade Baixa e a Cidade Alta de Salvador - interligadas pelo Elevador Lacerda. Na Cidade Alta, ruas, ladeiras e becos têm como ponto de origem a Praça Tomé de Sousa (mais conhecida como Praça Municipal) e são vias de acesso a Barroquinha, Avenida J.J. Seabra e Avenida Sete de Setembro. Na Cidade Baixa, a Praça Cairu (atual Praça Maria Felipa) integra-se ao setor bancário da cidade e à área portuária do Comércio, onde se situa o antigo prédio da Alfândega, no qual seria reinstalado o Mercado Modelo, após o incêndio de 1969.\nEntre 1938 e 1945, o Instituto do Patrimônio Histórico e Artístico Nacional (IPHAN) promoveu o tombamento de vários monumentos como patrimônio nacional, o que não foi suficiente para impedir a sua degradação. Isso se acentuou principalmente depois de 1960, quando o local perdeu importância para as novas áreas de expansão urbana. Somente em 1984 o IPHAN promoveu o tombamento de uma área extensa, de 80 hectares, necessária para que a UNESCO declarasse esse sítio Patrimônio Mundial, em 1985. Desde então, o local passa por vários processos de restauração e revitalização, visando a preservação da área histórica da cidade.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Centro_Hist%C3%B3rico_Salvador_Vista_A%C3%A9rea_2021-0933.jpg/1280px-Centro_Hist%C3%B3rico_Salvador_Vista_A%C3%A9rea_2021-0933.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Centro_Hist%C3%B3rico_de_Salvador"
+  },
+  {
+    "destination": "salvador",
+    "slug": "mercado-modelo",
+    "name": "Mercado Modelo",
+    "subtitle": "Mercado em Salvador, Brasil",
+    "summary": "O Mercado Modelo é um mercado de artesanato localizado na cidade de Salvador, estado da Bahia, no Brasil. Foi inaugurado em 2 de fevereiro de 1912, e ocupa, desde 1971, o prédio da antiga Casa da Alfândega de Salvador. Está situado no bairro do Comércio, uma das zonas comerciais mais antigas e tradicionais de Salvador, constituindo-se em importante atração turística, visitado por 80% dos turistas da cidade. Diante da Baía de Todos os Santos, é vizinho do Elevador Lacerda e do Centro Histórico (que inclui o Pelourinho). Em arquitetura do estilo neoclássico, a edificação é tombada pelo Instituto do Patrimônio Histórico e Artístico Nacional (IPHAN).\nCom 8 410 metros quadrados e dois pavimentos, abriga 266 lojas que oferecem a maior variedade de artesanato, presentes e lembranças da Bahia, contando com dois dos mais tradicionais restaurantes de culinária baiana, o Maria de São Pedro, com oitenta anos de existência e o Camafeu de Oxóssi.\nA canção Mercado Modelo, de parceria entre Antônio Carlos, Jocafi e Ildázio Tavares, lamenta na sua letra o incêndio de 1969 que destruiu o prédio original. A música foi gravada em 1973 pela cantora Vanusa e lançada em seu quarto álbum.[carece de fontes]?\nÉ ícone cultural e turístico, com suas 263 lojas de artesanato e lembranças, restaurantes, galeria de arte (a Galeria Mercado, criada em 2024) e estrutura arquitetônica histórica instalada na Praça Maria Felipa. Em meados do século XX, a então Feira de Águas de Meninos e o Mercado Modelo eram os maiores centros de abastecimento de alimentos de Salvador e coexistiam ao lado dos mercados das Sete Portas, do Ouro Popular, de São Miguel (na Baixa dos Sapateiros), dos então pequenos mercados da Barra e da Ribeira e pela Feira do Curtume.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Mercado_Modelo_Salvador_2019-0416.jpg/1280px-Mercado_Modelo_Salvador_2019-0416.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Mercado_Modelo"
+  },
+  {
+    "destination": "salvador",
+    "slug": "igreja-e-convento-de-sao-francisco",
+    "name": "Igreja e Convento de São Francisco",
+    "subtitle": "Igreja e convento em Salvador, Brasil",
+    "summary": "A Igreja e Convento de São Francisco é um importante conjunto de edificações históricas na cidade de Salvador, na Bahia, Brasil.\nParte do Centro Histórico de Salvador, que é Patrimônio da Humanidade pela UNESCO, as estruturas foram erguidas entre os séculos XVII e XVIII e são consideradas uma das mais singulares e ricas expressões do Barroco no Brasil, apresentando, em especial a Igreja, uma faustosa decoração interior com revestimento em ouro. O conjunto é, ainda, tombado como patrimônio material pelo Instituto do Patrimônio Histórico e Artístico Nacional do Brasil, registrado no Sistema de Informação para o Património Arquitetónico português, sob número 30673, e uma das Sete Maravilhas de Origem Portuguesa no Mundo.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Igreja_de_S%C3%A3o_Francisco_Salvador_2019-6875.jpg/1280px-Igreja_de_S%C3%A3o_Francisco_Salvador_2019-6875.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Igreja_e_Convento_de_S%C3%A3o_Francisco_(Salvador)"
+  },
+  {
+    "destination": "salvador",
+    "slug": "igreja-do-senhor-do-bonfim",
+    "name": "Igreja do Senhor do Bonfim",
+    "subtitle": "Igreja em Salvador",
+    "summary": "A Igreja Nosso Senhor do Bonfim é um templo católico localizado na Sagrada Colina, na península de Itapagipe, em Salvador, Brasil. Sua construção teve início entre 1745 e 1746, finalizando suas obras internas em 1754 e externa em 1772 (com as torres). É lá que são distribuídas as famosas fitinhas do Bonfim, que são feitas desde o início do século XIX com a medida do comprimento do braço direito até o peito da imagem do Senhor do Bonfim. É tombado desde 1985 e seu tombamento inclui também todo o seu acervo.\nPara o povo baiano, a Igreja do Bonfim é o maior centro da fé católica, e ainda daquelas que, pelo sincretismo, têm no local o ponto máximo da religião.\nAs imagens de Senhor do Bonfim e de Nossa Senhora da Guia vieram de Portugal para a Bahia, através do capitão da marinha portuguesa Theodozio Rodrigues de Faria, chegando no dia 18 de abril de 1745, num domingo de Páscoa e ficando abrigadas na Igreja da Penha, edificada na ponta da península itapagipana, até 1754.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/73/Igreja_do_Bonfim%2C_salvador%2C2019.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Igreja_Nosso_Senhor_do_Bonfim"
+  },
+  {
+    "destination": "salvador",
+    "slug": "museu-de-arte-moderna-da-bahia",
+    "name": "Museu de Arte Moderna da Bahia",
+    "subtitle": "Museu brasileiro em Salvador, Bahia, Brasil",
+    "summary": "O Museu de Arte Moderna da Bahia (MAM Bahia) está localizado no Solar do Unhão, um sítio histórico do século XVIII, às margens da Baía de Todos os Santos em Salvador. Inaugurado no início da década de 1960 no foyer do Teatro Castro Alves, o museu foi transferido em 1963 para o atual endereço.\nO MAM Bahia é um dos 12 museus estaduais vinculados à Diretoria de Museus (DIMUS), ligada ao   Instituto do Patrimônio Artístico e Cultural da Bahia uma autarquia da Secretaria de Cultura do Estado da Bahia.\nO espaço do museu se estrutura em um setor técnico com serviços de conservação, restauro e museologia; oito salas de exposição; um teatro; uma biblioteca; e uma oficina de arte que oferece cursos abertos à toda comunidade, além de uma galeria ao ar livre (o Parque das Esculturas) e uma sala de cinema.\nSeu acervo é constituído por pinturas, esculturas, fotografias e desenhos de artistas como Tarsila do Amaral, Portinari, Flávio de Carvalho, Di Cavalcanti, Rubem Valentim, Pancetti, Carybé, Mário Cravo e Sante Scaldaferri, entre outros.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Espa%C3%A7o_expositivo_do_MAM_-_Bahia_-_01.jpg/1280px-Espa%C3%A7o_expositivo_do_MAM_-_Bahia_-_01.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Museu_de_Arte_Moderna_da_Bahia"
+  },
+  {
+    "destination": "salvador",
+    "slug": "forte-e-farol-da-barra",
+    "name": "Forte e Farol da Barra",
+    "subtitle": "Fortaleza em Salvador, Bahia",
+    "summary": "O Forte de Santo Antônio da Barra, popularmente chamado de Farol da Barra, é uma fortificação localizada na ponta do Padrão (atual Largo do Farol da Barra), em Salvador, no estado da Bahia, Brasil. De acordo com a Marinha do Brasil, é a primeira edificação militar do país, sendo seu farol o mais antigo das Américas. Teve sua estrutura atual erigida entre 1696 e 1702, a partir de um primitivo forte erguido no século 16.\nPara os aficcionados da telecartofilia, a sua fachada e portão ilustram um cartão telefônico da série Fortes de Salvador, emitida pela Telebahia em junho de 1998. Também figura com destaque na emissão filatélica da ECT comemorando os 450 anos de Salvador, emitida em 29 de março de 1999.\nAlguns pesquisadores em arqueoastronomia sustentam que os naufrágios na entrada da barra de Salvador são atribuídos à latitude de 13° sul em que o Farol da Barra se encontra.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Farol_da_Barra_com_nuvens_ao_fundo.jpg/1280px-Farol_da_Barra_com_nuvens_ao_fundo.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Forte_de_Santo_Ant%C3%B4nio_da_Barra"
+  },
+  {
+    "destination": "salvador",
+    "slug": "praia-do-porto-da-barra",
+    "name": "Praia do Porto da Barra",
+    "subtitle": "Trecho do litoral de Salvador, município do estado brasileiro da Bahia",
+    "summary": "A praia do Porto da Barra é uma praia de Salvador, município capital do estado brasileiro da Bahia. Está situada no bairro da Barra, banhada pela Baía de Todos os Santos e limita-se ao sul pela encosta que é formada pela Ladeira da Barra, passando pelo Hospital Espanhol indo até o Farol da Barra, passando pela fortaleza de Santa Maria. Esta praia possui uma pequena extensão de areia e é bastante frequentada aos fins de semana e feriados, possuindo uma pequena enseada de ondas calmas propícia ao banho de mar.\nNo limite do passeio, em pedras portuguesas, existe uma balaustrada de onde se tem uma vista para a Ilha de Itaparica e de onde pode-se apreciar o pôr do sol — um dos poucos locais do Brasil continental onde o poente ocorre sobre o mar, sendo relatado que, durante os fins de semana, dezenas de pessoas se reúnem para ver e aplaudi-lo. Esta enseada termina antes da fortaleza de Santa Maria, a partir da qual as formações rochosas dificultam o banho. Existe também o Marco da Fundação da Cidade do Salvador, um monumento em forma de coluna com cruz portuguesa na ponta indicando o local do desembarque do primeiro governador-geral do Brasil Tomé de Sousa.\nA abundância de vida marinha, correntes amenas e presença de corais torna o local atrativo ao mergulho em apneia e autônomo. Além disso, a praia é o local de chegada da competição esportiva de natação de águas abertas Travessia Mar Grande-Salvador. Sendo um dos pontos turísticos da Bahia, há vários hotéis e restaurantes ao redor. O editor do caderno de viagens do jornal britânico The Guardian apontou o Porto da Barra como uma das melhores praias do mundo. Em 2024, o Centro Internacional de Formación en Gestión y Certificación de Playas a classificou como a 80.ª melhor praia do mundo a partir da avaliação de 126 locais dos litorais da Argentina, Brasil, Canadá, Colômbia, Cuba, Equador, Espanha, Guatemala, México, Nova Zelândia, Peru, Porto Rico e Venezuela.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Praia_do_Porto_da_Barra_1.jpg/1280px-Praia_do_Porto_da_Barra_1.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_do_Porto_da_Barra"
+  },
+  {
+    "destination": "salvador",
+    "slug": "dique-do-tororo",
+    "name": "Dique do Tororó",
+    "subtitle": "Corpo d'água em Salvador, município do estado brasileiro da Bahia",
+    "summary": "Dique do Tororó (comumente chamado apenas de Dique) é o único manancial natural da cidade de Salvador, no estado da Bahia, no Brasil, tombado pelo Instituto do Patrimônio Histórico e Artístico Nacional. possui uma lagoa de 110 mil metros cúbicos de água. É delimitada, atualmente, pelo bairro do Tororó em sua margem esquerda; pelo do Engenho Velho de Brotas em sua margem direita; ao Norte, pelo bairro de Nazaré e pelo estádio Arena Fonte Nova; e, ao Sul, pelo bairro do Garcia.\nÉ margeado pelas avenidas Presidente Costa e Silva e Vasco da Gama — que, ao Sul, convergem para a avenida Centenário e o Vale dos Barris.\nUma de suas principais características são as oito esculturas de orixás flutuando no espelho d'água. Elas foram instaladas em 1998 e são assinadas pelo artista plástico Tatti Moreno. Representam os orixás Oxum, Ogum, Oxóssi, Xangô, Oxalá, Iemanjá, Nanã e Iansã. À noite, possuem uma bela iluminação cênica.\nO termo \"Tororó\" vem do tupi antigo tororoma, que significa \"jorro\" (de água).\nÉ um \"cartão-postal\", atração turística e espaço de lazer em Salvador. Também é um lugar sagrado para o Candomblé, em que ocorrem práticas religiosas, geralmente associadas a Oxum, e, por isso, leva o nome de Bacia de Oxum.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Orix%C3%A1s_do_Dique_do_Toror%C3%B3.jpg/1280px-Orix%C3%A1s_do_Dique_do_Toror%C3%B3.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Dique_do_Toror%C3%B3"
+  },
+  {
+    "destination": "fortaleza",
+    "slug": "praia-de-iracema",
+    "name": "Praia de Iracema",
+    "subtitle": "Bairro do município brasileiro de Fortaleza, Ceará",
+    "summary": "A Praia de Iracema é uma praia de bairro homônimo localizados na zona central do município de Fortaleza, no estado do Ceará, no Brasil. Seu nome vem da personagem Iracema, que dá título ao romance Iracema, do escritor cearense José de Alencar. Segundo os mapas holandeses de 1649, foi neste local que os índios potiguares encontravam-se quando Matias Beck e sua frota chegaram a Fortaleza. \nAlém da forte ligação da praia e do bairro com a famosa obra da trilogia indianista do romance brasileiro, o local também apresenta em boa parte de suas ruas nomes que representam a tradição indígena, como rua dos Tabajaras, Cariris e Potiguaras.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Pier_in_Iracema_Beach.png/1280px-Pier_in_Iracema_Beach.png",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_de_Iracema"
+  },
+  {
+    "destination": "fortaleza",
+    "slug": "beach-park",
+    "name": "Beach Park",
+    "subtitle": "Parque aquático em Aquiraz, Ceará",
+    "summary": "Beach Park é um destino turístico do litoral do Nordeste do Brasil, na praia de Porto das Dunas, município de Aquiraz, a cerca de 20 minutos de Fortaleza. Seu parque aquático é considerado o 2º melhor do mundo e o melhor da América Latina, distribuído numa área total de 20.000 m² e 13 km² de área específica do parque aquático.[carece de fontes]?\nNo destino, além do Aqua Park e do Parque Arvorar, há também o Restaurante da Praia, quatro resorts (Suites, Acqua, Wellness e Oceani) e uma ampla rede de lounges, lojas e restaurantes. O parque possui mais de 30 atrações, entre radicais, moderadas e infantis. O Beach Park em si recebeu 990 mil visitantes em 2025, e a área no geral supera um milhão de visitantes todos os anos. 7.793.000 litros de água são usados anualmente no Aqua Park.\nInaugurado em 1989, o parque é filiado a órgãos de turismo e lazer do nacionais e internacionais. Faz parte da World Waterpark Association (WWA), International Association of Amusement Parks and Attractions (IAAPA), da Associação Brasileira de Restaurantes e Empresas de Entretenimento (ABRASEL), da Associação Brasileira da Indústria Hoteleira (ABIH) e da Aquiraz Convention & Visitors Bureau (ACVB). Em 2016, começaram negociações para uma provável filial do parque na capital baiana, no espaço do antigo aeroclube plaza show.[carece de fontes]?\nEm 2013, foi classificado como uma das melhores empresas para se trabalhar no Brasil. Em 2015, o parque foi considerado o segundo melhor parque aquático do mundo pelos usuários do site TripAdvisor. O empreendimento também já ganhou vários outros prêmios internacionais.",
+    "image": "https://upload.wikimedia.org/wikipedia/pt/2/2e/Logotipo_do_Beach_Park.png",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Beach_Park"
+  },
+  {
+    "destination": "fortaleza",
+    "slug": "dragao-do-mar",
+    "name": "Dragão do Mar",
+    "subtitle": "Centro Cultural em Fortaleza, Ceará, Brasil",
+    "summary": "O Centro Dragão do Mar de Arte e Cultura (CDMAC) é um centro cultural, um dos maiores do Brasil, localizado em Fortaleza, Ceará. São 30 mil metros quadrados de área dedicada à arte e à cultura, com atrações como o Museu da Cultura Cearense, o Museu de Arte Contemporânea do Ceará, Planetário Rubens de Azevedo, Teatro Dragão do Mar, Salas do Cinema do Dragão, Anfiteatro Sérgio Mota, Espaço Rogaciano Leite Filho, Biblioteca Leonilson, Auditório, Multigalerias e espaços para exposições itinerantes e a Praça Verde, que abriga mais de quatro mil pessoas e também grandes shows nacionais e internacionais.\n\nO Instituto Dragão do Mar é a organização social responsável pela gestão e execução das políticas públicas do Centro Dragão do Mar de Arte e Cultura e de outras dez (10) instituições de cultura, esporte e gastronomia do Ceará. São elas: Escola Porto Iracema das Artes, Escola de Artes e Ofícios Thomas Pompeu Sobrinho, Centro Cultural Grande Bom Jardim, Cine Teatro São Luiz, Teatro José de Alencar, Escola de Gastronomia Social Ivens Dias Branco, Escola de Hotelaria e Gastronomia da Estação das Artes, Casa dos Saberes Cego Aderaldo, Vila da Música e Centro de Formação Olímpica.\nO Centro Dragão do Mar é um espaço destinado ao encontro das pessoas, ao fomento e à difusão da arte e da cultura. Foi criado pelo então secretário da Cultura e atual Presidente do Instituto Dragão do Mar, o sociólogo e jornalista Paulo Linhares, durante a gestão do então Governador do Estado do Ceará, Ciro Gomes, na década de 90. O espaço foi entregue à população pelo governador Tasso Jereissati, em 28 de abril de 1999.\nO Instituto de Arte e Cultura do Ceará (IACC), hoje nomeado de Instituto Dragão do Mar, foi a primeira Organização Social (OS) criada no Brasil na área da Cultura, tendo sido qualificada pelo Governo do Ceará em 03 de Julho de 1998. O nome Dragão do Mar é uma homenagem ao histórico personagem cearense Chico da Matilde, jangadeiro símbolo do movimento abolicionista no estado, que, em 1881 recusou-se a transportar escravos para serem vendidos no sul do país.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Centro_Drag%C3%A3o_do_Mar_de_Arte_e_Cultura_%284%29.jpg/1280px-Centro_Drag%C3%A3o_do_Mar_de_Arte_e_Cultura_%284%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Centro_Drag%C3%A3o_do_Mar_de_Arte_e_Cultura"
+  },
+  {
+    "destination": "fortaleza",
+    "slug": "mercado-central-de-fortaleza",
+    "name": "Mercado Central de Fortaleza",
+    "subtitle": "Mercado público brasileiro localizado em Fortaleza, CE",
+    "summary": "O Mercado Central de Fortaleza é um mercado especializado em produtos artesanais cearenses localizado na cidade de Fortaleza, Ceará, Brasil. É de propriedade da prefeitura municipal. Está localizado no Centro da cidade ao lado da Catedral de Fortaleza e da Fortaleza de Nossa Senhora da Assunção, e foi construído ao lado da margem esquerda do Riacho Pajeú, que corta a região.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Mercado_Central_de_Fortaleza_2025.jpg/1280px-Mercado_Central_de_Fortaleza_2025.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Mercado_Central_de_Fortaleza"
+  },
+  {
+    "destination": "fortaleza",
+    "slug": "theatro-jose-de-alencar",
+    "name": "Theatro José de Alencar",
+    "subtitle": "Teatro em Fortaleza, Ceará, Brasil",
+    "summary": "O Theatro José de Alencar é um teatro brasileiro, localizado na cidade de Fortaleza, no Ceará. É referência artística, turística e arquitetônica no país, além de ser tombado pelo Instituto do Patrimônio Histórico e Artístico Nacional. Enquanto teatro-monumento, conta com seleta programação cênica e diversificada pauta de atividades sócio-culturais e artísticas. Além disso, por meio das construções e equipamentos anexos, é considerado um grande espaço aglutinador de pesquisa, formação, produção e difusão artística.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Interior_do_Theatro_Jos%C3%A9_de_Alencar_04.jpg/1280px-Interior_do_Theatro_Jos%C3%A9_de_Alencar_04.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Theatro_Jos%C3%A9_de_Alencar"
+  },
+  {
+    "destination": "fortaleza",
+    "slug": "praia-do-futuro",
+    "name": "Praia do Futuro",
+    "subtitle": "Praia e bairro de Fortaleza, estado do Ceará, Brasil",
+    "summary": "A Praia do Futuro é uma praia e também um bairro na zona leste da cidade de Fortaleza, capital do estado do Ceará.\nÉ considerada uma das mais conhecidas praias do Nordeste. Com aproximadamente 8 km de extensão, possui um corredor de \"barracas\" (restaurantes com comida típica e frutos do mar), feitas normalmente de palha de carnaúba, onde são servidos uma variedade de pratos típicos. A praia tem muito movimento nos dias de quinta-feira a noite, dia da tradicional caranguejada, prato típico.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Map_Praia_do_Futuro_%40Fortaleza.png",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_do_Futuro"
+  },
+  {
+    "destination": "fortaleza",
+    "slug": "catedral-metropolitana-de-fortaleza",
+    "name": "Catedral Metropolitana de Fortaleza",
+    "subtitle": "Igreja católica",
+    "summary": "A Catedral Metropolitana de Fortaleza é um templo católico da cidade de Fortaleza, capital do estado brasileiro do Ceará. É a sede da Arquidiocese de Fortaleza, construída no mesmo local da antiga Igreja da Sé. \nA obra demorou quarenta anos para ser concluída, tendo sido iniciada em 1938 e inaugurada em 1978. Tem capacidade para 5 000 pessoas e suas torres chegam a 75 metros de altura. Ocupando a maior parte da Praça Pedro II, também conhecida como Praça da Sé, no centro histórico de Fortaleza, o templo se destaca pela imponência arquitetônica e a beleza dos vitrais. O arquiteto francês George Maunier assinou o projeto de estilo eclético, com predominância de elementos neogóticos e românicos e com referências à Catedral de Colônia e à Catedral de Chartres. São José é o santo vinculado à catedral.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Igreja_Matriz_-_Fortaleza-CE_%288433951864%29.jpg/1280px-Igreja_Matriz_-_Fortaleza-CE_%288433951864%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Catedral_Metropolitana_de_Fortaleza"
+  },
+  {
+    "destination": "fortaleza",
+    "slug": "praia-de-cumbuco",
+    "name": "Praia de Cumbuco",
+    "subtitle": "Praia de Caucaia",
+    "summary": "A Praia de Cumbuco é uma praia localizada no bairro Cumbuco, município de Caucaia, no estado do Ceará, Brasil. Distante cerca de 30 quilômetros da capital Fortaleza, a praia de Cumbuco é considerada o principal destino turístico de Caucaia e um dos mais importantes do Ceará.\nTem sido uma praia bastante procurada por turistas por apresentar uma série de paisagens de dunas e lagoas, além de grande variedade de restaurantes, hotéis, pousadas, barracas de praia e infraestrutura turística. Uma das atividades mais populares, contudo, é o passeio de bugue pelas dunas e lagoas da região.\nAs boa condições de ventos tornam o lugar um dos melhores destinos do Brasil para a prática de kitesurf e windsurf, o que rendeu a praia de Cumbuco o título de \"meca internacional do kitesurf\". Desde 2023, como forma de celebrar o Dia Internacional do Kitesurf, em 1º de agosto, é realizado o \"Lançamento da Temporada dos Ventos\", evento realizado na Vila do Cumbuco e organizado pela Secretaria de Turismo e Cultura de Caucaia.\nEm 2022 a praia obteve de forma inédita a certificação Bandeira Azul, maior prêmio ecológico internacional concedido a praias, marinas e embarcações de turismo, destacando-se como a única do Ceará a alcançar esse reconhecimento. Para conseguir a qualificação, o município deve atingir uma série de critérios com foco em gestão ambiental, qualidade da água, educação ambiental, segurança, serviços, turismo sustentável e responsabilidade social, que devem ser mantidos e comprovados anualmente. Em 2023 a praia recebeu a certificação ambiental pelo segundo ano consecutivo.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Praia_do_cumbuco.jpg/1280px-Praia_do_cumbuco.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_de_Cumbuco"
+  },
+  {
+    "destination": "gramado",
+    "slug": "lago-negro",
+    "name": "Lago Negro",
+    "subtitle": "Lago artificial em Gramado, Rio Grande do Sul, Brasil",
+    "summary": "O Lago Negro é um lago artificial situado em Gramado, no Bairro Planalto, na Rua A. J. Renner. Aberto diariamente durante 24h, oferece passeio de pedalinhos (de 8:30h às 19h), bar, restaurante e loja de conveniências.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/Lago_Negro%2C_Gramado%2C_RS%2C_Brasil.jpg/1280px-Lago_Negro%2C_Gramado%2C_RS%2C_Brasil.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Lago_Negro"
+  },
+  {
+    "destination": "gramado",
+    "slug": "mini-mundo",
+    "name": "Mini Mundo",
+    "subtitle": "Parque ao ar livre formado por réplicas fiéis de prédios de várias partes do mundo, ricas em detalhes e repleto de mini habitantes",
+    "summary": "Mini Mundo é um parque em miniatura brasileiro, localizado na cidade de Gramado, no Rio Grande do Sul, sendo uma das mais tradicionais atrações turísticas desta cidade. No parque pioneiro da região existe uma cidade em miniatura de mais de 6mil m2 ao ar livre, formada por réplicas de prédios existentes, todos 24 vezes menor que o seu tamanho original.\nO Mini Mundo surgiu em 1981, a partir do carinho de um pai e de um avô, que resolveram presentear suas duas crianças, a menina com uma casinha de bonecas e o menino com um conjunto de castelos com trenzinhos, em uma pequena área de lazer, ao lado do Hotel Ritta Höppner, pertencente à família. Aos poucos, essa pequena brincadeira foi crescendo, até que em 1983 ela foi aberta ao público com a inauguração do Mini Mundo, e segue crescendo até hoje.\nNo Mini Mundo os visitantes encontram importantes obras da humanidade, dentre elas castelos europeus, prefeituras, estações ferroviárias, igrejas, torre de televisão, conjuntos de casarios, aeroporto e metrô, além de unidades habitacionais, comerciais e de serviços.\nCom mais de 140 construções dos mais variados portes, o Mini Mundo conta com reproduções desde as mais contemporâneas, como a Cinelândia, o Pelourinho, e o Aeroporto de Bariloche na Argentina, até os prédios mais tradicionais, como o Castelo de Neuschwanstein na Alemanha, o Castelo de Mônaco e o Museu do Ipiranga. Assim como o  Jardim Botânico de Curitiba ao lado de obras como a Usina do Gasômetro de Porto Alegre, tudo convive harmoniosamente  num ambiente orgânico realista e funcional.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Mini_Mundo_em_setembro_de_2019_%2824%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Mini_Mundo"
+  },
+  {
+    "destination": "gramado",
+    "slug": "cascata-do-caracol",
+    "name": "Cascata do Caracol",
+    "subtitle": null,
+    "summary": "Cachoeira do Caracol é uma cachoeira de 130 metros, localizada a 7 quilômetros do município de Canela, no Parque Estadual do Caracol. É formada pelo rio Caracol e corta de falésias basálticas na Serra Geral, caindo no Vale da Lageana. As quedas estão situadas entre a zona pinheiral (floresta de pinheiros) do Planalto Brasileiro e a Mata Atlântica do litoral sul. A base da cachoeira pode ser alcançada por uma trilha íngreme de 927 degraus mantida pelo Projeto Lobo-Guará.\nA cachoeira se formou nas rochas basálticas da formação Serra Geral e possui duas cascatas. A cascata superior está localizada a aproximadamente 100 m antes da segunda cascata, que cai sobre uma borda saliente do penhasco.\nAs Cataratas do Caracol há tempos atraem visitantes e são a segunda atração turística natural mais popular do Brasil, atrás apenas das Cataratas do Iguaçu. Em 2009, recebeu mais de 289.000 visitantes. Há uma torre de observação de 30 metros que oferece elevador e vista panorâmica, além de um teleférico que dá aos turistas uma visão aérea da cachoeira. A área também oferece um restaurante e barracas de artesanato.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Caracol_falls_%282_April_2008%29.jpg/1280px-Caracol_falls_%282_April_2008%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Cascata_do_Caracol"
+  },
+  {
+    "destination": "gramado",
+    "slug": "parque-estadual-do-caracol",
+    "name": "Parque Estadual do Caracol",
+    "subtitle": "Unidade de conservação da natureza pertencente ao governo do estado do Rio Grande do Sul",
+    "summary": "Parque do Caracol é uma unidade de conservação no município de Canela, no Rio Grande do Sul, Brasil. Possui uma área de 25 hectares e está a 7 quilômetros da sede municipal. O parque fica na Serra Gaúcha, na parte nordeste do estado. A altitude média é de 760 metros. \nA queda do Caracol no rio Caracol tem uma queda livre de 131 metros e é a principal atração turística. Com matas fechadas em suas proximidades, é formada pelo arroio de mesmo nome, que despenca em queda livre de 131 metros por rochas basálticas da Formação Serra Geral, formando a Cascata do Caracol. Um conjunto paisagístico de rara beleza.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/PE_do_Caracol_-_Stankuns%28001%29.jpg/1280px-PE_do_Caracol_-_Stankuns%28001%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Estadual_do_Caracol"
+  },
+  {
+    "destination": "gramado",
+    "slug": "igreja-matriz-sao-pedro",
+    "name": "Igreja Matriz São Pedro",
+    "subtitle": null,
+    "summary": "A Paróquia São Pedro, também conhecida como Igreja Matriz de São Pedro, Igreja Matriz de Gramado ou simplesmente Igreja São Pedro, é uma igreja de orientação católica, pertencente à Diocese de Novo Hamburgo, localizada no centro da cidade de Gramado, no Estado do Rio Grande do Sul, e um dos pontos turísticos da cidade.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Igreja_S%C3%A3o_Pedro_de_Gramado.jpg/1280px-Igreja_S%C3%A3o_Pedro_de_Gramado.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Par%C3%B3quia_S%C3%A3o_Pedro_(Gramado)"
+  },
+  {
+    "destination": "florianopolis",
+    "slug": "ponte-hercilio-luz",
+    "name": "Ponte Hercílio Luz",
+    "subtitle": "Ponte mais antiga entre a ilha de Florianópolis e o continente brasileiro",
+    "summary": "Ponte Hercílio Luz é uma ponte pênsil localizada em Florianópolis, no estado brasileiro de Santa Catarina, sendo a mais antiga das três que ligam as partes insular e continental da capital catarinense. É a maior ponte suspensa do Brasil, com 821 metros - sendo também a maior ponte pênsil sustentada por um sistema de barras de olhal ainda existente no mundo - e possui o 132º maior vão pênsil do mundo, com 339 metros. É o símbolo mais famoso da cidade e do estado, sendo a imagem mais reconhecida de ambos. O mirante situado à cabeceira insular proporciona uma das mais belas vistas panorâmicas do Centro de Florianópolis. Na área também está situado o Parque da Luz.\nTeve sua construção iniciada em 14 de novembro de 1922 e foi inaugurada em 13 de maio de 1926 com o objetivo de ligar a capital do estado, que na época era apenas na ilha de Santa Catarina, à cidade vizinha de São José, visando substituir o antigo serviço de ligação por balsas e reforçando a importância da cidade como capital. Foi a única ligação rodoviária entre ilha e continente até 1975. Em 1982, o trânsito na ponte foi interditado após inspeções de segurança. Entre 1988 e 1991, foi reaberta para pedestres, bicicletas, motocicletas e veículos de tração animal, e após isso permaneceu interditada por 28 anos.\nA ponte foi tombada como patrimônio histórico, artístico e arquitetônico do município de Florianópolis em 4 de agosto de 1992, através do decreto de número 637/92. Na data em que comemoraram-se os 71 anos de sua construção, 13 de maio de 1997, o tombamento da ponte Hercílio Luz foi homologado pelo governo estadual através do decreto de número 1830, e no ano seguinte, em 5 de agosto de 1998, veio o tombamento em nível federal.\nEsses tombamentos permitiram que a ponte sobrevivesse às ideias de demolição, entretanto, a restauração consumiu recursos e teve diversas polêmicas quanto ao tempo e efetividade das obras, permanecendo por duas décadas sem grandes mudanças. Na década de 2010, as obras finalmente avançaram, levando à reabertura da ponte no dia 30 de dezembro de 2019. Reformada, a ponte reforçou seu status de ponto turístico, com o monumento e seu entorno recebendo muitos visitantes e moradores locais.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Ponte_Herc%C3%ADlio_Luz_FREITASFOTOS_002.jpg/1280px-Ponte_Herc%C3%ADlio_Luz_FREITASFOTOS_002.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Ponte_Herc%C3%ADlio_Luz"
+  },
+  {
+    "destination": "florianopolis",
+    "slug": "lagoa-da-conceicao",
+    "name": "Lagoa da Conceição",
+    "subtitle": null,
+    "summary": "A Lagoa da Conceição é uma laguna brasileira localizada a leste da Ilha de Santa Catarina, em Florianópolis, capital do estado de Santa Catarina, no Brasil. Está situada entre uma cadeia de montanhas, planícies costeiras, uma restinga e o mar (Oceano Atlântico). Na sua margem leste se encontram os bairros do Distrito da Lagoa da Conceição.\nSubdividide-se em Lagoa de Dentro e Lagoa de Fora:",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/37/Vista_da_Lagoa_da_trilha_de_Ratones.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Lagoa_da_Concei%C3%A7%C3%A3o"
+  },
+  {
+    "destination": "florianopolis",
+    "slug": "praia-da-joaquina",
+    "name": "Praia da Joaquina",
+    "subtitle": null,
+    "summary": "Praia da Joaquina é uma praia oceânica da cidade brasileira de Florianópolis, ao leste da ilha de Santa Catarina, ao sul do Brasil. O ponto procurado por surfistas, já foi sede de alguns campeonatos mundiais de surfe.\nA denominação da praia é recente, aparecendo pela primeira vez em mapas a partir de 1975. Até então, era chamada de Praia do Campeche. A Praia da Joaquina pertence ao Distrito da Lagoa da Conceição e dista quinze km do Centro da Cidade de Florianópolis na direção nordeste. Possui três mil metros de extensão e sua largura varia de oito a setenta metros, tendo seus limites entre a Ponta do Retiro e Praia do Campeche.\nAo redor de toda a praia está localizado o Parque Natural Municipal das Dunas da Lagoa da Conceição, uma importante área protegida da cidade.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Joaquina_centro.JPG/1280px-Joaquina_centro.JPG",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_da_Joaquina"
+  },
+  {
+    "destination": "florianopolis",
+    "slug": "mercado-publico-de-florianopolis",
+    "name": "Mercado Público de Florianópolis",
+    "subtitle": "Patrimônio localizado no Brasil",
+    "summary": "O Mercado Público Municipal de Florianópolis é um centro de comércio e edifício público histórico de Florianópolis, capital do estado de Santa Catarina, Brasil. O prédio é composto de duas alas – norte e sul – separadas por um vão central. No local acontece um variado comércio, principalmente de vestuário, alimentos, utensílios diversos e artesanato. Além disso, é um importante ponto de encontro e lazer da cidade, tanto para moradores quanto para turistas.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Mercado_P%C3%BAblico_de_Florian%C3%B3polis_%283886761127%29.jpg/1280px-Mercado_P%C3%BAblico_de_Florian%C3%B3polis_%283886761127%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Mercado_P%C3%BAblico_de_Florian%C3%B3polis"
+  },
+  {
+    "destination": "florianopolis",
+    "slug": "jurere",
+    "name": "Jurerê",
+    "subtitle": "Bairro do Florianópolis",
+    "summary": "Jurerê é uma praia e um bairro situados ao norte de Florianópolis, em Santa Catarina. O bairro é popularmente dividido em duas partes: Jurerê Internacional, um empreendimento imobiliário famoso por suas residências de luxo, voltado a moradores de renda elevada, e a porção leste do bairro que já existia antes e por isso é chamada de Jurerê Tradicional ou Jurerê Velho para diferenciar da outra parte. A praia banha ambas as partes do bairro e fica entre as praia de Canasvieiras e do Forte.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Jurer%C3%AA_Internacional_panorama.jpg/1280px-Jurer%C3%AA_Internacional_panorama.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Jurer%C3%AA"
+  },
+  {
+    "destination": "florianopolis",
+    "slug": "fortaleza-de-anhatomirim",
+    "name": "Fortaleza de Anhatomirim",
+    "subtitle": "Forte em Santa Catarina",
+    "summary": "A Fortaleza de Santa Cruz de Anhatomirim, ou simplesmente Fortaleza de Anhatomirim, ergue-se na ilha de Anhatomirim (\"ilha pequena do  diabo\" em língua tupi), na barra norte do canal da ilha de Santa Catarina, atual município de Governador Celso Ramos, no litoral do estado de Santa Catarina, no Brasil.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Forte_cart%C3%A3o_postal.JPG/1280px-Forte_cart%C3%A3o_postal.JPG",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Fortaleza_de_Santa_Cruz_de_Anhatomirim"
+  },
+  {
+    "destination": "florianopolis",
+    "slug": "praia-dos-ingleses",
+    "name": "Praia dos Ingleses",
+    "subtitle": null,
+    "summary": "A praia dos Ingleses está situada no bairro de Ingleses, norte da ilha de Santa Catarina, no municipio de Florianópolis, capital do estado brasileiro de Santa Catarina.\nÉ uma praia com 4,83 km de extensão, mar aberto, águas azuis e mornas e com poucas ondas, com muita areia, onde inclusive é praticado o surf de areia (sandboard), um esporte praticado por pessoas de todas as idades nas dunas existentes no local. São também realizados passeios náuticos.\nAo norte da praia dos Ingleses, após o costão, encontra-se a Brava, e ao sul, a praia do Santinho, também no distrito de Ingleses do Rio Vermelho.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/20/Praia_dos_Ingleses%2C_Florian%C3%B3polis_%28janeiro_2006%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_dos_Ingleses"
+  },
+  {
+    "destination": "florianopolis",
+    "slug": "praia-do-campeche",
+    "name": "Praia do Campeche",
+    "subtitle": null,
+    "summary": "A praia do Campeche é uma praia oceânica situa-se no bairro de mesmo nome, em Florianópolis, no estado brasileiro de Santa Catarina. Fica entre a praia da Joaquina e a praia do Morro das Pedras, na Ilha de Santa Catarina. Exatamente em frente à praia fica a ilha do Campeche, que deu nome tanto à praia quanto ao bairro.\nA região das dunas próximas ao Campeche fazem parte de uma área de preservação. A praia e seus atrativos naturais atraíram moradores à região, que passou por um processo de expansão e supervalorização imobiliária na última década.\nCom o desenvolvimento, alguns problemas de infraestrutura têm mudado o perfil do bairro, com a falta de saneamento e as construções irregulares colocando em risco a preservação ambiental da praia, levando a problemas de balneabilidade. Nos últimos anos, tem se iniciado a criação de uma rede de esgotamento sanitário.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Ilha_do_Campeche_von_NW.JPG/1280px-Ilha_do_Campeche_von_NW.JPG",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_do_Campeche"
+  },
+  {
+    "destination": "lencois-maranhenses",
+    "slug": "parque-nacional-dos-lencois-maranhenses",
+    "name": "Parque Nacional dos Lençóis Maranhenses",
+    "subtitle": "Unidade de conservação da natureza pertencente ao governo federal brasileiro",
+    "summary": "O Parque Nacional dos Lençóis Maranhenses é uma unidade de conservação brasileira de proteção integral à natureza localizada na região nordeste do estado do Maranhão. O território do parque, com uma área de 156 584 ha, está distribuído pelos municípios de Barreirinhas, Primeira Cruz e Santo Amaro do Maranhão. O parque foi criado com a finalidade precípua de \"proteger a flora, a fauna e as belezas naturais, existentes no local.\"\nInserido no bioma costeiro marinho e cerrado, o parque é um exponente dos ecossistemas de mangue, restinga e dunas, associando ventos fortes e chuvas regulares. Sua grande beleza cênica, aliada aos passeios de ecoturismo pelos campos de dunas e à possibilidade de banhar-se nas lagoas e observação do céu noturno, atraem turistas de todo o mundo, que visitam o parque durante o ano inteiro.\nEm julho de 2024, o local foi declarado Patrimônio Mundial da UNESCO devido à \"sua beleza excepcional e o fato de ser um fenômeno natural único no mundo\".",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Len%C3%A7%C3%B3is_Maranhenses_2018.jpg/1280px-Len%C3%A7%C3%B3is_Maranhenses_2018.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Nacional_dos_Len%C3%A7%C3%B3is_Maranhenses"
+  },
+  {
+    "destination": "lencois-maranhenses",
+    "slug": "barreirinhas",
+    "name": "Barreirinhas",
+    "subtitle": "Município do estado do Maranhão, no Brasil",
+    "summary": "Barreirinhas é um município brasileiro do estado do Maranhão. Localiza-se no Norte do estado, na região dos Lençóis Maranhenses. Sua população foi estimada em 63.991 habitantes, conforme dados do IBGE de 2021, sendo o vigésimo mais populoso do estado. \nO município é conhecido como \"Portal dos Lençóis maranhenses\" pelo fato de abrigar o Parque nacional dos lençóis maranhenses, região turística que consiste numa vasta área de altas dunas de areias brancas e de lagos e lagoas, também conhecido como \"Deserto Brasileiro\".\nA área do município do Barreirinhas é de 3.046,308 quilômetros quadrados, o que coloca na posição 25 dentre a 217 cidades do Maranhão.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Lencois_Maranhenses_3.jpg/1280px-Lencois_Maranhenses_3.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Barreirinhas"
+  },
+  {
+    "destination": "lencois-maranhenses",
+    "slug": "atins",
+    "name": "Atins",
+    "subtitle": "Vilarejo  / Distrito de Barreirinhas-MA",
+    "summary": "Atins é um vilarejo de pescadores do município de Barreirinhas, no estado do Maranhão, na região nordeste do Brasil. Se localiza na foz do rio Preguiças no Oceano Atlântico, com aproximadamente  1 500 habitantes. \nÉ o maior povoado litorâneo do município, encrustado entre as dunas do Parque Nacional dos Lençóis Maranhenses, o delta do Rio Preguiças e o Oceano Atlântico. Rodeada de praias, dunas e lagoas de águas cristalinas que se formam durante o período chuvoso. O vilarejo fica cerca de duas horas de barco ou Jeep 4×4 do município de Barreirinhas, é realmente para quem dá conta da natureza e entende seu poder e limitantes. É considerado a porta de entrada do Parque Nacional dos Lençóis Maranhenses.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Atins-praia-MA-1.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Atins"
+  },
+  {
+    "destination": "lencois-maranhenses",
+    "slug": "santo-amaro-do-maranhao",
+    "name": "Santo Amaro do Maranhão",
+    "subtitle": "Município brasileiro do estado do Maranhão",
+    "summary": "Santo Amaro do Maranhão é um município brasileiro do estado do Maranhão. Sua população estimada, em 2022, era de 13.949 habitantes. De acordo com o IBGE, em 2013 era considerado o quinto município mais pobre do Brasil.\nSanto Amaro do Maranhão limita-se ao Norte com o Oceano Atlântico; a Leste e ao Sul com o município de Barreirinhas; a Oeste com o município de Primeira Cruz.[carece de fontes]?\nÉ um importante polo turístico, com o Parque Nacional dos Lençóis Maranhenses. Sua estrutura de serviços é composta por pousadas, restaurantes, farmácias, agencias de receptivo e prestadores de serviços credenciados (veículos 4x4) junto ao ICMBio e a Secretaria Municipal de Turismo para operar no Parque. O acesso à cidade é feito através da rodovia BR-135, depois seguindo pela MA-402 e, por fim, mais 36 km de estrada asfaltada até o portal da cidade. Desde agosto/2021, foi entregue a estrada e as pontes que permitem acesso de carro até a cidade.[carece de fontes]?\nPossui também agências dos Correios e dos bancos do Brasil, Bradesco e Caixa Econômica Federal (por meio do serviço Caixa Aqui). É banhada pelo Rio Alegre e pelo Lago de Santo Amaro.[carece de fontes]?",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Wiki9_-_Santo_Amaro_do_Maranh%C3%A3o_-_O_Para%C3%ADso.jpg/1280px-Wiki9_-_Santo_Amaro_do_Maranh%C3%A3o_-_O_Para%C3%ADso.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Santo_Amaro_do_Maranh%C3%A3o"
+  },
+  {
+    "destination": "lencois-maranhenses",
+    "slug": "rio-preguicas",
+    "name": "Rio Preguiças",
+    "subtitle": null,
+    "summary": "O rio Preguiças é um curso d'água localizado no estado do Maranhão, no complexo dos Lençóis Maranhenses.\nNasce no município de Santana do Maranhão, numa altitude de cerca de 120 metros, e percorre quase 135 km de extensão até chegar à sua foz, no Oceano Atlântico no município de Barreirinhas.\nEntretanto, outros estudiosos colocam a nascente no povoado Barra da Campineira, no município de Anapurus.\nA sua bacia hidrográfica abrange os municípios de Barreirinhas, Paulino Neves, Tutoia, Santana do Maranhão, Anapurus, Santa Quitéria, Urbano Santos, Belágua, Santo Amaro e Primeira Cruz.\nTem como afluentes os rios Palmira, Grande, Jacu, Cocal, Juçaral, Maçangano, Achuí, Sucuriju, dentre outros.\nA origem do nome do rio seria a presença de muitos bichos-preguiças que habitavam as matas das margens do rio, além de ter suas águas mansas e tranquilas, influenciadas pelas correntes vazante e enchente.\nO clima da região é tropical, muito quente, úmido a sub-úmido, com precipitações distribuídas em dois períodos sazonais, com chuvas de janeiro a julho e uma estação seca de agosto a dezembro. As temperaturas médias ficam entre 26 e 27ºC, com temperaturas máximas que podem alcançar 38ºC, enquanto a precipitação anual situa-se entre 1.600 e 1.800 mm.\nA vegetação da região é caracterizada pela presença do cerrado e mata ciliar, além de dunas, restingas e mangues na região de sua foz.\nA sua bacia hidrográfica é abrangida por três unidades de conservação: Parque Nacional dos Lençóis Maranhenses, e as APAs Upaon-Açu- Miritiba- Alto Preguiças e Foz do rio Preguiças/Pequenos Lençóis/Região Lagunar Adjacente.\nNa margem direita, ao descer o rio, estão os povoados Alazão, Vassouras, Espadarte, Morro do Boi e Moitas, com as belas praias e dunas dos Pequenos Lençóis. Mais à frente, na margem esquerda está a vila de Mandacaru, onde fica a Torre do Farol, que oferece uma vista panorâmica dos Lençóis. Avançando-se o rio, no lado direito, chega-se a Caburé, uma pequena comunidade de pescadores que se estabeleceu numa estreita faixa de areia entre o rio e o mar, em habitações simples cobertas com palha de buriti. O último povoado antes da foz do rio é o de Atins.\nOs passeios de barcos e lanchas pelo rio são uma importante atração turística da região dos Lençóis Maranhenses.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/As_palmeiras_e_o_rio.jpg/1280px-As_palmeiras_e_o_rio.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Rio_Pregui%C3%A7as"
+  },
+  {
+    "destination": "foz-do-iguacu",
+    "slug": "cataratas-do-iguacu",
+    "name": "Cataratas do Iguaçu",
+    "subtitle": "Conjunto de quedas d'água entre o Brasil e a Argentina",
+    "summary": "Cataratas do Iguaçu (em castelhano: Cataratas del Iguazú) é um conjunto de cerca de 275 quedas de água no rio Iguaçu (na Bacia hidrográfica do rio Paraná), localizada entre o Parque Nacional do Iguaçu, Paraná, no Brasil, e o Parque Nacional Iguazú em Misiones, na Argentina, na fronteira entre os dois países. A área total de ambos os parques nacionais corresponde a 250 mil hectares de floresta subtropical e é considerada Patrimônio Natural da Humanidade.\nO parque nacional argentino foi criado em 1934, enquanto o parque brasileiro foi inaugurado em 1939. Ambas as áreas de proteção com o propósito de administrar e preservar o manancial de água que representa essa catarata e o conjunto do meio ambiente ao seu redor. Os parques tanto brasileiro como argentino passaram a ser considerados Patrimônio da Humanidade em 1984 e 1986, respectivamente. A formação geológica das cataratas está associada a processos vulcânicos ocorridos há cerca de 500 milhões de anos e, desde 2002, o Parque Nacional do Iguaçu é considerado um dos sítios geológicos brasileiros.\nHistoricamente, o primeiro europeu a achar as Cataratas do Iguaçu foi o espanhol Álvar Núñez Cabeza de Vaca, no ano de 1541. Atualmente, é o segundo local mais visitado por estrangeiros no Brasil. Em época de chuva, as Cataratas do Iguaçu chegam a ser a 3ª maior do mundo em volume de água. Sua vazão chega a aumentar 10 vezes, chegando a 11,3 mil metros cúbicos por segundo, quando o normal é 1,5 mil.\nAs Cataratas do Iguaçu participaram da campanha mundial de escolha das sete maravilhas naturais do mundo, organizada pela Fundação New 7 Wonders. As cataratas ficaram entre as 28 finalistas da campanha, que durou até o fim do ano 2011 quando foi atingido o número de 1 bilhão de votos. No dia 31 de janeiro de 2012, o Google preparou um doodle especial em homenagem a descoberta das Cataratas do Iguaçu por Álvar Núñez Cabeza de Vaca.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Aerial_Foz_de_Igua%C3%A7u_26_Nov_2005.jpg/1280px-Aerial_Foz_de_Igua%C3%A7u_26_Nov_2005.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Cataratas_do_Igua%C3%A7u"
+  },
+  {
+    "destination": "foz-do-iguacu",
+    "slug": "parque-nacional-do-iguacu",
+    "name": "Parque Nacional do Iguaçu",
+    "subtitle": "Unidade de conservação da natureza pertencente ao governo federal brasileiro",
+    "summary": "Parque Nacional do Iguaçu é uma área protegida brasileira, do grupo das Unidades de Conservação. Está localizado na região Extremo Oeste Paranaense, a 17 km do centro da cidade de Foz do Iguaçu e a apenas 5 km do Aeroporto Internacional de Foz do Iguaçu. O Parque Nacional tem uma área total de 169 695,88 hectares, e nele se encontra um dos mais espetaculares conjuntos de cataratas da Terra, as Cataratas do Iguaçu. É administrado pelo  Instituto Chico Mendes de Conservação da Biodiversidade (ICMBio).\nTambém é um dos poucos locais de conservação da Mata Atlântica, que antes cobria mais de 1,3 milhão de km² e hoje está reduzida a apenas 7,3% desse total. Dentro do bioma da Mata Atlântica, o parque conserva um dos maiores trechos da vegetação original da ecorregião da Floresta Atlântica do Alto Paraná, hoje reduzida a menos 5 % de sua cobertura original, no Brasil. O que restou encontra-se, atualmente, em pequenas áreas isoladas, dentre elas as chamadas Unidades de Conservação. Até a década de 1950, a região oeste paranaense mantinha-se bem preservada ambientalmente, a partir daí, o processo mais intenso de devastação foi isolando o Parque Nacional do Iguaçu. Em 1980, este já estava praticamente isolado, em situação similar ocorrida à região da Serra do Mar, no litoral paranaense. (Fonte: Fundação SOS Mata Atlântica)\nQuanto a biodiversidade de fauna, presentemente foram registradas 257 espécies de borboletas, porém estima-se que existam cerca de 800, mamíferos foram catalogados 45, anfíbios 12, serpentes 41, lagartos 8, peixes 18 e 200 espécies de aves (IBAMA). De acordo com o ICMBio, o Parque abrange 14 municípios paranaenses: Capanema, Capitão Leônidas Marques, Santa Lúcia, Lindoeste, Santa Tereza do Oeste, Diamante d'Oeste, Céu Azul, Matelândia, Ramilândia, Medianeira, Serranópolis do Iguaçu, São Miguel do Iguaçu, Santa Terezinha de Itaipu e Foz do Iguaçu. \nEm 17 de Novembro de 1986, recebeu a distinção, concedida pela UNESCO, de Patrimônio Natural da Humanidade. O parque teve seu primeiro Plano de Manejo elaborado em 1981, tendo sido revisado somente no ano de 1999. O parque protege toda a bacia do rio Floriano, um dos afluentes do Rio Iguaçu, uma raridade na Região Sul do Brasil pela qualidade da água, cujas nascentes ficam próximas à rodovia BR-277, entre Céu Azul e Santa Terezinha de Itaipu. As Cataratas do Iguaçu, junto com a Floresta Amazônica, são uma das 28 finalistas da campanha mundial de escolha das sete maravilhas naturais do mundo, organizada pela Fundação New 7 Wonders e que deve durar até 2011 quando deve ser atingido o número de 1 bilhão de votos. Pela internet é possível votar através da página oficial da Fundação New 7 Wonders.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/CataratasdeIguazu.JPG/1280px-CataratasdeIguazu.JPG",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Nacional_do_Igua%C3%A7u"
+  },
+  {
+    "destination": "foz-do-iguacu",
+    "slug": "usina-de-itaipu",
+    "name": "Usina de Itaipu",
+    "subtitle": "Central hidroelétrica em Hernandarias, Alto Paraná, Brasil",
+    "summary": "Usina Hidrelétrica de Itaipu (em castelhano:  Itaipú, em guarani:  Itaipu) é uma hidrelétrica binacional localizada no Rio Paraná, na fronteira entre o Brasil e o Paraguai. A barragem foi construída pelos dois países entre 1975 e 1982. O nome Itaipu foi tirado de uma ilha que existia perto do local de construção. Na língua tupi, o termo significa \"pedra na qual a água faz barulho\", através da junção dos termos itá (pedra), i (água) e pu (barulho). Quando foi concluída, era a maior barragem do mundo, título que manteve por 21 anos até a construção da Hidrelétrica das Três Gargantas, na China, em 2003.\nA usina é operada pela empresa Itaipu Binacional, dividindo com Três Gargantas o primeiro lugar em geração anual de energia limpa, tendo produzido mais de 2,5 bilhões de megawatts-hora (MWh) desde o início de sua operação. Três Gargantas produziu cerca de 800 milhões de MWh desde o início de sua operação, com uma potência instalada 60% maior do que a de Itaipu (22,5 mil MW contra 14 mil MW).\nEm termos de recorde anual de produção de energia, a usina de Itaipu ocupa o primeiro lugar ao superar seu próprio recorde que era de 98,6 milhões de MWh. Em 2016, a usina de Itaipu Binacional realizou um feito histórico ao produzir, em um único ano calendário, mais de 100 milhões de MWh de energia limpa e renovável. No total, em 2016, foram produzidos 103 098 366 MWh de energia.\nO seu lago possui uma área de 1 350 km2, indo de Foz do Iguaçu, no Brasil e Ciudad del Este, no Paraguai, até Guaíra e Salto del Guairá, 150 km ao norte. Possuindo 20 unidades geradoras de 700 MW cada e projeto hidráulico de 118 m, Itaipu tem uma potência de geração (capacidade) de 14 mil MW. É um empreendimento binacional administrado por Brasil e Paraguai no rio Paraná na seção de fronteira entre os dois países, a 15 km ao norte da Ponte da Amizade. A Usina de Itaipu fazia parte da lista oficial de candidatas para as Sete Maravilhas do Mundo Moderno, elaborada em 1995 pela revista Popular Mechanics, dos Estados Unidos, mas não ganhou o título.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Itaipu_geral.jpg/1280px-Itaipu_geral.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Usina_Hidrel%C3%A9trica_de_Itaipu"
+  },
+  {
+    "destination": "foz-do-iguacu",
+    "slug": "parque-das-aves",
+    "name": "Parque das Aves",
+    "subtitle": "Parque com aves e outros animais, no Brasil",
+    "summary": "O Parque das Aves é um parque temático localizado no município brasileiro de Foz do Iguaçu, no estado do Paraná.\nSituado próximo às Cataratas do rio Iguaçu, possui 16 hectares de mata nativa, com 1 500 animais de 140 espécies diferentes, entre aves, répteis e mamíferos. É uma instituição privada que trabalha como um centro de conservação integrada de espécies da Mata Atlântica, pesquisando a reprodução em cativeiro e preservando animais ameaçados de extinção.\nA sua estrutura conta com 1 300 metros de trilhas, onde são dispostos as aves para observação, e ambientes que imitam ecossistemas naturais para alguns espécies, como para os jacarés, jiboias, saguis e borboletas.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Viveiro_Aves_de_Rios_e_Mangues.jpg/1280px-Viveiro_Aves_de_Rios_e_Mangues.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_das_Aves"
+  },
+  {
+    "destination": "foz-do-iguacu",
+    "slug": "ponte-internacional-da-amizade",
+    "name": "Ponte Internacional da Amizade",
+    "subtitle": "Ponte que liga Brasil e Paraguai",
+    "summary": "A Ponte Internacional da Amizade   (em castelhano Puente Internacional de la Amistad) é uma importante ligação rodoviária entre o Brasil e o Paraguai, conectando as cidades de Foz de Iguaçu e Cidade do Leste, passando sobre o rio Paraná. Sua construção teve início em 1959 e a inauguração ao tráfego deu-se em 27 de março de 1965 com a presença dos presidentes Castelo Branco e Alfredo Stroessner.\nO local onde se encontra o canal entre Sete Quedas e Foz do Iguaçu era estreito, profundo e com águas revoltas. Suas variações de nível em condições normais chegavam até dez metros em 36 horas, resultando uma oscilação 30 centímetros por hora. Em função da rapidez de variações do rio Paraná foi definido que a ponte deveria ter vão livre de 18 metros acima do nível da água mesmo em grandes cheias. Tais condições foram resolvidas anos depois, com a construção da Barragem de Itaipu.\nO rio Paraná, devido a sua extensão continental, sofre duas cheias por ano, sendo a primeira em junho ou julho e a segunda no fim do ano, entre novembro e dezembro. Esta variação não está relacionada com as estações do ano, e sim com o regime de chuvas nas regiões em que passa. Os registros históricos comprovaram que a maior cheia havia acontecido em 1905, quando as águas chegaram a 30 metros acima do nível normal.\nEm função da construção da ponte surgiu o comércio exportador e importador de Foz do Iguaçu. Iniciou-se a colonização e inauguração da cidade de Puerto Stroessner, atualmente chamada de Cidade do Leste, cidade que ocupa o posto de segundo maior centro urbano do Paraguai e seus clientes em sua maioria são brasileiros atraídos pelos baixos preços dos produtos vendidos na cidade.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Ponte_da_amizade_-_Friendship_bridge-_Paraguay_%289623754507%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Ponte_Internacional_da_Amizade"
+  },
+  {
+    "destination": "foz-do-iguacu",
+    "slug": "parque-nacional-iguazu-argentina",
+    "name": "Parque Nacional Iguazú (Argentina)",
+    "subtitle": null,
+    "summary": "O Parque Nacional do Iguaçu (em castelhano: Parque Nacional Iguazú) é uma área protegida, criada na Argentina no ano 1934 com o objetivo de conservar as Cataratas do Iguaçu e a biodiversidade que as rodeia. Localizado no norte da província de Misiones, o parque conta com uma superfície aproximada de 67.000 hectares e a sua entrada está a 7 km de Puerto Iguazú.\nA história do parque pode ser traçada até 1902, quando o Ministério do Interior da Argentina encarregou Carlos Thays de realizar um levantamento detalhado das cataratas, e que posteriormente serviu de base para a lei de criação do parque nacional.\nO Parque tornou-se Património Mundial da UNESCO em 1984.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Iguacu.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Nacional_do_Igua%C3%A7u_(Argentina)"
+  },
+  {
+    "destination": "manaus",
+    "slug": "teatro-amazonas",
+    "name": "Teatro Amazonas",
+    "subtitle": "Teatro em Manaus, Amazonas, Brasil",
+    "summary": "Teatro Amazonas é uma casa de ópera localizada em Manaus, no estado do Amazonas, sendo o principal cartão-postal da cidade. Situado no Largo de São Sebastião, no Centro Histórico, foi inaugurado em 1896 para atender ao desejo da elite amazonense da época, que idealizava a cidade à altura dos grandes centros culturais. É amplamente considerado como um dos mais belos teatros do mundo. Por ser uma obra singular no Brasil e representar o apogeu de Manaus durante o ciclo da borracha, foi reconhecido como Patrimônio Mundial pela UNESCO em 2026.\nDe estilo renascentista entorno de sua estrutura externa com os detalhes únicos na sua cúpula, tornou-se um dos monumentos mais conhecidos do Brasil e, consequentemente, o maior símbolo cultural de Manaus, e uma das expressões arquitetônicas responsáveis pela fama da cidade de Paris dos Trópicos. Está localizado mais precisamente na Avenida Eduardo Ribeiro e recebe cerca de 288 mil visitantes ao ano.\nCom uma decoração muito nobre, o Teatro Amazonas já foi palco não somente de grandes peças teatrais, mas também de shows internacionais como o da banda The White Stripes. Desde 1997, o Festival Amazonas de Ópera é realizado no teatro.\nEm 2008, o teatro foi eleito uma das sete maravilhas brasileiras em dois concursos promovidos pela Caras em parceria com o banco HSBC e outro pelo escritório de design Goff. Em 2014, o TripAdvisor, considerado o maior site de viagens do mundo, elegeu o Teatro Amazonas a terceira melhor atração turística do Brasil.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Noite_no_Teatro_Amazonas_%28cropped%29.jpg/1280px-Noite_no_Teatro_Amazonas_%28cropped%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Teatro_Amazonas"
+  },
+  {
+    "destination": "manaus",
+    "slug": "encontro-das-aguas",
+    "name": "Encontro das Águas",
+    "subtitle": "Fenômeno natural dos rios Negro e Solimões",
+    "summary": "O encontro das águas é um fenômeno natural facilmente visto em muitos rios da Amazônia. Os fatores para isso ocorrer na região variam desde questões geológicas, climáticas, termais ou até mesmo o tamanho ou a acidez dos rios. O mais famoso encontro das águas está localizado na frente da cidade de Manaus, entre os rios Negro e Solimões, sendo uma das principais atrações turísticas da capital amazonense.  \nO fenômeno também ocorre em outras cidades do Brasil, como em Santarém, no Pará, com o encontro das águas dos rios Tapajós e Amazonas, em Tefé no estado do Amazonas, entre os rios Tefé e Solimões e em Tapauá, Amazonas, o fenômeno também é visto na frente da cidade com o encontro dos rios amazônicos do Purus e Ipixuna, além de muitos outros municípios do interior da Amazônia brasileira e da Amazônia internacional como em Iquitos, Peru, e em outras localidades da Amazônia hispânica. \nEm homenagem a esse fenômeno, o arquiteto Oscar Niemeyer elaborou um projeto de monumento ao encontro das águas, ainda em projeto em Manaus, foi um de seus últimos trabalhos antes de seu falecimento.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Encontro_das_%C3%81guas_-_Manaus.jpg/1280px-Encontro_das_%C3%81guas_-_Manaus.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Encontro_das_%C3%A1guas"
+  },
+  {
+    "destination": "manaus",
+    "slug": "mercado-municipal-adolpho-lisboa",
+    "name": "Mercado Municipal Adolpho Lisboa",
+    "subtitle": "Mercado em Manaus, AM, Brasil",
+    "summary": "O Mercado Municipal Adolpho Lisboa, também conhecido como Mercadão, está localizado às margens do rio Negro, no Centro da cidade de Manaus, capital do estado do Amazonas. Construído durante o ciclo da borracha com material importado da Europa.\nCom mais de 140 anos de história, foi inaugurado em 15 de julho de 1883, sendo um dos mais importantes espaços de comercialização de produtos e alimentos típicos da Amazônia, em função da variedade de espécies de peixes de água doce, artesanatos, frutas, legumes e especiarias, atraindo a atenção e a curiosidade de quem o visita.\nO Mercadão é um símbolo da arquitetura do período áureo da economia da borracha e uma relíquia para todo o Brasil. Sobre a bandeira do portão principal, existe uma cartela cravada com o nome Adolpho Lisboa que, na época da construção, era prefeito da cidade de Manaus. Posteriormente Lisboa deu o nome ao mercado. Por ser um dos principais exemplares da arquitetura de ferro sem similar em todo mundo, foi tombado como Patrimônio Histórico Nacional pelo IPHAN em 1987 e incluído no Livro das Belas Artes.\nLocalizado mais precisamente na Rua dos Barés, possui duas fachadas totalmente distintas, uma de frente para o rio Negro e outra para a via pública. Um importante prédio histórico e arquitetônico da cidade, o Mercado Municipal também se destaca como um polo cultural e turístico. O prédio foi interditado em 2006 para obras de restauro, sendo reaberto em 2013.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Mercado_Municipal%2C_Manaus_-_AM_-_panoramio_%282%29.jpg/1280px-Mercado_Municipal%2C_Manaus_-_AM_-_panoramio_%282%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Mercado_Municipal_Adolpho_Lisboa"
+  },
+  {
+    "destination": "manaus",
+    "slug": "museu-da-amazonia",
+    "name": "Museu da Amazônia",
+    "subtitle": "Museu em Manaus, Amazonas",
+    "summary": "O Museu da Amazônia (Musa) é um museu vivo de 100 hectares localizado dentro da Reserva Florestal Adolpho Ducke, na cidade de Manaus. O espaço une ciência, natureza e cultura, oferecendo trilhas na mata, torre de observação de 42 metros, borboletário, aquários e lagos com vitórias-régias.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/MarioOliveira_Musa_Manaus_AM_%2840438938404%29.jpg/1280px-MarioOliveira_Musa_Manaus_AM_%2840438938404%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Museu_da_Amaz%C3%B4nia"
+  },
+  {
+    "destination": "manaus",
+    "slug": "palacio-rio-negro",
+    "name": "Palácio Rio Negro",
+    "subtitle": "Casa de veraneio do Presidente do Brasil",
+    "summary": "O Palácio Rio Negro localiza-se na cidade de Petrópolis, estado do Rio de Janeiro, no Brasil",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/President%27s_Summer_home%2C_Rio_Negro_Palace%2C_Petr%C3%B3polis%2C_Rio_de_Janeiro.jpg/1280px-President%27s_Summer_home%2C_Rio_Negro_Palace%2C_Petr%C3%B3polis%2C_Rio_de_Janeiro.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Pal%C3%A1cio_Rio_Negro"
+  },
+  {
+    "destination": "manaus",
+    "slug": "ponte-rio-negro",
+    "name": "Ponte Rio Negro",
+    "subtitle": "Ponte sobre o Rio Negro, no estado do Amazonas, Brasil",
+    "summary": "Ponte Jornalista Phelippe Daou, mais conhecida como Ponte Rio Negro, é uma ponte que atravessa o rio Negro, no estado brasileiro do Amazonas. Ela conecta os municípios de Manaus e Iranduba, e também faz parte da Rodovia Manoel Urbano. Atualmente é a maior ponte estaiada do Brasil, com 3,6 quilômetros de extensão sobre o maior rio de água negra do mundo.\nFoi aberta para o tráfego de veículos em 2011 e batizada como Ponte Rio Negro durante a inauguração. Em 2017, recebeu o nome do jornalista e empresário brasileiro Phelippe Daou, um dos fundadores da Rede Amazônica. A obra foi orçada em R$ 1,099 bilhão (R$ 586 milhões em financiamento do BNDES e R$ 513 milhões do Governo do Estado do Amazonas).",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Rio_Negro_Bridge%2C_Brazil_%28cropped%29.jpg/1280px-Rio_Negro_Bridge%2C_Brazil_%28cropped%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Ponte_Rio_Negro"
+  },
+  {
+    "destination": "manaus",
+    "slug": "parque-nacional-de-anavilhanas",
+    "name": "Parque Nacional de Anavilhanas",
+    "subtitle": "Parque Nacional de Anavilhanas de nível Federal, localizado (a) em Novo Airão (AM), Manaus (AM)",
+    "summary": "O Parque Nacional de Anavilhanas é uma unidade de conservação brasileira de proteção integral da natureza localizada no estado do Amazonas, com território distribuído pelos municípios de Manaus, Iranduba e Novo Airão. \nCriado em 1981, sua finalidade é preservar o arquipélago fluvial de Anavilhanas bem como suas diversas formações florestais, estimular a produção de conhecimento através da pesquisa científica e promover a valorização da importância do Parque Nacional para conservação através da educação ambiental e turismo sustentável, buscando harmonizar as relações entre as comunidades do entorno e a Unidade com ações de bases sustentáveis.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Anavilhanas2.jpg/1280px-Anavilhanas2.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Nacional_de_Anavilhanas"
+  },
+  {
+    "destination": "manaus",
+    "slug": "praia-da-ponta-negra-manaus",
+    "name": "Praia da Ponta Negra (Manaus)",
+    "subtitle": null,
+    "summary": "Praia da Ponta Negra é uma praia fluvial urbana do município de Manaus, capital do estado do Amazonas. Localizada às margens do rio Negro, no bairro homônimo, é um dos principais cartões-postais da cidade.\nPossui orla urbanizada, quadras para prática de esporte e um anfiteatro, onde são realizadas apresentações musicais, espetáculos teatrais e outras atrações, tornando-a um dos principais pontos turísticos da capital amazonense.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Praia_da_Ponta_Negra_%28Manaus%29.jpg/1280px-Praia_da_Ponta_Negra_%28Manaus%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Praia_da_Ponta_Negra_(Manaus)"
+  },
+  {
+    "destination": "fernando-de-noronha",
+    "slug": "parque-nacional-marinho-de-fernando-de-noronha",
+    "name": "Parque Nacional Marinho de Fernando de Noronha",
+    "subtitle": "Parque Nacional Marinho de Fernando de Noronha de nível Federal, localizado em Fernando de Noronha (PE)",
+    "summary": "Parque Nacional Marinho de Fernando de Noronha é um parque nacional no estado de Pernambuco, Brasil.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ba%C3%ADa_dos_Porcos_-_Fernando_de_Noronha_%2832811749914%29.jpg/1280px-Ba%C3%ADa_dos_Porcos_-_Fernando_de_Noronha_%2832811749914%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Nacional_Marinho_de_Fernando_de_Noronha"
+  },
+  {
+    "destination": "fernando-de-noronha",
+    "slug": "baia-dos-porcos",
+    "name": "Baía dos Porcos",
+    "subtitle": null,
+    "summary": "A Baía dos Porcos (em espanhol, Bahia de los Cochinos) é uma baía na costa meridional de Cuba, mais conhecida em razão de uma tentativa de invasão malsucedida por parte de mais de mil e duzentos exilados cubanos, ligados ao antigo regime de Fulgêncio Batista, apoiados pelos Estados Unidos — que foram treinados e financiados pelo serviço secreto norte-americana CIA, em 1961. Esta invasão deu-se devido à persistência dos Estados Unidos em contrariar a dispersão dos ideais comunistas. É um dos marcos históricos da reconhecida Guerra Fria.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Cuba_Bahia_de_Cochinos-pt.svg/1280px-Cuba_Bahia_de_Cochinos-pt.svg.png",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Ba%C3%ADa_dos_Porcos"
+  },
+  {
+    "destination": "fernando-de-noronha",
+    "slug": "forte-de-nossa-senhora-dos-remedios",
+    "name": "Forte de Nossa Senhora dos Remédios",
+    "subtitle": "Patrimônio localizado no Brasil",
+    "summary": "O Forte de Nossa Senhora dos Remédios de Fernando de Noronha localiza-se ao norte da ilha de Fernando de Noronha, no arquipélago de mesmo nome, no estado de Pernambuco, no Brasil.\nEm posição dominante sobre o ancoradouro na baía de Santo Antônio, constituiu-se na principal estrutura de defesa da ilha e do arquipélago.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Forte_de_Nossa_Senhora_dos_Rem%C3%A9dios_de_Fernando_de_Noronha_-_Pernambuco%2C_Brasil.jpg/1280px-Forte_de_Nossa_Senhora_dos_Rem%C3%A9dios_de_Fernando_de_Noronha_-_Pernambuco%2C_Brasil.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Forte_de_Nossa_Senhora_dos_Rem%C3%A9dios_(Fernando_de_Noronha)"
+  },
+  {
+    "destination": "bonito",
+    "slug": "gruta-do-lago-azul",
+    "name": "Gruta do Lago Azul",
+    "subtitle": "Monumento Natural da Gruta do Lago Azul de nível Estadual, localizado (a) em Bonito (MS)",
+    "summary": "Monumento Natural da Gruta do Lago Azul é um monumento natural no município de Bonito, Mato Grosso do Sul, Brasil. Possui duas cavernas com formações calcárias interessantes, mas frágeis, e está listada como área protegida desde 1978.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Gruta_do_Lago_Azul_em_Bonito.jpg/1280px-Gruta_do_Lago_Azul_em_Bonito.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Monumento_Natural_da_Gruta_do_Lago_Azul"
+  },
+  {
+    "destination": "bonito",
+    "slug": "buraco-das-araras",
+    "name": "Buraco das Araras",
+    "subtitle": "Reserva Particular do Patrimônio Natural Buraco das Araras de nível Federal, localizado (a) em Jardim (MS)",
+    "summary": "A Reserva Particular do Patrimônio Natural Buraco das Araras é uma área de conservação de propriedade privada no estado do Mato Grosso do Sul, Brasil. Leva o nome do Buraco das Araras, um grande sumidouro que é a principal característica da reserva. É considerada a maior dolina da América Latina, possui cerca de 500 metros de diâmetro e 127 metros de profundidade. O nome Buraco das Araras surgiu em razão do grande número de araras que habitam o local. Há em seu interior fauna e flora bem particulares, com ecossistema próprio e um grande lago habitado por jacarés do papo amarelo.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Buraco_das_Araras_Jardim_MS_Brazil.jpg/1280px-Buraco_das_Araras_Jardim_MS_Brazil.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Reserva_Particular_do_Patrim%C3%B4nio_Natural_Buraco_das_Araras"
+  },
+  {
+    "destination": "bonito",
+    "slug": "rio-da-prata",
+    "name": "Rio da Prata",
+    "subtitle": "Rio do Mato Grosso do Sul",
+    "summary": "O rio da Prata é um curso de água do estado do Mato Grosso do Sul, Brasil, localizado no município de Jardim. É afluente do rio Miranda .\nDevido a alta concentração de calcário, o rio possui alta transparência e é utilizado para a prática do ecoturismo",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/55/RiodaPrataemBonito.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Rio_da_Prata_(Mato_Grosso_do_Sul)"
+  },
+  {
+    "destination": "bonito",
+    "slug": "parque-nacional-da-serra-da-bodoquena",
+    "name": "Parque Nacional da Serra da Bodoquena",
+    "subtitle": "Unidade de conservação da natureza pertencente ao governo federal brasileiro",
+    "summary": "O Parque Nacional da Serra da Bodoquena, criado em novembro de 2000, com 76.400 ha, é administrado pelo Instituto Chico Mendes de Conservação da Biodiversidade (ICMBio). A Serra da Bodoquena, situada na borda sudoeste do Complexo do Pantanal, no estado do Mato Grosso do Sul, é um dos mais interessantes ecossistemas do Pantanal. É formada pelas cidades de Porto Murtinho, Bonito, Jardim, Miranda e Bodoquena.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Serra_da_Bodoquena.jpg/1280px-Serra_da_Bodoquena.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Nacional_da_Serra_da_Bodoquena"
+  },
+  {
+    "destination": "campos-do-jordao",
+    "slug": "palacio-boa-vista",
+    "name": "Palácio Boa Vista",
+    "subtitle": null,
+    "summary": "O Palácio Boa Vista é a residência oficial de inverno do governador do estado de São Paulo. Localiza-se no bairro Alto da Boa Vista, na cidade de Campos do Jordão. Sua construção foi iniciada em 1938, a pedido do interventor federal Adhemar de Barros, com o intuito de servir como residência oficial de veraneio, sendo concluída apenas em 1964. Em 1970, o palácio foi declarado “monumento de visitação pública” e transformado em um centro de arte, sem prejuízo de sua finalidade precípua como sede de inverno do governo estadual. Atualmente, além de servir como residência oficial, o Palácio é tombado como patrimônio público.\nO palácio abriga um precioso acervo artístico — são mais de 1.800 objetos de arte expostos — composto por obras de importantes nomes da arte brasileira, além de uma coleção de itens de artes aplicadas e artesanato. Anexa ao palácio, encontra-se a Capela de São Pedro Apóstolo e um campanário japonês. O acervo do Palácio Boa Vista é aberto à visitação pública e integra, juntamente com as coleções do Palácio dos Bandeirantes, o Acervo Artístico-Cultural dos Palácios do Governo de São Paulo.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Fachada_do_Pal%C3%A1cio_Boa_Vista_%28entrada%29.jpg/1280px-Fachada_do_Pal%C3%A1cio_Boa_Vista_%28entrada%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Pal%C3%A1cio_Boa_Vista"
+  },
+  {
+    "destination": "campos-do-jordao",
+    "slug": "parque-estadual-de-campos-do-jordao",
+    "name": "Parque Estadual de Campos do Jordão",
+    "subtitle": "Parque Estadual de Campos do Jordão de nível Estadual, localizado (a) em Campos do Jordão (SP)",
+    "summary": "O Parque Estadual de Campos do Jordão (PECJ) é uma unidade de conservação brasileira de proteção integral da natureza localizada na Serra da Mantiqueira e conhecido regionalmente como Horto Florestal, foi criado pela Lei Estadual nº 11.908, de 27 de março de 1941.\nÉ um dos 29 parques do estado de São Paulo destinados à observação da natureza. Foi a primeira Unidade de Conservação a ser implantada no Estado de São Paulo, tendo sido o primeiro parque brasileiro a possuir um Plano de Manejo. Está localizado no Cone Leste do estado, no município de Campos do Jordão e se estende por uma área de aproximadamente 8 341 hectares.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Arauc%C3%A1rias2.jpg/1280px-Arauc%C3%A1rias2.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Estadual_de_Campos_do_Jord%C3%A3o"
+  },
+  {
+    "destination": "campos-do-jordao",
+    "slug": "pico-do-itapeva",
+    "name": "Pico do Itapeva",
+    "subtitle": null,
+    "summary": "O pico do Itapeva é uma elevação rochosa brasileira com 2 025 metros de altitude. O cume está situado no município de Pindamonhangaba, no estado de São Paulo, a apenas 35 metros da divisa com Campos do Jordão. O pico é acessível a partir desta última cidade por estrada pavimentada, sendo um dos pontos mais altos acessíveis por automóvel no Brasil. Do alto, é possível se ver uma ampla extensão do Vale do Paraíba paulista, avistando-se sete cidades.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Vista_do_Pico_do_Itapeva_SP.jpg/1280px-Vista_do_Pico_do_Itapeva_SP.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Pico_do_Itapeva"
+  },
+  {
+    "destination": "campos-do-jordao",
+    "slug": "estrada-de-ferro-campos-do-jordao",
+    "name": "Estrada de Ferro Campos do Jordão",
+    "subtitle": null,
+    "summary": "A Estrada de Ferro Campos do Jordão é uma estrada de ferro eletrificada no estado de São Paulo que liga as cidades de Pindamonhangaba a Campos do Jordão, sendo hoje utilizada somente para transporte de passageiros, essencialmente em passeios turísticos. É de propriedade do governo do Estado de São Paulo, sendo administrada pela Secretaria dos Transportes Metropolitanos e pela CPTM.\nDe janeiro a outubro de 2019, transportou 162 622 passageiros, tanto em seu serviço de subúrbios (similar aos trens metropolitanos da capital paulista) como em seus serviços turísticos.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Estrada_de_Ferro_Campos_do_Jord%C3%A3o%2C_em_Santo_Antonio_do_Pinhal.JPG/1280px-Estrada_de_Ferro_Campos_do_Jord%C3%A3o%2C_em_Santo_Antonio_do_Pinhal.JPG",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Estrada_de_Ferro_Campos_do_Jord%C3%A3o"
+  },
+  {
+    "destination": "campos-do-jordao",
+    "slug": "parque-amantikir",
+    "name": "Parque Amantikir",
+    "subtitle": "Parque em Campos do Jordão, Brasil",
+    "summary": "O Parque Amantikir ou Amantikir Jardins, é um parque composto por um conjunto de jardins e diversos pontos de interesse. Situado no município de Campos do Jordão, a 180 quilômetros da cidade de São Paulo, o parque é visitado por milhares de turistas anualmente.\nIdealizado pelo paisagista e engenheiro agrônomo, Walter Vasconcellos, conhecido como Dr. Garden, o Amantikir abriga mais de 700 espécies de plantas em 26 jardins ao longo dos seus 60 mil metros quadrados. Em 2013 o site TripAdvisor, certificou pela primeira vez o Amantikir com o atrativo n.º 1 de Campos do Jordão, posição em que o parque vem se mantendo desde então.\nO parque e a cidade de Campos do Jordão ficam situados na Serra da Mantiqueira, (um complexo de montanhas considerado a 8.ª formação natural protegida mais \"insubstituível\" do planeta, segundo um artigo da União Internacional para a Conservação da Natureza publicado em 2013 pela Revista Science).",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/M%C3%ADrame_do_Amantikir_%28cropped%29.jpg/1280px-M%C3%ADrame_do_Amantikir_%28cropped%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Amantikir"
+  }
+]
