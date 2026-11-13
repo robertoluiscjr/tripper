@@ -36,8 +36,9 @@ const PLURAL: Record<ItemCategory, string> = {
 const joinPt = (parts: string[]) => (parts.length < 2 ? parts.join("") : `${parts.slice(0, -1).join(", ")} e ${parts.at(-1)}`);
 
 /**
- * Ver Progresso — Figma "Progresso da viagem" (4688:5461) para o topo (título, destino · dias,
- * % grande em azul, barra em segmentos, aviso de reservas e CTA do próximo passo) +
+ * Ver Progresso — Figma "Progresso da viagem 2 (A + C)" (4863:6102): topo do frame original
+ * (título, destino • dias, aviso de reservas, próximo passo + CTA de 313px), barra contínua com
+ * "5 de 8 itens adicionados" e a % logo acima (opção C) +
  * opções A + C escolhidas na conversa de design para o conteúdo (mesmo card de Estimar Gastos). escolhidas na conversa de design; mesmo visual de Estimar Gastos).
  * - Topo: barra geral "Planejamento" com % e "5 de 8 itens adicionados".
  * - Um card por categoria: interruptor (vai ter / não vai ter) e quantos itens são previstos (– N +).
@@ -90,45 +91,28 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
         {trip.name} • {daysLabel(trip.daysCount)}
       </p>
 
-      {/* Resumo: "5 de 8 itens adicionados" + % grande (Figma) */}
+      {/* Resumo (opção C): "5 de 8 itens adicionados" e a % logo acima de uma barra contínua */}
       <section aria-label="Progresso do planejamento" className="mt-[25px]">
-        <div className="flex items-center justify-between gap-4">
-          <div className="min-w-0">
-            <p className="text-p16 leading-5 font-medium text-foreground">
-              {progress.planned === 0
-                ? "Nenhuma categoria ligada"
-                : `${progress.done} de ${progress.planned} ${progress.planned === 1 ? "item adicionado" : "itens adicionados"}`}
-            </p>
-            <p className="mt-1 text-p14 leading-[18px] text-muted-foreground">Itens previstos para a viagem</p>
-          </div>
-          <span className={cn("text-[40px] leading-[48px] font-medium tracking-[-0.03em]", complete ? "text-success" : "text-primary")}>
-            {progress.percent}%
+        <div className="flex items-center justify-between gap-4 text-p16 leading-5 font-medium">
+          <span className="min-w-0 text-foreground">
+            {progress.planned === 0
+              ? "Nenhuma categoria ligada"
+              : `${progress.done} de ${progress.planned} ${progress.planned === 1 ? "item adicionado" : "itens adicionados"}`}
           </span>
+          <span className={cn("shrink-0", complete ? "text-success" : "text-primary")}>{progress.percent}%</span>
         </div>
-        {/* Barra em segmentos: um por categoria ligada (largura = itens previstos) */}
         <div
           role="progressbar"
           aria-label="Planejamento da viagem"
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={progress.percent}
-          className="mt-2 flex h-2 gap-1"
+          className="mt-2 h-2 overflow-hidden rounded-[4px] bg-tripper-blue-100"
         >
-          {progress.planned === 0 ? (
-            <span className="flex-1 rounded-[4px] bg-tripper-blue-100" />
-          ) : (
-            CATEGORY_MENU.filter(({ category }) => progress.byCategory[category]).map(({ category }) => {
-              const c = progress.byCategory[category]!;
-              return (
-                <span key={category} className="overflow-hidden rounded-[4px] bg-tripper-blue-100" style={{ flex: `${c.planned} 1 0` }}>
-                  <span
-                    className={cn("block h-full rounded-[4px] transition-[width] duration-300 ease-figma-out", complete ? "bg-success" : "bg-primary")}
-                    style={{ width: `${(c.done / c.planned) * 100}%` }}
-                  />
-                </span>
-              );
-            })
-          )}
+          <div
+            className={cn("h-full rounded-[4px] transition-[width] duration-300 ease-figma-out", complete ? "bg-success" : "bg-primary")}
+            style={{ width: `${progress.percent}%` }}
+          />
         </div>
         <p className="mt-2 text-p14 leading-[18px] text-muted-foreground">Itens adicionados não indicam reservas confirmadas.</p>
       </section>
