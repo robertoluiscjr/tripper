@@ -17,6 +17,8 @@ export type Destination = {
   airport: string;
   photo: string;
   photoPosition?: string;
+  /** foto de fora do Figma (Wikimedia Commons): autor e licença, exibidos no app */
+  photoCredit?: string;
   lat: number;
   lon: number;
 };
@@ -44,6 +46,9 @@ export const DESTINATIONS: Destination[] = [
   D({ slug: "manaus", name: "Manaus", state: "AM", query: "Manaus, Amazonas", airport: "MAO", photo: "/images/destinos/manaus.webp", lat: -3.119, lon: -60.0217 }),
   D({ slug: "fernando-de-noronha", name: "Fernando de Noronha", state: "PE", query: "Fernando de Noronha, Pernambuco", airport: "FEN", photo: "/images/destinos/fernando-de-noronha.webp", lat: -3.8547, lon: -32.4247 }),
   D({ slug: "bonito", name: "Bonito", state: "MS", query: "Bonito, Mato Grosso do Sul", airport: "BYO", photo: "/images/destinos/bonito.webp", lat: -21.1261, lon: -56.4836 }),
+  // Fora do protótipo: fotos da Wikimedia Commons (licença pede o crédito do autor)
+  D({ slug: "ouro-preto", name: "Ouro Preto", state: "MG", query: "Ouro Preto, Minas Gerais", airport: "CNF", photo: "/images/destinos/ouro-preto.webp", photoCredit: "Ouro Preto: Rosino (CC BY-SA 2.0)", lat: -20.3856, lon: -43.5035 }),
+  D({ slug: "paraty", name: "Paraty", state: "RJ", query: "Paraty, Rio de Janeiro", airport: "GIG", photo: "/images/destinos/paraty.webp", photoCredit: "Paraty: Ministério da Cultura (CC BY 2.0)", lat: -23.2178, lon: -44.7131 }),
   D({ slug: "campos-do-jordao", name: "Campos do Jordão", state: "SP", query: "Campos do Jordão, São Paulo", airport: "GRU", photo: "/images/destinos/campos-do-jordao.webp", lat: -22.7394, lon: -45.5914 }),
 ];
 
@@ -132,7 +137,7 @@ export const BUSCAR_SECTIONS: BuscarSection[] = [
     kind: "Passeios",
     partner: "GetYourGuide",
     partnerPrep: "no",
-    cards: [{ destination: "rio-de-janeiro" }, { destination: "foz-do-iguacu" }, { destination: "bonito" }, { destination: "manaus" }, { destination: "lencois-maranhenses" }],
+    cards: [{ destination: "rio-de-janeiro" }, { destination: "ouro-preto" }, { destination: "paraty" }, { destination: "manaus" }, { destination: "lencois-maranhenses" }],
   },
 ];
 

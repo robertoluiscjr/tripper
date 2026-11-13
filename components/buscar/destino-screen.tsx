@@ -68,6 +68,9 @@ export function DestinoScreen({ destination, attractions }: { destination: Desti
           <span className="sr-only">(abre em nova aba)</span>
         </a>
       )}
+      {destination.photoCredit && (
+        <p className="mt-8 text-small leading-[1.4] text-muted-foreground">Foto do destino via Wikimedia Commons — {destination.photoCredit}.</p>
+      )}
     </main>
   );
 }

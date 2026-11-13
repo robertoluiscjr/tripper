@@ -21,8 +21,17 @@ export function BuscarScreen() {
       {BUSCAR_SECTIONS.map((section, i) => (
         <Section key={section.id} section={section} first={i === 0} />
       ))}
+
+      <PhotoCredits />
     </main>
   );
+}
+
+/** Crédito das fotos que não são do Figma (Wikimedia Commons), como pede a licença. */
+function PhotoCredits() {
+  const credits = [...new Set(BUSCAR_SECTIONS.flatMap((s) => s.cards.map((c) => getDestination(c.destination)?.photoCredit)).filter(Boolean))];
+  if (!credits.length) return null;
+  return <p className="mt-8 text-small leading-[1.4] text-muted-foreground">Fotos via Wikimedia Commons — {credits.join(" · ")}.</p>;
 }
 
 function Section({ section, first }: { section: BuscarSection; first: boolean }) {

@@ -637,5 +637,113 @@
     "summary": "O Parque Amantikir ou Amantikir Jardins, é um parque composto por um conjunto de jardins e diversos pontos de interesse. Situado no município de Campos do Jordão, a 180 quilômetros da cidade de São Paulo, o parque é visitado por milhares de turistas anualmente.\nIdealizado pelo paisagista e engenheiro agrônomo, Walter Vasconcellos, conhecido como Dr. Garden, o Amantikir abriga mais de 700 espécies de plantas em 26 jardins ao longo dos seus 60 mil metros quadrados. Em 2013 o site TripAdvisor, certificou pela primeira vez o Amantikir com o atrativo n.º 1 de Campos do Jordão, posição em que o parque vem se mantendo desde então.\nO parque e a cidade de Campos do Jordão ficam situados na Serra da Mantiqueira, (um complexo de montanhas considerado a 8.ª formação natural protegida mais \"insubstituível\" do planeta, segundo um artigo da União Internacional para a Conservação da Natureza publicado em 2013 pela Revista Science).",
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/M%C3%ADrame_do_Amantikir_%28cropped%29.jpg/1280px-M%C3%ADrame_do_Amantikir_%28cropped%29.jpg",
     "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Amantikir"
+  },
+  {
+    "destination": "ouro-preto",
+    "slug": "igreja-de-sao-francisco-de-assis",
+    "name": "Igreja de São Francisco de Assis",
+    "subtitle": "Igreja em Ouro Preto, Brasil",
+    "summary": "A Igreja de São Francisco de Assis é uma igreja católica da cidade de Ouro Preto, Brasil, construída em estilo Barroco, com elementos decorativos Rococó. \nÉ um dos monumentos mais significativos da arte colonial, uma das mais conhecidas igrejas brasileiras daquele período e uma das mais celebradas criações do mestre Aleijadinho, que elaborou o projeto básico da fachada e da decoração em relevos e talha dourada, realizando pessoalmente diversos de seus elementos, ainda que outros artistas também tenham colaborado.\nAli também se encontram trabalhos do Mestre Ataíde, o maior nome da pintura colonial brasileira, que decorou o teto da nave criando aquela que se tornou sua composição mais famosa, além de pintar outros painéis e dourar o altar-mor. Pela sua relevância extraordinária, a Igreja foi tombada pelo Instituto do Patrimônio Histórico e Artístico Nacional (IPHAN), foi classificada em 2009 como uma das Sete Maravilhas de Origem Portuguesa no Mundo, e integrando a Cidade Histórica de Ouro Preto é parte do Patrimônio da Humanidade.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/SFrancisOuroPreto-CCBY.jpg/1280px-SFrancisOuroPreto-CCBY.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Igreja_de_S%C3%A3o_Francisco_de_Assis_(Ouro_Preto)"
+  },
+  {
+    "destination": "ouro-preto",
+    "slug": "museu-da-inconfidencia",
+    "name": "Museu da Inconfidência",
+    "subtitle": "Museu histórico e artístico que ocupa a antiga Casa de Câmara e Cadeia de Vila Rica e mais quatro prédios auxiliares na cidade de Ouro Preto, em Minas Gerais",
+    "summary": "Museu da Inconfidência é um museu histórico e artístico que ocupa a antiga Casa de Câmara e Cadeia de Vila Rica e mais quatro prédios auxiliares na cidade de Ouro Preto, no estado de Minas Gerais. O museu é dedicado à preservação da memória da Inconfidência Mineira e também oferece um rico painel da sociedade e cultura mineiras no período do ciclo do ouro e dos diamantes no século XVIII, incluindo obras de Manuel da Costa Ataíde e Aleijadinho. Localiza-se na praça Tiradentes, em frente ao monumento a Joaquim José da Silva Xavier, o mais famoso ativista da Inconfidência.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Museu_da_Inconfid%C3%AAncia_7.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Museu_da_Inconfid%C3%AAncia"
+  },
+  {
+    "destination": "ouro-preto",
+    "slug": "basilica-de-nossa-senhora-do-pilar",
+    "name": "Basílica de Nossa Senhora do Pilar",
+    "subtitle": "Igreja em Ouro Preto, Minas Gerais, Brasil",
+    "summary": "A Basílica Menor Nossa Senhora do Pilar de Ouro Preto, Minas Gerais, popularmente chamada Igreja Matriz Nossa Senhora do Pilar, é uma das edificações católicas mais conhecidas entre as que foram erguidas durante o ciclo do ouro. É monumento tombado pelo Instituto do Patrimônio Histórico e Artístico Nacional (IPHAN). Está localizada na Praça Monsenhor Castilho Barbosa.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Igreja_Matriz_de_Nossa_Senhora_do_Pilar_-_Ouro_Preto_3.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Bas%C3%ADlica_Menor_de_Nossa_Senhora_do_Pilar_(Ouro_Preto)"
+  },
+  {
+    "destination": "ouro-preto",
+    "slug": "praca-tiradentes",
+    "name": "Praça Tiradentes",
+    "subtitle": "Patrimônio localizado no Brasil",
+    "summary": "A Praça Tiradentes é uma praça localizada na cidade de Ouro Preto, em Minas Gerais. Foi o local onde a cabeça do mártir da independência, Joaquim José da Silva Xavier, o Tiradentes foi exposta (1792) em Vila Rica, atual Ouro Preto. No local onde estivera o poste (atual praça Tiradentes) se encontra hoje um monumento ao mártir. Verifica-se que curiosamente, a estátua em bronze de Tiradentes está de costas para a então residência oficial do governador.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Pra%C3%A7a_Tiradentes_-_Ouro_Preto_-_MG.jpg/1280px-Pra%C3%A7a_Tiradentes_-_Ouro_Preto_-_MG.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Pra%C3%A7a_Tiradentes_(Ouro_Preto)"
+  },
+  {
+    "destination": "ouro-preto",
+    "slug": "igreja-de-nossa-senhora-do-carmo",
+    "name": "Igreja de Nossa Senhora do Carmo",
+    "subtitle": "Templo católico da cidade brasileira de Ouro Preto",
+    "summary": "A Igreja de Nossa Senhora do Carmo é um templo católico da cidade brasileira de Ouro Preto, importante exemplar da tradição rococó no Brasil. É monumento tombado pelo Instituto do Patrimônio Histórico e Artístico Nacional (IPHAN).",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Igreja_da_V._O._T._de_N._Sra._do_Carmo%2C_em_Ouro_Preto.jpg/1280px-Igreja_da_V._O._T._de_N._Sra._do_Carmo%2C_em_Ouro_Preto.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Igreja_de_Nossa_Senhora_do_Carmo_(Ouro_Preto)"
+  },
+  {
+    "destination": "ouro-preto",
+    "slug": "mina-da-passagem",
+    "name": "Mina da Passagem",
+    "subtitle": "Mina de ouro em Mariana, Brasil",
+    "summary": "A Mina da Passagem é uma das maiores minas ainda existentes para visitação no mundo, localizada no município brasileiro de Mariana, na área do Quadrilátero Ferrífero, no estado de Minas Gerais. Situada no distrito de Passagem de Mariana e com cerca de 7 200 km² de extensão, a Mina da Passagem é a maior mina dessa região com os seus 30 km de túneis, com lagos subterrâneos de águas cristalinas.\nNo ano de 1729 foram descobertas as primeiras jazidas da mina, que só começaram a ser exploradas mais de 100 anos depois. Durante o ciclo do ouro em Minas Gerais pelos portugueses e ingleses que chegaram a extrair 35 toneladas de ouro. A mina foi paralisada em 1954, mas foi reaberta para visitação na década de 1970. Nos dias de hoje a mina é utilizada para turismo, é um dos maiores pontos de encontro de mergulhadores de cavernas no Brasil. Mas a mina também é um grande campo para pesquisadores que vem de diversas instituições de vários lugares do mundo para realizar pesquisas sobre os segredos e mistérios ainda não descobertos no seu interior.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Mina_da_Passagem_-_Passagem_de_Mariana_%28Mariana_-_MG%29_45.jpg/1280px-Mina_da_Passagem_-_Passagem_de_Mariana_%28Mariana_-_MG%29_45.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Mina_da_Passagem"
+  },
+  {
+    "destination": "ouro-preto",
+    "slug": "parque-estadual-do-itacolomi",
+    "name": "Parque Estadual do Itacolomi",
+    "subtitle": "Unidade de conservação da natureza pertencente ao governo do estado de Minas Gerais",
+    "summary": "O Parque Estadual do Itacolomi é uma Unidade de Conservação estadual de Proteção Integral, situada nas cidades mineiras de Ouro Preto e Mariana, sob a responsabilidade do Instituto Estadual de Florestas (IEF),em Minas Gerais. Criado através da Lei estadual nº 4.495 de 1967, com uma área territorial de 7.543 hectares e altitudes variáveis entre 700 e 1772 m, está aberto à visitação pública desde Maio de 2004.\nO Parque do Itacolomi está localizado na porção sul da Serra do Espinhaço. Sua área é composta de regiões de Mata Atlântica com afloramentos rupestres nas porções mais elevadas. Além de sua grande beleza cênica, rica biodiversidade e geodiversidade, é também um marco histórico-cultural. Possui algumas estruturas, como um Centro de Visitantes, a Casa Bandeirista e o Museu do Chá. A visitação é autoguiada tanto na parte histórica quanto nas trilhas e expedições. Os monitores estão a disposição dos visitantes para trocarem experiências e realizarem atividades ambientais.\nO Parque criou ao longo dos anos programas ambientais e educacionais que visam sensibilizar a comunidade à preservação do meio ambiente em conjunto a diversas ações que culminam na recuperação e preservação das florestas naturais.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Itacolomi_sob_nuvens.jpg/1280px-Itacolomi_sob_nuvens.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Parque_Estadual_do_Itacolomi"
+  },
+  {
+    "destination": "paraty",
+    "slug": "igreja-matriz-de-nossa-senhora-dos-remedios",
+    "name": "Igreja Matriz de Nossa Senhora dos Remédios",
+    "subtitle": "Igreja em Paraty, Brasil",
+    "summary": "A Igreja Matriz de Nossa Senhora dos Remédios localiza-se em Paraty, no estado do Rio de Janeiro, no Brasil.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Parati-Matriz1.jpg/1280px-Parati-Matriz1.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Igreja_Matriz_de_Nossa_Senhora_dos_Rem%C3%A9dios_(Paraty)"
+  },
+  {
+    "destination": "paraty",
+    "slug": "igreja-de-nossa-senhora-das-dores",
+    "name": "Igreja de Nossa Senhora das Dores",
+    "subtitle": "Igreja em Paraty, Brasil",
+    "summary": "A Igreja de Nossa Senhora das Dores localiza-se no centro histórico de Paraty, no estado do Rio de Janeiro, no Brasil.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Here_cames_The_Sun_-_Paraty_%284162590295%29.jpg/1280px-Here_cames_The_Sun_-_Paraty_%284162590295%29.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Igreja_de_Nossa_Senhora_das_Dores_(Paraty)"
+  },
+  {
+    "destination": "paraty",
+    "slug": "forte-defensor-perpetuo",
+    "name": "Forte Defensor Perpétuo",
+    "subtitle": "Patrimônio localizado no Brasil",
+    "summary": "O Forte Defensor Perpétuo é uma construção localizada no município brasileiro de Paraty e que foi erguida no ano de 1793, no primeiro núcleo de povoamento da cidade, então chamada Vila de São Roque.  O forte foi construído com o intuito de proteger o escoamento do ouro da Estrada Real, bem como a produção de açúcar da região.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Museu_Forte_Defensor_Perp%C3%A9tuo_01.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Forte_Defensor_Perp%C3%A9tuo"
+  },
+  {
+    "destination": "paraty",
+    "slug": "trindade",
+    "name": "Trindade",
+    "subtitle": "Bairro do Paraty",
+    "summary": "A Vila de Trindade é um bairro localizado no município brasileiro de Paraty, estado do Rio de Janeiro. É formada basicamente por uma vila de pescadores.\nO comércio local é exercido pelos caiçaras, nativos da região. É constituído basicamente de artesanato e restaurantes com comidas típicas.[carece de fontes]?\nParte de Trindade pertence ao Parque Nacional da Serra da Bocaina e é preservada pelo ICMBio.[carece de fontes]?",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Praia_do_Caixa_d%27A%C3%A7o.jpg/1280px-Praia_do_Caixa_d%27A%C3%A7o.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Trindade_(Paraty)"
+  },
+  {
+    "destination": "paraty",
+    "slug": "saco-do-mamangua",
+    "name": "Saco do Mamanguá",
+    "subtitle": null,
+    "summary": "O Saco do Mamanguá é um saco localizado em Paraty-Mirim, no município de Paraty, no estado do Rio de Janeiro, no Brasil. Possui 8 quilômetros de comprimento e 2 quilômetros de largura. Comumente, é confundido com um fiorde tropical. \nÉ uma área de proteção ambiental, com a presença de algumas casas de caiçaras e de veranistas construídas antes da criação da reserva. \nA população local vive da pesca, turismo e artesanato em madeira (miniaturas de canoas, barcos de pesca, tartarugas, etc.). A água é mais clara na entrada do saco e fica mais turva e rasa à medida que se avança em direção ao manguezal.\nO Saco do Mamanguá possui 33 praias. Entre elas, encontra-se a Praia do Cruzeiro, onde fica o Pico do Pão de Açúcar. É possível subir até o topo do pico através de uma trilha e ter uma vista panorâmica da região.",
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Pico_do_P%C3%A3o_de_A%C3%A7ucar_no_Saco_do_Mamangu%C3%A1%2C_Paraty-Rj._Serra_da_Bocaina_ao_longo.jpg/1280px-Pico_do_P%C3%A3o_de_A%C3%A7ucar_no_Saco_do_Mamangu%C3%A1%2C_Paraty-Rj._Serra_da_Bocaina_ao_longo.jpg",
+    "wikiUrl": "https://pt.wikipedia.org/wiki/Saco_do_Mamangu%C3%A1"
   }
 ]
