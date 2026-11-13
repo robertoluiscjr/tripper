@@ -83,7 +83,8 @@ export function distanceKm(a: { lat: number; lon: number }, b: { lat: number; lo
   return 6371 * 2 * Math.asin(Math.sqrt(h));
 }
 
-/* Seções da tela Buscar (Figma 214:2332): um carrossel por tipo, cada card abre o parceiro. */
+/* Seções da tela Buscar (Figma 214:2332): um carrossel por tipo, cada card abre o parceiro.
+   Os 3 primeiros cards de cada seção são os do Figma; os demais ampliam as opções do carrossel. */
 export type BuscarSection = {
   id: "pacotes" | "passagens" | "hospedagens";
   title: string;
@@ -103,7 +104,7 @@ export const BUSCAR_SECTIONS: BuscarSection[] = [
     kind: "Pacotes",
     partner: "Decolar",
     partnerPrep: "na",
-    cards: [{ destination: "rio-de-janeiro", photo: "/images/destinos/rio-copacabana.webp" }, { destination: "lencois-maranhenses" }, { destination: "foz-do-iguacu" }],
+    cards: [{ destination: "rio-de-janeiro", photo: "/images/destinos/rio-copacabana.webp" }, { destination: "lencois-maranhenses" }, { destination: "foz-do-iguacu" }, { destination: "fortaleza" }, { destination: "gramado" }],
   },
   {
     id: "passagens",
@@ -112,7 +113,7 @@ export const BUSCAR_SECTIONS: BuscarSection[] = [
     kind: "Passagens",
     partner: "Skyscanner",
     partnerPrep: "no",
-    cards: [{ destination: "salvador" }, { destination: "florianopolis" }, { destination: "manaus" }],
+    cards: [{ destination: "salvador" }, { destination: "florianopolis" }, { destination: "manaus" }, { destination: "fernando-de-noronha" }, { destination: "fortaleza" }],
   },
   {
     id: "hospedagens",
@@ -121,7 +122,7 @@ export const BUSCAR_SECTIONS: BuscarSection[] = [
     kind: "Diárias",
     partner: "Booking.com",
     partnerPrep: "no",
-    cards: [{ destination: "fernando-de-noronha" }, { destination: "bonito" }, { destination: "campos-do-jordao" }],
+    cards: [{ destination: "fernando-de-noronha" }, { destination: "bonito" }, { destination: "campos-do-jordao" }, { destination: "gramado" }, { destination: "salvador" }],
   },
 ];
 

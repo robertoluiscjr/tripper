@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Carousel } from "@/components/buscar/carousel";
 import { BUSCAR_SECTIONS, getDestination, sectionUrl, type BuscarSection } from "@/lib/catalog";
 
 /* eslint-disable @next/next/no-img-element */
@@ -21,14 +22,16 @@ export function BuscarScreen() {
     <main className="flex flex-1 flex-col px-6 pt-[72px] pb-14">
       <h1 className="text-h1 leading-[normal] font-semibold text-foreground">Buscar</h1>
 
-      {/* Categorias: 4 botões de 82 × 114 (círculo de 72px), 9px entre eles */}
-      <nav aria-label="Categorias" className="-mx-6 mt-8 flex justify-center gap-[9px]">
+      {/* Categorias (Figma 2133:3289): círculos de margem a margem — em 393px são 72px com 19px entre eles.
+          Em telas mais largas crescem na mesma proporção (coluna = 72/345 da largura, ícone = metade do círculo). */}
+      <nav aria-label="Categorias" className="mt-8 grid grid-cols-4 gap-x-[calc(100%*19/345)]">
         {CATEGORIES.map((c) => (
-          <Link key={c.label} href={c.href} className="group flex w-[82px] flex-col items-center text-center outline-none">
-            <span className="flex size-[72px] items-center justify-center rounded-full bg-white shadow-[0px_1px_4px_0px_rgba(0,0,0,0.25)] ring-ring/50 transition-colors group-hover:bg-tripper-blue-100 group-focus-visible:ring-3 group-active:bg-tripper-blue-100">
-              <img src={c.icon} alt="" width={36} height={36} className="size-9" />
+          <Link key={c.label} href={c.href} className="group flex min-w-0 flex-col items-center text-center outline-none">
+            <span className="flex aspect-square w-full items-center justify-center rounded-full bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] ring-ring/50 transition-colors group-hover:bg-tripper-blue-100 group-focus-visible:ring-3 group-active:bg-tripper-blue-100">
+              <img src={c.icon} alt="" width={36} height={36} className="aspect-square w-1/2" />
             </span>
-            <span className="mt-2 text-p14 leading-[1.2] text-foreground">{c.label}</span>
+            {/* rótulo 10px mais largo que o círculo (82 × 72 no Figma) */}
+            <span className="-mx-[5px] mt-2 text-p14 leading-[1.2] text-foreground">{c.label}</span>
           </Link>
         ))}
       </nav>
@@ -59,7 +62,7 @@ function Section({ section, first }: { section: BuscarSection; first: boolean })
         </h2>
       </div>
       {/* Carrossel: cards de 160px, 16px entre eles, rolagem lateral até a borda da tela */}
-      <ul className="-mx-6 mt-[11px] flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 py-1 [scrollbar-width:none]">
+      <Carousel label={section.title} className="-mx-6 mt-[11px] scroll-px-6 gap-4 px-6 py-1">
         {section.cards.map((card) => {
           const d = getDestination(card.destination);
           if (!d) return null;
@@ -77,7 +80,7 @@ function Section({ section, first }: { section: BuscarSection; first: boolean })
             </li>
           );
         })}
-      </ul>
+      </Carousel>
     </section>
   );
 }
