@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { TripDTO } from "@/lib/trips";
 import type { CreateTripInput } from "@/lib/validations";
+import type { ProgressPlan } from "@/lib/progress";
 
 export const tripKeys = {
   all: ["trips"] as const,
@@ -83,6 +85,35 @@ export function useUpdateBudget(id: string) {
       qc.invalidateQueries({ queryKey: tripKeys.all });
     },
   });
+}
+
+/** "Ver Progresso": salva o plano; a tela muda na hora (e volta se der erro). */
+export function useUpdateProgressPlan(id: string) {
+  const qc = useQueryClient();
+  const latest = useRef(0); // toques rápidos: só a resposta do último salvamento atualiza a tela
+  const mutation = useMutation({
+    // scope: os salvamentos rodam um de cada vez, na ordem dos toques
+    scope: { id: `progress-${id}` },
+    mutationFn: ({ plan }: { plan: ProgressPlan; seq: number }) =>
+      api<{ trip: TripDTO }>(`/api/trips/${id}/progress`, { method: "PATCH", body: JSON.stringify({ plan }) }).then((d) => d.trip),
+    onMutate: async ({ plan }) => {
+      await qc.cancelQueries({ queryKey: tripKeys.detail(id) });
+      const previous = qc.getQueryData<TripDTO>(tripKeys.detail(id));
+      if (previous) qc.setQueryData<TripDTO>(tripKeys.detail(id), { ...previous, progressPlan: plan });
+      return { previous };
+    },
+    onError: (_err, { seq }, context) => {
+      if (seq === latest.current && context?.previous) qc.setQueryData(tripKeys.detail(id), context.previous);
+    },
+    onSuccess: (trip, { seq }) => {
+      if (seq === latest.current) qc.setQueryData(tripKeys.detail(id), trip);
+    },
+  });
+  return {
+    ...mutation,
+    save: (plan: ProgressPlan, options?: { onError?: () => void }) =>
+      mutation.mutate({ plan, seq: ++latest.current }, { onError: options?.onError }),
+  };
 }
 
 export function useDeleteTrip(id: string) {

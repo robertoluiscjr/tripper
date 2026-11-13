@@ -1,4 +1,5 @@
 import type { Trip } from "@prisma/client";
+import { parsePlan, type ProgressPlan } from "@/lib/progress";
 
 /** Formato serializável de uma viagem (JSON da API / props de client components). */
 export type TripDTO = {
@@ -14,6 +15,8 @@ export type TripDTO = {
   daysCount: number;
   status: Trip["status"];
   plannedBudget: string | null;
+  /** "Ver Progresso" (null = ainda não configurado) */
+  progressPlan: ProgressPlan | null;
   createdAt: string;
 };
 
@@ -31,6 +34,7 @@ export function toTripDTO(trip: Trip): TripDTO {
     daysCount: trip.daysCount,
     status: trip.status,
     plannedBudget: trip.plannedBudget?.toString() ?? null,
+    progressPlan: parsePlan(trip.progressPlan),
     createdAt: trip.createdAt.toISOString(),
   };
 }

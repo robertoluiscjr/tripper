@@ -78,7 +78,6 @@ export function TripScreen({
     return true;
   }
 
-  const comingSoon = (feature: string) => toast(`${feature} chega na próxima etapa do Tripper ✈️`);
 
   return (
     <main className="relative flex flex-1 flex-col pb-8">
@@ -122,10 +121,10 @@ export function TripScreen({
           <span className="text-p16 leading-[1.2] font-medium text-foreground">Estimar Gastos</span>
         </Link>
         <span aria-hidden className="absolute top-0 left-1/2 h-8 w-px bg-tripper-divider" />
-        <button type="button" onClick={() => comingSoon("Ver Progresso")} className="flex items-center justify-center gap-1">
+        <Link href={`/app/viagens/${trip.id}/progresso`} className="flex items-center justify-center gap-1">
           <img src="/icons/progresso.svg" alt="" width={24} height={24} />
           <span className="text-p16 leading-[1.2] font-medium text-foreground">Ver Progresso</span>
-        </button>
+        </Link>
       </div>
 
       {/* Dias visualizados */}
