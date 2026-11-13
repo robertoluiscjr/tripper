@@ -81,7 +81,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
   const next = missing[0];
 
   return (
-    <main className="flex flex-1 flex-col px-6 pt-16 pb-[46px]">
+    <main className="flex flex-1 flex-col px-6 pt-16 pb-16">
       <Link href={`/app/viagens/${trip.id}`} aria-label="Voltar para a viagem" className="self-start">
         <img src="/icons/back.svg" alt="" width={24} height={24} />
       </Link>
