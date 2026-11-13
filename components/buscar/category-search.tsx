@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { SEARCH_MODES, SEARCH_ORDER, type SearchMode } from "@/lib/catalog";
@@ -11,11 +11,45 @@ import { SEARCH_MODES, SEARCH_ORDER, type SearchMode } from "@/lib/catalog";
  * Categorias + campo de busca da tela Buscar (Figma 2133:3289 e 214:2582).
  * Tocar numa categoria a deixa marcada em azul (como "Passeios e Atrações" no protótipo) e o
  * campo embaixo passa a buscar nela: "Buscar Passagens", "Buscar Hospedagens"…
+ * A última categoria escolhida fica guardada neste aparelho (localStorage) e volta marcada na
+ * próxima visita; na primeira vez, "Passeios e Atrações" (a única busca que fica dentro do app).
  * Círculos de margem a margem: em 393px são 72px com 19px entre eles; em telas mais largas
  * crescem na mesma proporção (ícone = metade do círculo).
  */
+const KEY = "tripper:buscar-categoria";
+const DEFAULT: SearchMode = "passeios";
+const listeners = new Set<() => void>();
+
+function readMode(): SearchMode {
+  try {
+    const saved = localStorage.getItem(KEY);
+    return saved && Object.hasOwn(SEARCH_MODES, saved) ? (saved as SearchMode) : DEFAULT;
+  } catch {
+    return DEFAULT; // modo privado / armazenamento bloqueado
+  }
+}
+
+function saveMode(mode: SearchMode) {
+  try {
+    localStorage.setItem(KEY, mode);
+  } catch {
+    // sem armazenamento: vale só enquanto a tela estiver aberta
+    memory = mode;
+  }
+  listeners.forEach((l) => l());
+}
+
+let memory: SearchMode | null = null;
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
 export function CategorySearch() {
-  const [mode, setMode] = useState<SearchMode>("passeios");
+  // No servidor (e no 1º desenho) usa o padrão; no navegador, a escolha guardada
+  const mode = useSyncExternalStore(subscribe, () => memory ?? readMode(), () => DEFAULT);
+  const setMode = saveMode;
   const current = SEARCH_MODES[mode];
 
   return (

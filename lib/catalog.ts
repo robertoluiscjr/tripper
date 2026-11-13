@@ -86,7 +86,7 @@ export function distanceKm(a: { lat: number; lon: number }, b: { lat: number; lo
 /* Seções da tela Buscar (Figma 214:2332): um carrossel por tipo, cada card abre o parceiro.
    Os 3 primeiros cards de cada seção são os do Figma; os demais ampliam as opções do carrossel. */
 export type BuscarSection = {
-  id: "pacotes" | "passagens" | "hospedagens";
+  id: "pacotes" | "passagens" | "hospedagens" | "passeios";
   title: string;
   icon: string;
   kind: string;
@@ -124,11 +124,22 @@ export const BUSCAR_SECTIONS: BuscarSection[] = [
     partnerPrep: "no",
     cards: [{ destination: "fernando-de-noronha" }, { destination: "bonito" }, { destination: "campos-do-jordao" }, { destination: "gramado" }, { destination: "salvador" }],
   },
+  {
+    // Não está no Figma: completa as 4 categorias do topo (os outros 3 carrosséis são do protótipo)
+    id: "passeios",
+    title: "Passeios e atrações",
+    icon: "/icons/buscar/cat-passeios.svg",
+    kind: "Passeios",
+    partner: "GetYourGuide",
+    partnerPrep: "no",
+    cards: [{ destination: "rio-de-janeiro" }, { destination: "foz-do-iguacu" }, { destination: "bonito" }, { destination: "manaus" }, { destination: "lencois-maranhenses" }],
+  },
 ];
 
 export function sectionUrl(section: BuscarSection["id"], d: Destination) {
   if (section === "passagens") return flightsUrl(d.airport);
   if (section === "hospedagens") return hotelsUrl(d.query);
+  if (section === "passeios") return toursUrl(d.name);
   return packagesUrl();
 }
 
