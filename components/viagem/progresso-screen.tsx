@@ -120,14 +120,14 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
         <p className="mt-2 text-p14 leading-[18px] text-muted-foreground">Itens adicionados não indicam reservas confirmadas.</p>
       </section>
 
-      <h2 className="mt-6 text-h3 leading-[1.2] font-medium text-foreground">O que a viagem vai ter</h2>
-      <p className="mt-2 text-p14 leading-[1.2] text-muted-foreground">
+      <h2 className="mt-6 text-h3 leading-[1.2] font-medium tracking-[-0.03em] text-foreground">O que a viagem vai ter</h2>
+      <p className="mt-2 text-p16 leading-[18px] text-muted-foreground">
         {configured || progress.planned === 0
           ? "Ligue as categorias e diga quantos itens você espera em cada uma."
           : "Sugestão inicial: ida e volta, hospedagem e o que já está no roteiro. Ajuste à vontade."}
       </p>
 
-      <ul className="mt-4 flex flex-col gap-6">
+      <ul className="mt-6 flex flex-col gap-6">
         {CATEGORY_MENU.map(({ category, label }) => {
           const on = plan[category] !== undefined;
           const stats = progress.byCategory[category];
@@ -232,7 +232,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
             : `Ainda faltam ${joinPt(missing.map(({ category, n }) => `${n} ${n === 1 ? ADD_LABEL[category] : PLURAL[category]}`))}.`}
       </p>
       {next && (
-        <Button size="cta" asChild className="mt-4">
+        <Button size="cta" asChild className="mt-6">
           <Link href={`/app/viagens/${trip.id}?novo=${next.category}`}>Adicionar {ADD_LABEL[next.category]}</Link>
         </Button>
       )}
