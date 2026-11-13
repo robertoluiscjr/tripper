@@ -92,15 +92,15 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
       </p>
 
       {/* Resumo (opção C): "5 de 8 itens adicionados" e a % (grande) logo acima de uma barra contínua */}
-      <section aria-label="Progresso do planejamento" className="mt-[25px]">
+      <section aria-label="Progresso do planejamento" className="mt-4">
         <div className="flex items-baseline justify-between gap-4 font-medium">
           <span className="min-w-0 text-p16 leading-5 text-foreground">
             {progress.planned === 0
               ? "Nenhuma categoria ligada"
               : `${progress.done} de ${progress.planned} ${progress.planned === 1 ? "item adicionado" : "itens adicionados"}`}
           </span>
-          {/* % grande do Figma "Progresso da viagem": 40px Medium, -3% */}
-          <span className={cn("shrink-0 text-[40px] leading-[48px] tracking-[-0.03em]", complete ? "text-success" : "text-primary")}>
+          {/* % grande: 32px Medium, -3%; leading-none para a linha não abrir espaço vazio acima do texto */}
+          <span className={cn("shrink-0 text-[32px] leading-none tracking-[-0.03em]", complete ? "text-success" : "text-primary")}>
             {progress.percent}%
           </span>
         </div>
