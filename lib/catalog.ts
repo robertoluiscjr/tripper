@@ -148,6 +148,23 @@ export function attractionToursUrl(a: Attraction) {
   return toursUrl(d && !a.name.includes(d.name) ? `${a.name} ${d.name}` : a.name);
 }
 
+/**
+ * Miniaturas 64 × 64 das listas de destino (Figma "Passeios e Atrações", 247:1328): Rio, Salvador
+ * e Florianópolis usam outras fotos do arquivo, para não repetir as da tela Buscar.
+ * position = recorte do Figma (left ÷ (largura − 100%) do preenchimento da imagem).
+ */
+export const LIST_PHOTOS: Record<string, { src: string; position: string }> = {
+  "rio-de-janeiro": { src: "/images/destinos/rio-de-janeiro-2.webp", position: "28.1% 50%" },
+  salvador: { src: "/images/destinos/salvador-2.webp", position: "25.8% 50%" },
+  fortaleza: { src: "/images/destinos/fortaleza.webp", position: "54% 50%" },
+  gramado: { src: "/images/destinos/gramado.webp", position: "78.3% 50%" },
+  florianopolis: { src: "/images/destinos/florianopolis-2.webp", position: "64.8% 50%" },
+};
+
+export function listPhoto(d: Destination) {
+  return LIST_PHOTOS[d.slug] ?? { src: d.photo, position: d.photoPosition };
+}
+
 /** "Destinos mais procurados" (Figma "Passeios e Atrações"). */
 export const MOST_SEARCHED = ["rio-de-janeiro", "salvador", "fortaleza", "gramado", "florianopolis"];
 

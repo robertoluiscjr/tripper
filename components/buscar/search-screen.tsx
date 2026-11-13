@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
-import { DESTINATIONS, SEARCH_MODES, distanceKm, searchDestinations, sectionUrl, suggestedDestinations, type Destination, type SearchMode } from "@/lib/catalog";
+import { DESTINATIONS, SEARCH_MODES, listPhoto, distanceKm, searchDestinations, sectionUrl, suggestedDestinations, type Destination, type SearchMode } from "@/lib/catalog";
 import { hotelsUrl, packagesUrl, toursUrl } from "@/lib/partners";
 import { ScreenHeader } from "@/components/buscar/screen-header";
 
@@ -102,10 +102,11 @@ export function SearchScreen({ mode }: { mode: SearchMode }) {
 
 function DestinationRow({ mode, destination: d, km }: { mode: SearchMode; destination: Destination; km?: number }) {
   const config = SEARCH_MODES[mode];
+  const photo = listPhoto(d);
   const content = (
     <>
       <span className="relative size-16 shrink-0 overflow-hidden rounded-[12px] ring-ring/50 group-focus-visible:ring-3">
-        <Image src={d.photo} alt="" fill sizes="64px" style={{ objectPosition: d.photoPosition }} className="object-cover" />
+        <Image src={photo.src} alt="" fill sizes="64px" style={{ objectPosition: photo.position }} className="object-cover" />
       </span>
       <span className="flex flex-col text-p14 leading-[1.2] font-medium text-muted-foreground">
         {d.name}
