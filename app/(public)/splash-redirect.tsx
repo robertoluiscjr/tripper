@@ -12,7 +12,7 @@ export function SplashRedirect() {
   useEffect(() => {
     const next = hasSeenOnboarding() ? "/app" : "/onboarding";
     router.prefetch(next);
-    const timer = setTimeout(() => router.replace(next), SPLASH_MS);
+    const timer = setTimeout(() => router.replace(next, { transitionTypes: ["dissolve"] }), SPLASH_MS);
     return () => clearTimeout(timer);
   }, [router]);
 

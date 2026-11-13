@@ -154,6 +154,7 @@ model TripItem {
   category   ItemCategory
   title      String // ex.: "Voo 3883", "Hotel Copa (check-in)"
   dayNumber  Int // 1..daysCount
+  endDayNumber Int? // dia do fim (check-out / devolução / chegada), quando houver
   position   Int          @default(0) // ordem dentro do dia
   startAt    DateTime?
   endAt      DateTime?

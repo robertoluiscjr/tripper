@@ -55,7 +55,7 @@ export function OnboardingCarousel() {
 
   function finish() {
     markOnboardingSeen();
-    router.replace("/app");
+    router.replace("/app", { transitionTypes: ["dissolve"] });
   }
 
   function next() {
@@ -90,7 +90,8 @@ export function OnboardingCarousel() {
           key={slide.image}
           aria-hidden={i !== index}
           className={cn(
-            "absolute inset-0 transition-opacity duration-500",
+            // Figma: "Dissolve" de 300ms, Ease out, entre as telas do onboarding
+            "absolute inset-0 transition-opacity duration-300 ease-figma-out",
             i === index ? "opacity-100" : "pointer-events-none opacity-0",
           )}
         >
@@ -112,13 +113,27 @@ export function OnboardingCarousel() {
       ))}
 
       {/* Texto */}
-      <div className="relative mt-auto flex flex-col gap-5 px-6 pb-[44px]" aria-live="polite">
-        <h1 className="text-h4 font-semibold leading-[1.2] tracking-[-0.03em] text-white">
-          {SLIDES[index].title}
-        </h1>
-        <p className="min-h-[54px] text-p15 leading-[1.2] tracking-[-0.01em] text-white">
-          {SLIDES[index].text}
-        </p>
+      <div className="relative mt-auto flex flex-col gap-5 px-6 pb-[44px]">
+        {/* Textos empilhados (alinhados por baixo) para dissolverem junto com a foto */}
+        <div className="grid items-end" aria-live="polite">
+          {SLIDES.map((slide, i) => (
+            <div
+              key={slide.image}
+              aria-hidden={i !== index}
+              className={cn(
+                "col-start-1 row-start-1 flex flex-col gap-5 transition-opacity duration-300 ease-figma-out",
+                i === index ? "opacity-100" : "pointer-events-none opacity-0",
+              )}
+            >
+              {i === index ? (
+                <h1 className="text-h4 font-semibold leading-[1.2] tracking-[-0.03em] text-white">{slide.title}</h1>
+              ) : (
+                <p className="text-h4 font-semibold leading-[1.2] tracking-[-0.03em] text-white">{slide.title}</p>
+              )}
+              <p className="min-h-[54px] text-p15 leading-[1.2] tracking-[-0.01em] text-white">{slide.text}</p>
+            </div>
+          ))}
+        </div>
 
         {/* Base: Pular · indicador · Próximo */}
         <div className="relative mt-[28px] flex h-[17px] items-center justify-between pr-2 pl-4">

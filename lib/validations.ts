@@ -46,36 +46,75 @@ export const itemCategorySchema = z.enum([
 
 export const transportModeSchema = z.enum(["PLANE", "BUS", "TRAIN", "SHIP", "OWN_CAR"]);
 
-// Telas "Voo", "Acomodação" e demais itens do menu "Novo Item"
-export const createTripItemSchema = z.object({
-  category: itemCategorySchema,
-  title: z.string().trim().min(1, "Campo obrigatório").max(120),
-  dayNumber: z.coerce.number().int().min(1),
-  startAt: z.coerce.date().optional(),
-  endAt: z.coerce.date().optional(),
-  cost: money,
-  notes: z.string().max(2000).optional(),
-  address: z.string().max(200).optional(),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
-  transportMode: transportModeSchema.optional(),
-  carrier: z.string().max(80).optional(),
-  code: z.string().max(40).optional(),
-  originName: z.string().max(120).optional(),
-  destinationName: z.string().max(120).optional(),
-});
-export type CreateTripItemInput = z.infer<typeof createTripItemSchema>;
+// Telas "Voo", "Acomodação" e demais itens do menu "Novo Item" (mesmo formato no form e na API).
+// O dia vem como data (viagem com datas) ou número do dia (viagem só com quantidade de dias).
+const optText = (max: number) => z.string().trim().max(max).optional();
+const day = z.coerce.number().int().min(1).max(90).optional();
+const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Data inválida").optional();
+const hhmm = z.string().regex(/^\d{2}:\d{2}$/, "Horário inválido").optional();
 
-// Arrastar e soltar itens na linha do tempo (2º teste de usabilidade)
-export const reorderTripItemsSchema = z.object({
-  items: z.array(
-    z.object({
-      id: z.string(),
-      dayNumber: z.number().int().min(1),
-      position: z.number().int().min(0),
-    }),
-  ),
+export const tripItemSchema = z
+  .object({
+    category: itemCategorySchema,
+    transportMode: transportModeSchema.optional(),
+    title: optText(120),
+    carrier: optText(80),
+    code: optText(40),
+    originName: optText(120),
+    destinationName: optText(120),
+    address: optText(200),
+    startDate: isoDate,
+    startDay: day,
+    startTime: hhmm,
+    endDate: isoDate,
+    endDay: day,
+    endTime: hhmm,
+    cost: money,
+    notes: optText(2000),
+  })
+  .superRefine((d, ctx) => {
+    const req = (path: string, message: string) => ctx.addIssue({ code: "custom", path: [path], message });
+    const hasStart = !!(d.startDate || d.startDay);
+    const hasEnd = !!(d.endDate || d.endDay);
+
+    if (d.category === "TRANSPORT") {
+      if (!d.transportMode) req("transportMode", "Escolha o tipo de transporte");
+      if (!d.originName) req("originName", "Informe a origem");
+      if (!d.destinationName) req("destinationName", "Informe o destino");
+      if (!hasStart) req("startDate", "Informe a data de partida");
+      if (!d.startTime) req("startTime", "Informe o horário");
+      if (!hasEnd) req("endDate", "Informe a data de chegada");
+      if (!d.endTime) req("endTime", "Informe o horário");
+    } else if (d.category === "ACCOMMODATION" || d.category === "CAR_RENTAL") {
+      if (d.category === "CAR_RENTAL" && !d.title) req("title", "Informe a locadora");
+      if (!hasStart) req("startDate", d.category === "CAR_RENTAL" ? "Informe a retirada" : "Informe a chegada");
+      if (!hasEnd) req("endDate", d.category === "CAR_RENTAL" ? "Informe a devolução" : "Informe a saída");
+    } else {
+      if (!d.title) req("title", "Dê um nome para o item");
+      if (!hasStart) req("startDate", "Informe a data");
+    }
+
+    // Fim não pode ser antes do início
+    const start = d.startDate ?? (d.startDay ? String(d.startDay).padStart(4, "0") : "");
+    const end = d.endDate ?? (d.endDay ? String(d.endDay).padStart(4, "0") : "");
+    if (start && end) {
+      const startKey = `${start}T${d.startTime ?? "00:00"}`;
+      const endKey = `${end}T${d.endTime ?? "23:59"}`;
+      if (endKey < startKey) req("endDate", "O fim deve ser depois do início");
+    }
+  });
+export type TripItemInput = z.infer<typeof tripItemSchema>;
+
+// Arrastar e soltar itens na linha do tempo (2º teste de usabilidade).
+// kind: qual "ponta" do item foi arrastada (check-in/retirada = start, check-out/devolução = end).
+// order: ids dos itens do dia de destino, na nova ordem.
+export const moveTripItemSchema = z.object({
+  itemId: z.string().min(1),
+  kind: z.enum(["single", "start", "end"]),
+  toDay: z.number().int().min(1).max(90),
+  order: z.array(z.string().min(1)).max(200),
 });
+export type MoveTripItemInput = z.infer<typeof moveTripItemSchema>;
 
 // "Estimar Gastos": quanto o usuário deseja gastar
 export const updateBudgetSchema = z.object({
