@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/session";
 import { tripItemSchema } from "@/lib/validations";
 import { itemDataFromInput, toTripItemDTO } from "@/lib/trip-items";
 import { placeKey } from "@/lib/place-lookup";
+import { slotByTime } from "@/lib/item-order";
 
 async function findOwnItem(tripId: string, itemId: string) {
   const user = await getCurrentUser();
@@ -33,7 +34,11 @@ export async function PATCH(req: Request, ctx: RouteContext<"/api/trips/[id]/ite
   // Mudou o lugar: apaga pino e foto para o app buscar de novo (/items/[itemId]/place)
   const moved = placeKey({ ...found.item, ...result.data }) !== placeKey(found.item);
   const reset = moved ? { latitude: null, longitude: null, imageUrl: null } : {};
-  const item = await db.tripItem.update({ where: { id: itemId }, data: { ...result.data, ...reset } });
+  // Mudou o dia ou o horário: reposiciona pelo horário (senão mantém a ordem arrastada)
+  const startAt = result.data.startAt ? new Date(result.data.startAt) : null;
+  const retimed = result.data.dayNumber !== found.item.dayNumber || startAt?.getTime() !== found.item.startAt?.getTime();
+  const position = retimed ? { position: await slotByTime(id, result.data.dayNumber, startAt, itemId) } : {};
+  const item = await db.tripItem.update({ where: { id: itemId }, data: { ...result.data, ...reset, ...position } });
   return Response.json({ item: toTripItemDTO(item) });
 }
 

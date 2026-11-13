@@ -242,9 +242,39 @@ export function itineraryForDay(items: TripItemDTO[], day: number): ItineraryEnt
       entries.push({ item, kind: "single" });
     }
   }
-  // Ordem do dia: horário (check-out/devolução pelo horário final) e, empatado, a posição
+  // Ordem do dia: a que a pessoa definiu arrastando (posição); itens novos entram pelo horário
+  // (o servidor calcula a posição ao salvar). Empate: horário (check-out pelo horário final).
   const time = (e: ItineraryEntry) => formatTime(e.kind === "end" ? e.item.endAt : e.item.startAt) || "99:99";
-  return entries.sort((a, b) => time(a).localeCompare(time(b)) || a.item.position - b.item.position);
+  return entries.sort((a, b) => a.item.position - b.item.position || time(a).localeCompare(time(b)));
+}
+
+export type EntryKind = ItineraryEntry["kind"];
+
+/**
+ * Arrastar um item para outro dia: qual dia muda e quantos dias andou.
+ * - Item simples: muda o dia (e o dia de chegada junto, mantendo a duração).
+ * - Hospedagem/aluguel: muda só a ponta arrastada (check-in ou check-out), sem inverter as duas.
+ */
+export function moveDays(
+  item: Pick<TripItemDTO, "category" | "dayNumber" | "endDayNumber">,
+  kind: EntryKind,
+  toDay: number,
+  daysCount: number,
+): { dayNumber: number; endDayNumber: number | null; startDelta: number; endDelta: number } | { error: string } {
+  if (toDay < 1 || toDay > daysCount) return { error: "O dia precisa estar dentro da viagem" };
+  const car = item.category === "CAR_RENTAL";
+  if (kind === "start" && item.endDayNumber) {
+    if (toDay > item.endDayNumber) return { error: car ? "A retirada precisa ser antes da devolução" : "O check-in precisa ser antes do check-out" };
+    return { dayNumber: toDay, endDayNumber: item.endDayNumber, startDelta: toDay - item.dayNumber, endDelta: 0 };
+  }
+  if (kind === "end" && item.endDayNumber) {
+    if (toDay < item.dayNumber) return { error: car ? "A devolução precisa ser depois da retirada" : "O check-out precisa ser depois do check-in" };
+    return { dayNumber: item.dayNumber, endDayNumber: toDay, startDelta: 0, endDelta: toDay - item.endDayNumber };
+  }
+  const delta = toDay - item.dayNumber;
+  const end = item.endDayNumber ? item.endDayNumber + delta : null;
+  if (end !== null && end > daysCount) return { error: "A chegada ficaria depois do fim da viagem" };
+  return { dayNumber: toDay, endDayNumber: end, startDelta: delta, endDelta: delta };
 }
 
 /** Textos das 3 linhas do item. */

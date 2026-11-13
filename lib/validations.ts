@@ -105,16 +105,16 @@ export const tripItemSchema = z
   });
 export type TripItemInput = z.infer<typeof tripItemSchema>;
 
-// Arrastar e soltar itens na linha do tempo (2º teste de usabilidade)
-export const reorderTripItemsSchema = z.object({
-  items: z.array(
-    z.object({
-      id: z.string(),
-      dayNumber: z.number().int().min(1),
-      position: z.number().int().min(0),
-    }),
-  ),
+// Arrastar e soltar itens na linha do tempo (2º teste de usabilidade).
+// kind: qual "ponta" do item foi arrastada (check-in/retirada = start, check-out/devolução = end).
+// order: ids dos itens do dia de destino, na nova ordem.
+export const moveTripItemSchema = z.object({
+  itemId: z.string().min(1),
+  kind: z.enum(["single", "start", "end"]),
+  toDay: z.number().int().min(1).max(90),
+  order: z.array(z.string().min(1)).max(200),
 });
+export type MoveTripItemInput = z.infer<typeof moveTripItemSchema>;
 
 // "Estimar Gastos": quanto o usuário deseja gastar
 export const updateBudgetSchema = z.object({

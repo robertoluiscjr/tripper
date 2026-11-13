@@ -6,14 +6,16 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from "@/components/ui/drawer";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import type { ItemCategory } from "@prisma/client";
 import { useDeleteTrip, useTrip, useUpdateTrip } from "@/hooks/use-trips";
-import { useResolvePlaces, useTripItems } from "@/hooks/use-trip-items";
-import type { TripItemDTO } from "@/lib/trip-items";
+import { useDeleteItemWithUndo, useMoveTripItem, usePendingDeletes, useResolvePlaces, useTripItems } from "@/hooks/use-trip-items";
+import { moveDays, type TripItemDTO } from "@/lib/trip-items";
 import { daysLabel, type TripDTO } from "@/lib/trips";
 import { TripFormSheet } from "@/components/planejar/trip-form-sheet";
 import { TripMap } from "./trip-map";
-import { Itinerary } from "./itinerary";
+import { Itinerary, type MoveRequest } from "./itinerary";
 import { NewItemMenu } from "./new-item-menu";
 import { ItemFormSheet } from "./item-form-sheet";
 
@@ -39,8 +41,13 @@ export function TripScreen({
   const deleteTrip = useDeleteTrip(trip.id);
   const [editOpen, setEditOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const deleteItem = useDeleteItemWithUndo(initialTrip.id);
+  const pendingDeletes = usePendingDeletes();
+  const moveItem = useMoveTripItem(initialTrip.id);
   const [dayFilter, setDayFilter] = useState<number | "all">("all");
-  const { data: items = initialItems } = useTripItems(initialTrip.id, initialItems);
+  const { data: allItems = initialItems } = useTripItems(initialTrip.id, initialItems);
+  // Item excluído some na hora; só é apagado de vez quando o aviso "Desfazer" some
+  const items = pendingDeletes.size ? allItems.filter((i) => !pendingDeletes.has(i.id)) : allItems;
   useResolvePlaces(initialTrip.id, items); // pinos no mapa e fotos reais dos itens
   const [menuOpen, setMenuOpen] = useState(false);
   const [itemSheet, setItemSheet] = useState<{ category: ItemCategory; item?: TripItemDTO } | null>(
@@ -55,6 +62,22 @@ export function TripScreen({
 
   const days = Array.from({ length: trip.daysCount }, (_, i) => i + 1);
   const visibleDays = dayFilter === "all" ? days : days.filter((d) => d === dayFilter);
+  // Arrastar e soltar: a tela muda na hora; o servidor confirma (ou desfaz, se der erro)
+  function onMoveItem({ entry, toDay, order }: MoveRequest) {
+    const days = moveDays(entry.item, entry.kind, toDay, trip.daysCount);
+    if ("error" in days) {
+      toast.error(days.error);
+      return false;
+    }
+    const pos = new Map(order.map((id, i) => [id, i]));
+    const optimistic = allItems.map((i) => {
+      const moved = i.id === entry.item.id ? { dayNumber: days.dayNumber, endDayNumber: days.endDayNumber } : {};
+      return pos.has(i.id) || i.id === entry.item.id ? { ...i, ...moved, position: pos.get(i.id) ?? i.position } : i;
+    });
+    moveItem.mutate({ itemId: entry.item.id, kind: entry.kind, toDay, order, optimistic });
+    return true;
+  }
+
   const comingSoon = (feature: string) => toast(`${feature} chega na próxima etapa do Tripper ✈️`);
 
   return (
@@ -64,9 +87,22 @@ export function TripScreen({
         <Link href="/app/planejar" aria-label="Voltar para Planejar">
           <img src="/icons/back.svg" alt="" width={24} height={24} />
         </Link>
-        <button type="button" aria-label="Editar viagem" onClick={() => { setConfirmDelete(false); setEditOpen(true); }}>
-          <img src="/icons/edit.svg" alt="" width={24} height={24} />
-        </button>
+        {/* Menu ⋯: editar e excluir são intenções diferentes; excluir fica fora do formulário */}
+        <DropdownMenu modal={false}>
+          <DropdownMenuTrigger aria-label="Opções da viagem" className="-m-2 rounded-full p-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+            <img src="/icons/more.svg" alt="" width={24} height={24} />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" sideOffset={8} className="w-auto min-w-[200px] rounded-[12px] p-2">
+            <DropdownMenuItem onSelect={() => setEditOpen(true)} className="h-11 gap-3 rounded-[8px] px-3 text-p16 font-medium text-foreground">
+              <img src="/icons/edit.svg" alt="" width={24} height={24} />
+              Editar viagem
+            </DropdownMenuItem>
+            <DropdownMenuItem variant="destructive" onSelect={() => setConfirmDelete(true)} className="h-11 gap-3 rounded-[8px] px-3 text-p16 font-medium">
+              <img src="/icons/delete-red.svg" alt="" width={24} height={24} />
+              Excluir viagem
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {/* Title + Duração */}
@@ -105,7 +141,14 @@ export function TripScreen({
       </div>
 
       {/* Roteiro */}
-      <Itinerary days={visibleDays} items={items} cityPhoto={trip.coverImage} onOpenItem={(item) => setItemSheet({ category: item.category, item })} />
+      <Itinerary
+        days={visibleDays}
+        items={items}
+        cityPhoto={trip.coverImage}
+        onOpenItem={(item) => setItemSheet({ category: item.category, item })}
+        onDeleteItem={deleteItem}
+        onMoveItem={onMoveItem}
+      />
 
       {/* + Novo item (Figma "Button with icon"); aberto, vira "×" escuro acima do fundo do menu */}
       <div className={cn("pointer-events-none sticky bottom-[104px] mt-auto flex justify-end px-6 pt-8", menuOpen ? "z-[36]" : "z-30")}>
@@ -162,23 +205,73 @@ export function TripScreen({
           toast.success("Viagem atualizada");
           router.refresh();
         }}
-        footer={
-          <button
-            type="button"
-            disabled={deleteTrip.isPending}
-            onClick={async () => {
-              if (!confirmDelete) return setConfirmDelete(true);
-              await deleteTrip.mutateAsync();
-              toast.success("Viagem excluída");
-              router.replace("/app/planejar");
-            }}
-            className="mt-5 self-center text-p14 font-medium text-destructive"
-          >
-            {confirmDelete ? "Toque de novo para confirmar a exclusão" : "Excluir viagem"}
-          </button>
-        }
+      />
+
+      <DeleteTripSheet
+        open={confirmDelete}
+        onOpenChange={setConfirmDelete}
+        itemsCount={items.length}
+        pending={deleteTrip.isPending}
+        onConfirm={async () => {
+          try {
+            await deleteTrip.mutateAsync();
+            setConfirmDelete(false);
+            toast.success("Viagem excluída");
+            router.replace("/app/planejar");
+          } catch {
+            toast.error("Não foi possível excluir a viagem.");
+          }
+        }}
       />
     </main>
+  );
+}
+
+/**
+ * Confirmação para excluir a viagem (Apple HIG: ação destrutiva com "Cancelar" ao lado).
+ * Diz o que será perdido e usa vermelho só no botão final.
+ */
+function DeleteTripSheet({
+  open,
+  onOpenChange,
+  itemsCount,
+  pending,
+  onConfirm,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  itemsCount: number;
+  pending: boolean;
+  onConfirm: () => void;
+}) {
+  const what =
+    itemsCount === 0
+      ? "A viagem e o valor planejado serão apagados."
+      : itemsCount === 1
+        ? "O item do roteiro e o valor planejado também serão apagados."
+        : `Os ${itemsCount} itens do roteiro e o valor planejado também serão apagados.`;
+  return (
+    <Drawer open={open} onOpenChange={onOpenChange}>
+      <DrawerContent>
+        <div className="flex flex-col px-6 pt-[31px] pb-8">
+          <DrawerTitle className="text-h5 leading-[1.2] font-medium text-foreground">Excluir viagem?</DrawerTitle>
+          <DrawerDescription className="mt-2 text-p16 leading-[1.2] text-muted-foreground">
+            {what} Não é possível desfazer.
+          </DrawerDescription>
+          <Button
+            size="cta"
+            disabled={pending}
+            onClick={onConfirm}
+            className="mt-8 bg-destructive text-white hover:bg-destructive/90 active:bg-destructive/80"
+          >
+            {pending ? "Excluindo..." : "Excluir viagem"}
+          </Button>
+          <button type="button" onClick={() => onOpenChange(false)} className="mt-4 self-center p-2 text-p16 font-medium text-foreground">
+            Cancelar
+          </button>
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 }
 

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from "@/components/ui/drawer";
 import { ApiError } from "@/hooks/use-trips";
-import { useDeleteTripItem, useSaveTripItem } from "@/hooks/use-trip-items";
+import { useSaveTripItem } from "@/hooks/use-trip-items";
 import { tripItemSchema, type TripItemInput } from "@/lib/validations";
 import { TRANSPORT_MODES, formatMoney, inputFromItem, parseMoney, transportLabel, type TripItemDTO } from "@/lib/trip-items";
 import type { TripDTO } from "@/lib/trips";
@@ -166,11 +166,9 @@ function ItemForm({ trip, category, item, onDone }: { trip: TripDTO; category: I
   const [mode, setMode] = useState<TransportMode | undefined>(item?.transportMode ?? undefined);
   const [values, setValues] = useState<Values>(() => (item ? (inputFromItem(item, trip.startDate) as Values) : {}));
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [confirmDelete, setConfirmDelete] = useState(false);
   // Veio da lista "Tipos de Transporte": o formulário entra com dissolve (Smart animate do Figma)
   const [picked, setPicked] = useState(false);
   const save = useSaveTripItem(trip.id, item?.id);
-  const remove = useDeleteTripItem(trip.id);
 
   // "Transportes": primeiro escolhe o tipo (Figma 192:316 · 2062:1662)
   if (category === "TRANSPORT" && !mode) return (
@@ -322,22 +320,8 @@ function ItemForm({ trip, category, item, onDone }: { trip: TripDTO; category: I
         </Link>
       )}
 
-      <div className={cn("flex items-center", item ? "justify-between" : "justify-end", spec.help ? "mt-[49px]" : "mt-[57px]")}>
-        {item && (
-          <button
-            type="button"
-            disabled={remove.isPending}
-            onClick={async () => {
-              if (!confirmDelete) return setConfirmDelete(true);
-              await remove.mutateAsync(item.id);
-              toast.success("Item removido do roteiro");
-              onDone();
-            }}
-            className="text-p14 font-medium text-destructive"
-          >
-            {confirmDelete ? "Toque de novo para excluir" : "Excluir item"}
-          </button>
-        )}
+      {/* Excluir item: arrastando o item para a esquerda no roteiro (itinerary.tsx) */}
+      <div className={cn("flex items-center justify-end", spec.help ? "mt-[49px]" : "mt-[57px]")}>
         <button
           type="submit"
           disabled={save.isPending}

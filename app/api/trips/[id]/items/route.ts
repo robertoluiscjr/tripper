@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/session";
 import { checkUsageLimit } from "@/lib/subscription";
 import { tripItemSchema } from "@/lib/validations";
 import { itemDataFromInput, toTripItemDTO } from "@/lib/trip-items";
+import { slotByTime } from "@/lib/item-order";
 
 /** GET → itens do roteiro da viagem. */
 export async function GET(_req: Request, ctx: RouteContext<"/api/trips/[id]/items">) {
@@ -47,7 +48,8 @@ export async function POST(req: Request, ctx: RouteContext<"/api/trips/[id]/item
     return Response.json({ error: result.error, issues: [{ path: [result.field], message: result.error }] }, { status: 422 });
   }
 
-  const position = await db.tripItem.count({ where: { tripId: id, dayNumber: result.data.dayNumber } });
+  // Entra no dia pelo horário, sem bagunçar a ordem que a pessoa definiu arrastando
+  const position = await slotByTime(id, result.data.dayNumber, result.data.startAt ? new Date(result.data.startAt) : null);
   // Pino e foto: buscados logo depois, em /items/[itemId]/place (o salvar não espera o mapa)
   const item = await db.tripItem.create({ data: { ...result.data, tripId: id, position } });
   return Response.json({ item: toTripItemDTO(item) }, { status: 201 });

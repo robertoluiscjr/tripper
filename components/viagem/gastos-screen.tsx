@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from "@/components/ui/drawer";
 import { ApiError, useTrip, useUpdateBudget } from "@/hooks/use-trips";
-import { useTripItems } from "@/hooks/use-trip-items";
+import { usePendingDeletes, useTripItems } from "@/hooks/use-trip-items";
 import { CATEGORY_MENU, formatMoney, parseMoney, type TripItemDTO } from "@/lib/trip-items";
 import type { TripDTO } from "@/lib/trips";
 
@@ -21,7 +21,9 @@ import type { TripDTO } from "@/lib/trips";
  */
 export function GastosScreen({ initialTrip, initialItems }: { initialTrip: TripDTO; initialItems: TripItemDTO[] }) {
   const { data: trip = initialTrip } = useTrip(initialTrip.id, initialTrip);
-  const { data: items = initialItems } = useTripItems(initialTrip.id, initialItems);
+  const { data: allItems = initialItems } = useTripItems(initialTrip.id, initialItems);
+  const pendingDeletes = usePendingDeletes(); // excluído há pouco (aviso "Desfazer" ainda aberto)
+  const items = allItems.filter((i) => !pendingDeletes.has(i.id));
   const [editing, setEditing] = useState(false);
 
   const total = items.reduce((sum, i) => sum + Number(i.cost ?? 0), 0);
