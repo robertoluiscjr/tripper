@@ -229,7 +229,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
           ? "Ligue as categorias acima para acompanhar o progresso do planejamento."
           : complete
             ? "Tudo planejado! Agora é só aproveitar a viagem ✈️"
-            : `Ainda faltam ${joinPt(missing.map(({ category, n }) => `${n} ${n === 1 ? ADD_LABEL[category] : PLURAL[category]}`))}.`}
+            : `Ainda ${missing.reduce((s, m) => s + m.n, 0) === 1 ? "falta" : "faltam"} ${joinPt(missing.map(({ category, n }) => `${n} ${n === 1 ? ADD_LABEL[category] : PLURAL[category]}`))}.`}
       </p>
       {next && (
         <Button size="cta" asChild className="mt-6">
