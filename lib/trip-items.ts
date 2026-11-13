@@ -253,7 +253,8 @@ export type EntryKind = ItineraryEntry["kind"];
 /**
  * Arrastar um item para outro dia: qual dia muda e quantos dias andou.
  * - Item simples: muda o dia (e o dia de chegada junto, mantendo a duração).
- * - Hospedagem/aluguel: muda só a ponta arrastada (check-in ou check-out), sem inverter as duas.
+ * - Hospedagem/aluguel: muda só a ponta arrastada (check-in ou check-out). O check-in fica sempre
+ *   num dia antes do check-out (no mesmo dia a hospedagem viraria um item de um dia só).
  */
 export function moveDays(
   item: Pick<TripItemDTO, "category" | "dayNumber" | "endDayNumber">,
@@ -264,11 +265,11 @@ export function moveDays(
   if (toDay < 1 || toDay > daysCount) return { error: "O dia precisa estar dentro da viagem" };
   const car = item.category === "CAR_RENTAL";
   if (kind === "start" && item.endDayNumber) {
-    if (toDay > item.endDayNumber) return { error: car ? "A retirada precisa ser antes da devolução" : "O check-in precisa ser antes do check-out" };
+    if (toDay >= item.endDayNumber) return { error: car ? "A retirada precisa ser antes do dia da devolução" : "O check-in precisa ser antes do dia do check-out" };
     return { dayNumber: toDay, endDayNumber: item.endDayNumber, startDelta: toDay - item.dayNumber, endDelta: 0 };
   }
   if (kind === "end" && item.endDayNumber) {
-    if (toDay < item.dayNumber) return { error: car ? "A devolução precisa ser depois da retirada" : "O check-out precisa ser depois do check-in" };
+    if (toDay <= item.dayNumber) return { error: car ? "A devolução precisa ser depois do dia da retirada" : "O check-out precisa ser depois do dia do check-in" };
     return { dayNumber: item.dayNumber, endDayNumber: toDay, startDelta: 0, endDelta: toDay - item.endDayNumber };
   }
   const delta = toDay - item.dayNumber;

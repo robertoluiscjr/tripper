@@ -148,6 +148,10 @@ export function TripScreen({
         onOpenItem={(item) => setItemSheet({ category: item.category, item })}
         onDeleteItem={deleteItem}
         onMoveItem={onMoveItem}
+        checkMove={(entry, toDay) => {
+          const days = moveDays(entry.item, entry.kind, toDay, trip.daysCount);
+          return "error" in days ? days.error : null;
+        }}
       />
 
       {/* + Novo item (Figma "Button with icon"); aberto, vira "×" escuro acima do fundo do menu */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -18,6 +18,7 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { itemBadgeIcon, itemCardIcon, itemLines, itemPhoto, itineraryForDay, type ItineraryEntry, type TripItemDTO } from "@/lib/trip-items";
 
@@ -48,6 +49,7 @@ export function Itinerary({
   onOpenItem,
   onDeleteItem,
   onMoveItem,
+  checkMove,
 }: {
   days: number[];
   items: TripItemDTO[];
@@ -56,6 +58,8 @@ export function Itinerary({
   onOpenItem: (item: TripItemDTO) => void;
   onDeleteItem: (item: TripItemDTO) => void;
   onMoveItem: (move: MoveRequest) => boolean;
+  /** Pode soltar esta entrada neste dia? Retorna a mensagem do motivo quando não pode. */
+  checkMove: (entry: ItineraryEntry, toDay: number) => string | null;
 }) {
   // Itens que chegaram depois da 1ª renderização (acabaram de ser salvos) entram com dissolve
   const [seen, setSeen] = useState(() => new Set(items.map((i) => i.id)));
@@ -79,6 +83,8 @@ export function Itinerary({
   const [draft, setDraft] = useState<Columns | null>(null);
   const [droppedOn, setDroppedOn] = useState<TripItemDTO[] | null>(null);
   const [activeKey, setActiveKey] = useState<string | null>(null);
+  // Dia em que o item não pode entrar (ex.: check-in no dia do check-out): aviso antes de soltar
+  const [blocked, setBlocked] = useState<{ day: number; message: string } | null>(null);
   if (droppedOn && items !== droppedOn) {
     setDroppedOn(null);
     setDraft(null);
@@ -95,6 +101,7 @@ export function Itinerary({
   const hasBefore = (d: number) => allDays.some((x) => x < d);
   const hasAfter = (d: number) => allDays.some((x) => x > d);
 
+  const dndId = useId(); // ids estáveis entre servidor e navegador (acessibilidade do arraste)
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
@@ -110,7 +117,15 @@ export function Itinerary({
     if (!over || !draft) return;
     const from = findDay(active.id);
     const to = findDay(over.id);
-    if (from === undefined || to === undefined || from === to) return;
+    if (from === undefined || to === undefined) return;
+    const entry = entryByKey.get(String(active.id));
+    const problem = entry && to !== entryDay(entry) ? checkMove(entry, to) : null;
+    if (problem) {
+      if (blocked?.day !== to) setBlocked({ day: to, message: problem });
+      return; // não entra nesse dia
+    }
+    if (blocked && blocked.day !== to) setBlocked(null);
+    if (from === to) return;
     setDraft((prev) => {
       if (!prev) return prev;
       const key = String(active.id);
@@ -123,6 +138,13 @@ export function Itinerary({
 
   function onDragEnd({ active, over }: DragEndEvent) {
     setActiveKey(null);
+    // Soltou sobre um dia não permitido: volta ao lugar e explica o motivo
+    if (blocked && over && findDay(over.id) === blocked.day) {
+      toast.error(blocked.message);
+      setBlocked(null);
+      return setDraft(null);
+    }
+    setBlocked(null);
     const key = String(active.id);
     const entry = entryByKey.get(key);
     const to = findDay(active.id);
@@ -158,6 +180,7 @@ export function Itinerary({
 
   return (
     <DndContext
+      id={dndId}
       sensors={sensors}
       collisionDetection={closestCorners}
       onDragStart={onDragStart}
@@ -166,6 +189,7 @@ export function Itinerary({
       onDragCancel={() => {
         setActiveKey(null);
         setDraft(null);
+        setBlocked(null);
       }}
       accessibility={{
         announcements,
@@ -183,11 +207,17 @@ export function Itinerary({
           return (
             <DayDrop key={d} day={d} className={cn("relative flex flex-col", !last && "border-b border-tripper-divider pb-6")}>
               <h2 className="text-h3 leading-[1.2] font-medium text-foreground">Dia {d}</h2>
+              {blocked?.day === d && (
+                <p role="alert" className="mt-2 flex items-center gap-1 text-p14 leading-[1.2] font-medium text-destructive">
+                  <img src="/icons/block-red.svg" alt="" width={20} height={20} />
+                  {blocked.message}
+                </p>
+              )}
               <SortableContext id={dayId(d)} items={columns[d] ?? []} strategy={verticalListSortingStrategy}>
                 {entries.length === 0 ? (
                   <>
                     <p className="mt-2 text-p16 leading-[1.2] text-muted-foreground">
-                      {dragging ? "Solte aqui para mover para este dia" : "Adicione itens neste dia"}
+                      {!dragging ? "Adicione itens neste dia" : blocked?.day === d ? "" : "Solte aqui para mover para este dia"}
                     </p>
                     {!dragging && hasBefore(d) && hasAfter(d) && !last && <Line className="-bottom-6 h-10" />}
                   </>
