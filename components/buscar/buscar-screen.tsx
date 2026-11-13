@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Carousel } from "@/components/buscar/carousel";
+import { CategorySearch } from "@/components/buscar/category-search";
 import { BUSCAR_SECTIONS, getDestination, sectionUrl, type BuscarSection } from "@/lib/catalog";
 
 /* eslint-disable @next/next/no-img-element */
@@ -10,40 +10,13 @@ import { BUSCAR_SECTIONS, getDestination, sectionUrl, type BuscarSection } from 
  * no site parceiro; "Passeios e Atrações" fica dentro do app, com atrações reais.
  * Sem preços: o "a partir de R$…" do protótipo só volta com dados de parceiros.
  */
-const CATEGORIES = [
-  { label: "Passagens", icon: "/icons/buscar/flight.svg", href: "#passagens" },
-  { label: "Hospedagens", icon: "/icons/buscar/cat-hospedagens.svg", href: "#hospedagens" },
-  { label: "Passeios e Atrações", icon: "/icons/buscar/cat-passeios.svg", href: "/app/buscar/passeios" },
-  { label: "Pacotes", icon: "/icons/buscar/cat-pacotes.svg", href: "#pacotes" },
-];
 
 export function BuscarScreen() {
   return (
     <main className="flex flex-1 flex-col px-6 pt-[72px] pb-14">
       <h1 className="text-h1 leading-[normal] font-semibold text-foreground">Buscar</h1>
 
-      {/* Categorias (Figma 2133:3289): círculos de margem a margem — em 393px são 72px com 19px entre eles.
-          Em telas mais largas crescem na mesma proporção (coluna = 72/345 da largura, ícone = metade do círculo). */}
-      <nav aria-label="Categorias" className="mt-8 grid grid-cols-4 gap-x-[calc(100%*19/345)]">
-        {CATEGORIES.map((c) => (
-          <Link key={c.label} href={c.href} className="group flex min-w-0 flex-col items-center text-center outline-none">
-            <span className="flex aspect-square w-full items-center justify-center rounded-full bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] ring-ring/50 transition-colors group-hover:bg-tripper-blue-100 group-focus-visible:ring-3 group-active:bg-tripper-blue-100">
-              <img src={c.icon} alt="" width={36} height={36} className="aspect-square w-1/2" />
-            </span>
-            {/* rótulo 10px mais largo que o círculo (82 × 72 no Figma) */}
-            <span className="-mx-[5px] mt-2 text-p14 leading-[1.2] text-foreground">{c.label}</span>
-          </Link>
-        ))}
-      </nav>
-
-      {/* Campo de busca (Figma "Text Field with icon"): leva à tela Passeios e Atrações */}
-      <Link
-        href="/app/buscar/passeios"
-        className="mt-8 flex h-6 items-center gap-2 border-b border-tripper-dark-300 text-p16 leading-[1.2] text-muted-foreground outline-none focus-visible:border-primary"
-      >
-        <img src="/icons/buscar/search.svg" alt="" width={22} height={22} className="size-[22px]" />
-        Buscar Passeios e Atrações
-      </Link>
+      <CategorySearch />
 
       {BUSCAR_SECTIONS.map((section, i) => (
         <Section key={section.id} section={section} first={i === 0} />

@@ -139,3 +139,25 @@ export function attractionToursUrl(a: Attraction) {
 
 /** "Destinos mais procurados" (Figma "Passeios e Atrações"). */
 export const MOST_SEARCHED = ["rio-de-janeiro", "salvador", "fortaleza", "gramado", "florianopolis"];
+
+/* Categorias do topo da tela Buscar: a escolhida fica azul e define o campo de busca
+   ("Buscar Passagens", "Buscar Passeios e Atrações"…) e a tela que ele abre. */
+export type SearchMode = "passagens" | "hospedagens" | "passeios" | "pacotes";
+
+export const SEARCH_MODES: Record<SearchMode, { label: string; icon: string; href: string; partner?: string; partnerPrep?: "na" | "no" }> = {
+  passagens: { label: "Passagens", icon: "/icons/buscar/flight", href: "/app/buscar/passagens", partner: "Skyscanner", partnerPrep: "no" },
+  hospedagens: { label: "Hospedagens", icon: "/icons/buscar/cat-hospedagens", href: "/app/buscar/hospedagens", partner: "Booking.com", partnerPrep: "no" },
+  passeios: { label: "Passeios e Atrações", icon: "/icons/buscar/cat-passeios", href: "/app/buscar/passeios" },
+  pacotes: { label: "Pacotes", icon: "/icons/buscar/cat-pacotes", href: "/app/buscar/pacotes", partner: "Decolar", partnerPrep: "na" },
+};
+
+export const SEARCH_ORDER: SearchMode[] = ["passagens", "hospedagens", "passeios", "pacotes"];
+
+/** Destinos sugeridos na tela de busca de cada categoria (sem digitar nada). */
+export function suggestedDestinations(mode: SearchMode) {
+  const slugs = mode === "passeios" ? MOST_SEARCHED : (BUSCAR_SECTIONS.find((s) => s.id === mode)?.cards.map((c) => c.destination) ?? []);
+  return slugs.flatMap((slug) => {
+    const d = getDestination(slug);
+    return d ? [d] : [];
+  });
+}
