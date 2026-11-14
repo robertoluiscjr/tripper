@@ -137,7 +137,7 @@ export const BUSCAR_SECTIONS: BuscarSection[] = [
     kind: "Passeios",
     partner: "GetYourGuide",
     partnerPrep: "no",
-    cards: [{ destination: "rio-de-janeiro" }, { destination: "ouro-preto" }, { destination: "paraty" }, { destination: "manaus" }, { destination: "lencois-maranhenses" }],
+    cards: [{ destination: "rio-de-janeiro" }, { destination: "paraty" }, { destination: "ouro-preto" }, { destination: "manaus" }, { destination: "lencois-maranhenses" }],
   },
 ];
 
