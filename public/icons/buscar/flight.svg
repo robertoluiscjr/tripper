@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="&#195;&#141;cones">
+<mask id="mask0_0_255" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+<rect id="Bounding box" width="24" height="24" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_255)">
+<path id="flightsmode" d="M7.1481 16.8519L4.23657 15.2654L5.0558 14.4461L7.46925 14.7962L11.4942 10.7712L3.91543 6.65578L4.98847 5.5731L14.2885 7.94617L17.723 4.53275C17.9615 4.2943 18.2532 4.17507 18.598 4.17507C18.9429 4.17507 19.2346 4.2943 19.473 4.53275C19.7115 4.77122 19.8307 5.06448 19.8307 5.41255C19.8307 5.76062 19.7115 6.05388 19.473 6.29235L16.0634 9.72115L18.4269 19.0115L17.3539 20.0942L13.2289 12.5154L9.22308 16.5211L9.56345 18.9442L8.73463 19.773L7.1481 16.8519Z" fill="#454545"/>
+</g>
+</g>
+</svg>

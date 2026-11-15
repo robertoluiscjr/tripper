@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { ComingSoon } from "@/components/layout/coming-soon";
+import { BuscarScreen } from "@/components/buscar/buscar-screen";
 
 export const metadata: Metadata = { title: "Buscar" };
 
-// TODO: implementar Figma "Buscar" (214:2332)
+/** Buscar — Figma 214:2332 (conteúdo estático: aparece na hora, com ou sem login). */
 export default function BuscarPage() {
-  return <ComingSoon title="Buscar" text="Em breve: passagens, hospedagens, passeios e pacotes para o seu destino." />;
+  return <BuscarScreen />;
 }
