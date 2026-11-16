@@ -22,6 +22,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { itemBadgeIcon, itemCardIcon, itemLines, itemPhoto, itineraryForDay, type ItineraryEntry, type TripItemDTO } from "@/lib/trip-items";
+import { TouchDebug, logTouch } from "./touch-debug";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -32,6 +33,26 @@ type Columns = Record<number, string[]>; // dia → chaves das entradas, na orde
 const keyOf = (e: ItineraryEntry) => `${e.item.id}:${e.kind}`;
 const dayId = (d: number) => `dia-${d}`;
 const entryDay = (e: ItineraryEntry) => (e.kind === "end" ? e.item.endDayNumber! : e.item.dayNumber);
+
+const preventDefault = (e: Event) => e.preventDefault();
+/**
+ * TouchSensor do dnd-kit sem o cancelamento por "resize": no iPhone o Safari dispara resize quando a
+ * barra de endereço encolhe ou volta, e o dnd-kit largava o item no meio do arraste. Os demais
+ * cancelamentos (toque cancelado pelo sistema, trocar de aba, Esc) continuam.
+ */
+class StableTouchSensor extends TouchSensor {
+  constructor(props: ConstructorParameters<typeof TouchSensor>[0]) {
+    super(props);
+    const self = this as unknown as {
+      windowListeners: { removeAll(): void; add(name: string, fn: (e: Event) => void): void };
+      handleCancel: () => void;
+    };
+    self.windowListeners.removeAll();
+    self.windowListeners.add("dragstart", preventDefault);
+    self.windowListeners.add("visibilitychange", self.handleCancel);
+    self.windowListeners.add("contextmenu", preventDefault);
+  }
+}
 
 /**
  * Roteiro dia a dia — Figma "Tela da Viagem 2" (2098:2018) e "3" (2109:1868).
@@ -121,7 +142,7 @@ export function Itinerary({
   // cancelava o gesto para rolar a página (sobretudo no Safari do iPhone).
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 4 } }),
-    useSensor(TouchSensor, {
+    useSensor(StableTouchSensor, {
       activationConstraint: { delay: 250, tolerance: 6 },
       bypassActivationConstraint: ({ event }) => !!(event.target as Element | null)?.closest?.("[data-drag-handle]"),
     }),
@@ -129,6 +150,7 @@ export function Itinerary({
   );
 
   function onDragStart({ active, activatorEvent }: DragStartEvent) {
+    logTouch("dnd: levantou");
     setActiveKey(String(active.id));
     setDraft(columns);
     // Toque longo: uma vibração curta confirma que o item "levantou" (Android; o iPhone ignora)
@@ -160,6 +182,7 @@ export function Itinerary({
   }
 
   function onDragEnd({ active, over }: DragEndEvent) {
+    logTouch(`dnd: soltou ${over ? `em ${over.id}` : "fora"}`);
     setActiveKey(null);
     // Soltou sobre um dia não permitido: volta ao lugar e explica o motivo
     if (blocked && over && findDay(over.id) === blocked.day) {
@@ -210,6 +233,7 @@ export function Itinerary({
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
       onDragCancel={() => {
+        logTouch("dnd: CANCELADO");
         setActiveKey(null);
         setDraft(null);
         setBlocked(null);
@@ -286,6 +310,7 @@ export function Itinerary({
           </div>
         )}
       </DragOverlay>
+      <TouchDebug />
     </DndContext>
   );
 }
@@ -394,6 +419,23 @@ function SwipeToDelete({ label, onDelete, disabled, children }: { label: string;
   const swallowClick = useRef(false);
   const open = offset !== 0;
 
+  // Deslizar na horizontal: bloqueia a rolagem do navegador (que cancelaria o gesto). Antes isso era
+  // "touch-action: pan-y", mas no iPhone essa regra deixava o Safari rolar a página mesmo com o item
+  // já levantado para mudar de dia (o arraste só funcionava começando para a esquerda).
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onMove = (e: TouchEvent) => {
+      const d = drag.current;
+      const t = e.touches[0];
+      if (!d || !t || !e.cancelable) return;
+      const dx = Math.abs(t.clientX - d.x);
+      if (d.axis === "x" || (!d.axis && dx > 3 && dx > Math.abs(t.clientY - d.y))) e.preventDefault();
+    };
+    el.addEventListener("touchmove", onMove, { passive: false });
+    return () => el.removeEventListener("touchmove", onMove);
+  }, []);
+
   // Aberto: tocar em qualquer outro lugar fecha
   useEffect(() => {
     if (!open || dragging) return;
@@ -407,7 +449,7 @@ function SwipeToDelete({ label, onDelete, disabled, children }: { label: string;
   return (
     <div
       ref={ref}
-      className="relative touch-pan-y overflow-hidden select-none"
+      className="relative overflow-hidden select-none"
       onDragStart={(e) => e.preventDefault()}
       onPointerDown={(e) => {
         if (e.button !== 0) return;
