@@ -5,7 +5,8 @@ import {
   DndContext,
   DragOverlay,
   KeyboardSensor,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   closestCorners,
   useDroppable,
   useSensor,
@@ -102,14 +103,24 @@ export function Itinerary({
   const hasAfter = (d: number) => allDays.some((x) => x > d);
 
   const dndId = useId(); // ids estáveis entre servidor e navegador (acessibilidade do arraste)
+  // Mouse: arrasta pelo ícone. Toque: o ícone arrasta na hora; o resto do item precisa de um toque
+  // longo (¼ s, como nas listas do iOS/Android), para não brigar com rolar a página, tocar para
+  // editar e deslizar para excluir. TouchSensor (e não PointerSensor): no celular o navegador
+  // cancelava o gesto para rolar a página (sobretudo no Safari do iPhone).
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 250, tolerance: 6 },
+      bypassActivationConstraint: ({ event }) => !!(event.target as Element | null)?.closest?.("[data-drag-handle]"),
+    }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   );
 
-  function onDragStart({ active }: DragStartEvent) {
+  function onDragStart({ active, activatorEvent }: DragStartEvent) {
     setActiveKey(String(active.id));
     setDraft(columns);
+    // Toque longo: uma vibração curta confirma que o item "levantou" (Android; o iPhone ignora)
+    if (typeof TouchEvent !== "undefined" && activatorEvent instanceof TouchEvent) navigator.vibrate?.(10);
   }
 
   // Passou para outro dia: o item entra na lista daquele dia (na posição sob o dedo)
@@ -240,7 +251,7 @@ export function Itinerary({
                               ) : (
                                 hasAfter(d) && !last && <Line className="top-[52px] h-[61px]" />
                               ))}
-                            <SwipeToDelete label={`Excluir ${entry.item.title}`} onDelete={() => onDeleteItem(entry.item)}>
+                            <SwipeToDelete label={`Excluir ${entry.item.title}`} onDelete={() => onDeleteItem(entry.item)} disabled={dragging}>
                               <ItemRow entry={entry} cityPhoto={cityPhoto} onOpen={() => onOpenItem(entry.item)} handle={handle} />
                             </SwipeToDelete>
                           </>
@@ -290,19 +301,20 @@ function SortableEntry({
   children: (handle: React.ReactNode) => React.ReactNode;
 }) {
   const { setNodeRef, setActivatorNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({ id });
+  const lastTouch = useRef(0);
   const handle = (
     <button
       type="button"
       ref={setActivatorNodeRef}
+      data-drag-handle
       {...attributes}
-      {...listeners}
+      onMouseDown={(e) => listeners?.onMouseDown?.(e)}
+      onKeyDown={(e) => listeners?.onKeyDown?.(e)}
       aria-label={`Mover ${label}`}
       // Não deixa o gesto de "arrastar para excluir" começar pelo ícone
-      onPointerDown={(e) => {
-        listeners?.onPointerDown?.(e);
-        e.stopPropagation();
-      }}
-      className="flex size-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-[4px] outline-none focus-visible:ring-3 focus-visible:ring-ring/50 active:cursor-grabbing"
+      onPointerDown={(e) => e.stopPropagation()}
+      // Área de toque de 44px (HIG 44pt / Material 48dp) em volta do ícone de 24px
+      className="relative flex size-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-[4px] outline-none before:absolute before:-inset-[10px] focus-visible:ring-3 focus-visible:ring-ring/50 active:cursor-grabbing"
     >
       <DragIcon />
     </button>
@@ -311,8 +323,15 @@ function SortableEntry({
     <li
       ref={setNodeRef}
       style={{ transform: CSS.Translate.toString(transform), transition }}
-      className={cn("relative", isDragging && "opacity-30", className)}
+      className={cn("relative [-webkit-touch-callout:none]", isDragging && "opacity-30", className)}
       onAnimationEnd={(e) => e.target === e.currentTarget && onAnimationEnd()}
+      // Toque: o item todo pode ser "levantado" com um toque longo (o ícone, na hora)
+      onTouchStart={(e) => {
+        lastTouch.current = Date.now();
+        listeners?.onTouchStart?.(e);
+      }}
+      // Toque longo na foto abriria o menu do navegador ("Baixar imagem") no lugar de arrastar
+      onContextMenu={(e) => Date.now() - lastTouch.current < 1500 && e.preventDefault()}
     >
       {children(handle)}
     </li>
@@ -332,7 +351,7 @@ const FULL_SWIPE = 180; // arrastar até aqui e soltar exclui direto
  * arrastar longe exclui direto. Tocar fora (ou no próprio item) fecha. Pelo teclado, o botão
  * aparece ao receber foco (Tab).
  */
-function SwipeToDelete({ label, onDelete, children }: { label: string; onDelete: () => void; children: React.ReactNode }) {
+function SwipeToDelete({ label, onDelete, disabled, children }: { label: string; onDelete: () => void; disabled?: boolean; children: React.ReactNode }) {
   const [offset, setOffsetState] = useState(0);
   const offsetRef = useRef(0); // valor atual mesmo antes de renderizar (move e solta no mesmo quadro)
   const setOffset = (v: number) => {
@@ -368,6 +387,13 @@ function SwipeToDelete({ label, onDelete, children }: { label: string; onDelete:
       onPointerMove={(e) => {
         const d = drag.current;
         if (!d) return;
+        // O item foi "levantado" para mudar de dia: o deslizar para excluir sai do caminho
+        if (disabled) {
+          drag.current = null;
+          if (dragging) setDragging(false);
+          if (offsetRef.current) setOffset(0);
+          return;
+        }
         const dx = e.clientX - d.x;
         const dy = e.clientY - d.y;
         if (!d.axis) {
