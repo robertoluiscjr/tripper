@@ -103,6 +103,18 @@ export function Itinerary({
   const hasAfter = (d: number) => allDays.some((x) => x > d);
 
   const dndId = useId(); // ids estáveis entre servidor e navegador (acessibilidade do arraste)
+
+  // iPhone: segurar o dedo no ícone de arrastar abria o menu do Safari ("Salvar no App Fotos") e
+  // rolava a página antes do arraste começar. preventDefault no "touchstart" desliga esses gestos
+  // do sistema — mas na janela (fim da propagação), depois de o dnd-kit já ter registrado o toque:
+  // ele ignora toques que chegam com defaultPrevented.
+  useEffect(() => {
+    const block = (e: TouchEvent) => {
+      if (e.cancelable && (e.target as Element | null)?.closest?.("[data-drag-handle]")) e.preventDefault();
+    };
+    window.addEventListener("touchstart", block, { passive: false });
+    return () => window.removeEventListener("touchstart", block);
+  }, []);
   // Mouse: arrasta pelo ícone. Toque: o ícone arrasta na hora; o resto do item precisa de um toque
   // longo (¼ s, como nas listas do iOS/Android), para não brigar com rolar a página, tocar para
   // editar e deslizar para excluir. TouchSensor (e não PointerSensor): no celular o navegador
@@ -268,7 +280,8 @@ export function Itinerary({
       {/* O item "levantado" acompanha o dedo, com sombra */}
       <DragOverlay dropAnimation={{ duration: 250, easing: "cubic-bezier(0, 0, 0.58, 1)" }}>
         {activeEntry && (
-          <div className="rounded-[12px] bg-white shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)]">
+          // Fica sob o dedo enquanto arrasta: sem receber toque nem oferecer imagens ao menu do iPhone
+          <div className={cn("pointer-events-none rounded-[12px] bg-white shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)] select-none", NO_TOUCH_MENU)}>
             <ItemRow entry={activeEntry} cityPhoto={cityPhoto} handle={<DragIcon />} />
           </div>
         )}
@@ -276,6 +289,13 @@ export function Itinerary({
     </DndContext>
   );
 }
+
+/**
+ * Sem o menu de toque longo do iPhone ("Salvar no App Fotos", "Copiar Objeto"), sem seleção de texto
+ * e sem o "arrastar imagem" nativo: as fotos e ícones do item não recebem o toque.
+ */
+const NO_TOUCH_MENU =
+  "[-webkit-touch-callout:none] [-webkit-user-select:none] [&_img]:pointer-events-none [&_img]:[-webkit-touch-callout:none] [&_img]:[-webkit-user-drag:none]";
 
 /** O dia inteiro aceita o item (inclusive dias vazios). */
 function DayDrop({ day, className, children }: { day: number; className?: string; children: React.ReactNode }) {
@@ -302,6 +322,7 @@ function SortableEntry({
 }) {
   const { setNodeRef, setActivatorNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({ id });
   const lastTouch = useRef(0);
+
   const handle = (
     <button
       type="button"
@@ -323,7 +344,7 @@ function SortableEntry({
     <li
       ref={setNodeRef}
       style={{ transform: CSS.Translate.toString(transform), transition }}
-      className={cn("relative [-webkit-touch-callout:none] [&_img]:pointer-events-none [&_img]:[-webkit-touch-callout:none]", isDragging && "opacity-30", className)}
+      className={cn("relative", NO_TOUCH_MENU, isDragging && "opacity-30", className)}
       onAnimationEnd={(e) => e.target === e.currentTarget && onAnimationEnd()}
       // Toque: o item todo pode ser "levantado" com um toque longo (o ícone, na hora)
       onTouchStart={(e) => {
