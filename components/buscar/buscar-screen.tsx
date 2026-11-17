@@ -13,7 +13,7 @@ import { BUSCAR_SECTIONS, getDestination, sectionUrl, type BuscarSection } from 
 
 export function BuscarScreen() {
   return (
-    <main className="flex flex-1 flex-col px-6 pt-[72px] pb-14">
+    <main className="flex flex-1 flex-col px-6 pt-6 pb-14">
       <h1 className="text-h1 leading-[normal] font-semibold text-foreground">Buscar</h1>
 
       <CategorySearch />

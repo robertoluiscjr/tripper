@@ -16,7 +16,7 @@ export function PlanejarHeader({
   onTabChange: (tab: PlanejarTab) => void;
 }) {
   return (
-    <div className="px-6 pt-[72px]">
+    <div className="px-6 pt-6">
       <h1 className="text-h1 leading-[normal] font-semibold text-foreground">Planejar</h1>
       <div role="tablist" aria-label="Viagens" className="mt-6 grid grid-cols-2">
         <TabButton active={tab === "proximas"} onClick={() => onTabChange("proximas")} className="w-20 justify-self-start">

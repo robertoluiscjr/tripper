@@ -16,7 +16,7 @@ async function logout() {
 // Tela de Conta ainda não desenhada no Figma — versão funcional mínima.
 export default function ContaPage() {
   return (
-    <main className="flex flex-1 flex-col gap-4 px-6 pt-16">
+    <main className="flex flex-1 flex-col gap-4 px-6 pt-4">
       <h1 className="text-h2 font-semibold text-foreground">Conta</h1>
       <Suspense fallback={<Skeleton className="h-28 w-full" />}>
         <ContaContent />

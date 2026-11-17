@@ -46,9 +46,9 @@ const ERRORS: Record<string, string> = {
  * Volta para a tela de origem (?callbackUrl=/app/planejar) após entrar.
  */
 export default function LoginPage({ searchParams }: PageProps<"/login">) {
-  // Medidas do Figma "Login" (3544:3125): voltar a 64px do topo, logo 48px, título 24px Medium
+  // Medidas do Figma "Login" (3544:3125): voltar a 16px do topo, logo 48px, título 24px Medium
   return (
-    <main className="flex flex-1 flex-col px-6 pt-16 pb-8">
+    <main className="flex flex-1 flex-col px-6 pt-4 pb-8">
       <Link href="/app" aria-label="Voltar" className="self-start">
         <img src="/icons/back.svg" alt="" width={24} height={24} />
       </Link>

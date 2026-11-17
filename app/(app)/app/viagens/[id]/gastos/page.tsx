@@ -34,7 +34,7 @@ async function GastosData({ params }: Pick<PageProps<"/app/viagens/[id]/gastos">
 
 function GastosSkeleton() {
   return (
-    <main className="flex flex-1 flex-col gap-4 px-6 pt-28">
+    <main className="flex flex-1 flex-col gap-4 px-6 pt-16">
       <Skeleton className="h-10 w-56" />
       <Skeleton className="h-12 w-full" />
       {Array.from({ length: 4 }, (_, i) => (
