@@ -308,10 +308,11 @@ export function Itinerary({
 
 /**
  * Sem o menu de toque longo do iPhone ("Salvar no App Fotos", "Copiar Objeto"), sem seleção de texto
- * e sem o "arrastar imagem" nativo: as fotos e ícones do item não recebem o toque.
+ * e sem o "arrastar imagem" nativo: os ícones do item não recebem o toque. Exceção: a foto marcada
+ * com data-preview, que mantém a prévia ampliada do navegador ao ser segurada.
  */
 const NO_TOUCH_MENU =
-  "[-webkit-touch-callout:none] [-webkit-user-select:none] [&_img]:pointer-events-none [&_img]:[-webkit-touch-callout:none] [&_img]:[-webkit-user-drag:none]";
+  "[-webkit-touch-callout:none] [-webkit-user-select:none] [&_img]:[-webkit-user-drag:none] [&_img:not([data-preview])]:pointer-events-none [&_img:not([data-preview])]:[-webkit-touch-callout:none]";
 
 /** O dia inteiro aceita o item (inclusive dias vazios). */
 function DayDrop({ day, className, children }: { day: number; className?: string; children: React.ReactNode }) {
@@ -554,7 +555,16 @@ function ItemRow({
         </span>
         <span className="ml-6 flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-[8px] bg-tripper-light-300">
           {photo ? (
-            <img src={photo} alt="" width={64} height={64} className="size-full object-cover" />
+            // Segurar a foto abre a prévia ampliada do próprio navegador (menu do iPhone /
+            // "Abrir imagem" no Android) — só na lista, não na cópia que acompanha o dedo
+            <img
+              src={photo}
+              alt=""
+              width={64}
+              height={64}
+              data-preview={onOpen ? "" : undefined}
+              className={cn("size-full object-cover", onOpen && "[-webkit-touch-callout:default]")}
+            />
           ) : (
             <img src={itemCardIcon(item)} alt="" width={32} height={32} />
           )}
