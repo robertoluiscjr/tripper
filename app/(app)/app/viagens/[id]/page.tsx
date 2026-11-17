@@ -43,7 +43,7 @@ async function TripData({ params, searchParams }: Pick<PageProps<"/app/viagens/[
 
 function TripSkeleton() {
   return (
-    <main className="flex flex-1 flex-col pt-4">
+    <main className="flex flex-1 flex-col pt-[18px]">
       <div className="flex flex-col gap-2 px-6 pt-12">
         <Skeleton className="h-10 w-56" />
         <Skeleton className="h-5 w-16" />

@@ -20,7 +20,7 @@ export function DestinoScreen({ destination, attractions }: { destination: Desti
   const count = attractions.length;
 
   return (
-    <main className="flex flex-1 flex-col px-6 pt-4 pb-7">
+    <main className="flex flex-1 flex-col px-6 pt-[18px] pb-7">
       <ScreenHeader back="/app/buscar/passeios" backLabel="Voltar para Passeios e Atrações" title={destination.name} />
 
       <p className="mt-[31px] text-p14 leading-[1.2] text-foreground">

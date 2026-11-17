@@ -81,7 +81,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
   const next = missing[0];
 
   return (
-    <main className="flex flex-1 flex-col px-6 pt-4 pb-16">
+    <main className="flex flex-1 flex-col px-6 pt-[18px] pb-8">
       <Link href={`/app/viagens/${trip.id}`} aria-label="Voltar para a viagem" className="self-start">
         <img src="/icons/back.svg" alt="" width={24} height={24} />
       </Link>
@@ -232,9 +232,13 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
             : `Ainda ${missing.reduce((s, m) => s + m.n, 0) === 1 ? "falta" : "faltam"} ${joinPt(missing.map(({ category, n }) => `${n} ${n === 1 ? ADD_LABEL[category] : PLURAL[category]}`))}.`}
       </p>
       {next && (
-        <Button size="cta" asChild className="mt-6">
-          <Link href={`/app/viagens/${trip.id}?novo=${next.category}`}>Adicionar {ADD_LABEL[next.category]}</Link>
-        </Button>
+        <>
+          {/* Figma "Progresso da viagem 2": 48px entre o texto e o CTA; o CTA fica preso a 32px da tab bar */}
+          <div aria-hidden className="min-h-12 flex-1" />
+          <Button size="cta" asChild className="sticky bottom-[calc(104px+env(safe-area-inset-bottom))] z-30">
+            <Link href={`/app/viagens/${trip.id}?novo=${next.category}`}>Adicionar {ADD_LABEL[next.category]}</Link>
+          </Button>
+        </>
       )}
     </main>
   );

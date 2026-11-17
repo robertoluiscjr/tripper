@@ -50,7 +50,7 @@ export function SearchScreen({ mode }: { mode: SearchMode }) {
   const listTitle = searching ? "Resultados" : nearby.status === "done" ? "Destinos próximos de você" : "Destinos mais procurados";
 
   return (
-    <main className="flex flex-1 flex-col px-6 pt-4 pb-14">
+    <main className="flex flex-1 flex-col px-6 pt-[18px] pb-14">
       <ScreenHeader back="/app/buscar" backLabel="Voltar para Buscar" title={config.label} />
 
       {/* Campo de busca (Figma "Text Field with icon"): ícone 22 + texto 16, linha de preenchimento */}

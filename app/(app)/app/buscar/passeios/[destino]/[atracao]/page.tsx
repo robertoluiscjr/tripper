@@ -34,7 +34,7 @@ async function Passeio({ params }: Pick<PageProps<"/app/buscar/passeios/[destino
 
 function PasseioSkeleton() {
   return (
-    <main className="flex flex-1 flex-col pt-4">
+    <main className="flex flex-1 flex-col pt-[18px]">
       <Skeleton className="mx-6 h-6 w-6" />
       <Skeleton className="mt-6 h-64 w-full rounded-none" />
       <div className="flex flex-col gap-4 px-6 pt-4">

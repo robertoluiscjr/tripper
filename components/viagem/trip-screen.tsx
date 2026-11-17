@@ -85,7 +85,7 @@ export function TripScreen({
   return (
     <main className="relative flex flex-1 flex-col pb-8">
       {/* Topo: voltar · editar */}
-      <div className="flex items-center justify-between px-6 pt-4">
+      <div className="flex items-center justify-between px-6 pt-[18px]">
         <Link href="/app/planejar" aria-label="Voltar para Planejar">
           <img src="/icons/back.svg" alt="" width={24} height={24} />
         </Link>
