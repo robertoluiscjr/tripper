@@ -22,7 +22,6 @@ import { CSS } from "@dnd-kit/utilities";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { itemBadgeIcon, itemCardIcon, itemLines, itemPhoto, itineraryForDay, type ItineraryEntry, type TripItemDTO } from "@/lib/trip-items";
-import { TouchDebug, logTouch } from "./touch-debug";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -136,24 +135,19 @@ export function Itinerary({
     window.addEventListener("touchstart", block, { passive: false });
     return () => window.removeEventListener("touchstart", block);
   }, []);
-  // Mouse: arrasta pelo ícone. Toque: o ícone arrasta na hora; o resto do item precisa de um toque
-  // longo (¼ s, como nas listas do iOS/Android), para não brigar com rolar a página, tocar para
-  // editar e deslizar para excluir. TouchSensor (e não PointerSensor): no celular o navegador
-  // cancelava o gesto para rolar a página (sobretudo no Safari do iPhone).
+  // Só o ícone "Drag Indicator" arrasta — mouse, toque ou teclado —, igual em todos os aparelhos.
+  // O resto do item fica para tocar (editar), rolar a página e deslizar para excluir.
+  // TouchSensor (e não PointerSensor): no celular o navegador cancelava o gesto para rolar a página.
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 4 } }),
-    useSensor(StableTouchSensor, {
-      activationConstraint: { delay: 250, tolerance: 6 },
-      bypassActivationConstraint: ({ event }) => !!(event.target as Element | null)?.closest?.("[data-drag-handle]"),
-    }),
+    useSensor(StableTouchSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   );
 
   function onDragStart({ active, activatorEvent }: DragStartEvent) {
-    logTouch("dnd: levantou");
     setActiveKey(String(active.id));
     setDraft(columns);
-    // Toque longo: uma vibração curta confirma que o item "levantou" (Android; o iPhone ignora)
+    // Toque: uma vibração curta confirma que o item "levantou" (Android; o iPhone ignora)
     if (typeof TouchEvent !== "undefined" && activatorEvent instanceof TouchEvent) navigator.vibrate?.(10);
   }
 
@@ -182,7 +176,6 @@ export function Itinerary({
   }
 
   function onDragEnd({ active, over }: DragEndEvent) {
-    logTouch(`dnd: soltou ${over ? `em ${over.id}` : "fora"}`);
     setActiveKey(null);
     // Soltou sobre um dia não permitido: volta ao lugar e explica o motivo
     if (blocked && over && findDay(over.id) === blocked.day) {
@@ -233,7 +226,6 @@ export function Itinerary({
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
       onDragCancel={() => {
-        logTouch("dnd: CANCELADO");
         setActiveKey(null);
         setDraft(null);
         setBlocked(null);
@@ -310,7 +302,6 @@ export function Itinerary({
           </div>
         )}
       </DragOverlay>
-      <TouchDebug />
     </DndContext>
   );
 }
@@ -346,8 +337,6 @@ function SortableEntry({
   children: (handle: React.ReactNode) => React.ReactNode;
 }) {
   const { setNodeRef, setActivatorNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({ id });
-  const lastTouch = useRef(0);
-
   const handle = (
     <button
       type="button"
@@ -355,6 +344,7 @@ function SortableEntry({
       data-drag-handle
       {...attributes}
       onMouseDown={(e) => listeners?.onMouseDown?.(e)}
+      onTouchStart={(e) => listeners?.onTouchStart?.(e)}
       onKeyDown={(e) => listeners?.onKeyDown?.(e)}
       aria-label={`Mover ${label}`}
       // Não deixa o gesto de "arrastar para excluir" começar pelo ícone
@@ -371,13 +361,6 @@ function SortableEntry({
       style={{ transform: CSS.Translate.toString(transform), transition }}
       className={cn("relative", NO_TOUCH_MENU, isDragging && "opacity-30", className)}
       onAnimationEnd={(e) => e.target === e.currentTarget && onAnimationEnd()}
-      // Toque: o item todo pode ser "levantado" com um toque longo (o ícone, na hora)
-      onTouchStart={(e) => {
-        lastTouch.current = Date.now();
-        listeners?.onTouchStart?.(e);
-      }}
-      // Toque longo na foto abriria o menu do navegador ("Baixar imagem") no lugar de arrastar
-      onContextMenu={(e) => Date.now() - lastTouch.current < 1500 && e.preventDefault()}
     >
       {children(handle)}
     </li>
