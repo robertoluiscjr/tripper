@@ -92,6 +92,17 @@
 
   /* Animações do protótipo (Figma): "Ease out" = cubic-bezier(0, 0, 0.58, 1) → ease-figma-out */
   --ease-figma-out: cubic-bezier(0, 0, 0.58, 1);
+
+  /* Item do roteiro "levantado" para arrastar: cresce levemente (retorno no lugar da vibração no iPhone) */
+  --animate-lift: tripper-lift 150ms var(--ease-figma-out) both;
+  @keyframes tripper-lift {
+    from {
+      scale: 1;
+    }
+    to {
+      scale: 1.04;
+    }
+  }
 }
 
 :root {

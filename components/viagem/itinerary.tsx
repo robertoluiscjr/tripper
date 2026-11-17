@@ -104,6 +104,7 @@ export function Itinerary({
   const [draft, setDraft] = useState<Columns | null>(null);
   const [droppedOn, setDroppedOn] = useState<TripItemDTO[] | null>(null);
   const [activeKey, setActiveKey] = useState<string | null>(null);
+  const [lift, setLift] = useState(false); // iPhone: o item "levantado" cresce (sem vibração)
   // Dia em que o item não pode entrar (ex.: check-in no dia do check-out): aviso antes de soltar
   const [blocked, setBlocked] = useState<{ day: number; message: string } | null>(null);
   if (droppedOn && items !== droppedOn) {
@@ -147,8 +148,12 @@ export function Itinerary({
   function onDragStart({ active, activatorEvent }: DragStartEvent) {
     setActiveKey(String(active.id));
     setDraft(columns);
-    // Toque: uma vibração curta confirma que o item "levantou" (Android; o iPhone ignora)
-    if (typeof TouchEvent !== "undefined" && activatorEvent instanceof TouchEvent) navigator.vibrate?.(10);
+    // Toque: uma vibração curta confirma que o item "levantou" (Android). O Safari do iPhone não deixa
+    // sites vibrarem; lá o item cresce levemente ao ser pego (retorno visual de "levantar").
+    const touch = typeof TouchEvent !== "undefined" && activatorEvent instanceof TouchEvent;
+    const canVibrate = typeof navigator.vibrate === "function";
+    if (touch && canVibrate) navigator.vibrate(10);
+    setLift(touch && !canVibrate);
   }
 
   // Passou para outro dia: o item entra na lista daquele dia (na posição sob o dedo)
@@ -297,7 +302,13 @@ export function Itinerary({
       <DragOverlay dropAnimation={{ duration: 250, easing: "cubic-bezier(0, 0, 0.58, 1)" }}>
         {activeEntry && (
           // Fica sob o dedo enquanto arrasta: sem receber toque nem oferecer imagens ao menu do iPhone
-          <div className={cn("pointer-events-none rounded-[12px] bg-white shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)] select-none", NO_TOUCH_MENU)}>
+          <div
+            className={cn(
+              "pointer-events-none rounded-[12px] bg-white shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)] select-none",
+              lift && "animate-lift motion-reduce:animate-none",
+              NO_TOUCH_MENU,
+            )}
+          >
             <ItemRow entry={activeEntry} cityPhoto={cityPhoto} handle={<DragIcon />} />
           </div>
         )}
