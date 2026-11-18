@@ -32,7 +32,7 @@ async function Destino({ params }: Pick<PageProps<"/app/buscar/passeios/[destino
 
 function DestinoSkeleton() {
   return (
-    <main className="flex flex-1 flex-col px-6 pt-16">
+    <main className="flex flex-1 flex-col px-6 pt-[18px]">
       <Skeleton className="h-6 w-48" />
       <Skeleton className="mt-[31px] h-4 w-40" />
       <Skeleton className="mt-6 h-10 w-full" />

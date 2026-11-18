@@ -81,7 +81,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
   const next = missing[0];
 
   return (
-    <main className="flex flex-1 flex-col px-6 pt-16 pb-16">
+    <main className="flex flex-1 flex-col px-6 pt-[18px] pb-8">
       <Link href={`/app/viagens/${trip.id}`} aria-label="Voltar para a viagem" className="self-start">
         <img src="/icons/back.svg" alt="" width={24} height={24} />
       </Link>
@@ -232,7 +232,9 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
             : `Ainda ${missing.reduce((s, m) => s + m.n, 0) === 1 ? "falta" : "faltam"} ${joinPt(missing.map(({ category, n }) => `${n} ${n === 1 ? ADD_LABEL[category] : PLURAL[category]}`))}.`}
       </p>
       {next && (
-        <Button size="cta" asChild className="mt-6">
+        // Figma "Progresso da viagem 2": 48px abaixo do texto e, no fim da página, 32px acima da tab bar.
+        // Rola junto com o conteúdo (não flutua sobre os cards).
+        <Button size="cta" asChild className="mt-12">
           <Link href={`/app/viagens/${trip.id}?novo=${next.category}`}>Adicionar {ADD_LABEL[next.category]}</Link>
         </Button>
       )}

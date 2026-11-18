@@ -5,7 +5,8 @@ import {
   DndContext,
   DragOverlay,
   KeyboardSensor,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   closestCorners,
   useDroppable,
   useSensor,
@@ -31,6 +32,26 @@ type Columns = Record<number, string[]>; // dia → chaves das entradas, na orde
 const keyOf = (e: ItineraryEntry) => `${e.item.id}:${e.kind}`;
 const dayId = (d: number) => `dia-${d}`;
 const entryDay = (e: ItineraryEntry) => (e.kind === "end" ? e.item.endDayNumber! : e.item.dayNumber);
+
+const preventDefault = (e: Event) => e.preventDefault();
+/**
+ * TouchSensor do dnd-kit sem o cancelamento por "resize": no iPhone o Safari dispara resize quando a
+ * barra de endereço encolhe ou volta, e o dnd-kit largava o item no meio do arraste. Os demais
+ * cancelamentos (toque cancelado pelo sistema, trocar de aba, Esc) continuam.
+ */
+class StableTouchSensor extends TouchSensor {
+  constructor(props: ConstructorParameters<typeof TouchSensor>[0]) {
+    super(props);
+    const self = this as unknown as {
+      windowListeners: { removeAll(): void; add(name: string, fn: (e: Event) => void): void };
+      handleCancel: () => void;
+    };
+    self.windowListeners.removeAll();
+    self.windowListeners.add("dragstart", preventDefault);
+    self.windowListeners.add("visibilitychange", self.handleCancel);
+    self.windowListeners.add("contextmenu", preventDefault);
+  }
+}
 
 /**
  * Roteiro dia a dia — Figma "Tela da Viagem 2" (2098:2018) e "3" (2109:1868).
@@ -83,6 +104,7 @@ export function Itinerary({
   const [draft, setDraft] = useState<Columns | null>(null);
   const [droppedOn, setDroppedOn] = useState<TripItemDTO[] | null>(null);
   const [activeKey, setActiveKey] = useState<string | null>(null);
+  const [lift, setLift] = useState(false); // iPhone: o item "levantado" cresce (sem vibração)
   // Dia em que o item não pode entrar (ex.: check-in no dia do check-out): aviso antes de soltar
   const [blocked, setBlocked] = useState<{ day: number; message: string } | null>(null);
   if (droppedOn && items !== droppedOn) {
@@ -102,14 +124,36 @@ export function Itinerary({
   const hasAfter = (d: number) => allDays.some((x) => x > d);
 
   const dndId = useId(); // ids estáveis entre servidor e navegador (acessibilidade do arraste)
+
+  // iPhone: segurar o dedo no ícone de arrastar abria o menu do Safari ("Salvar no App Fotos") e
+  // rolava a página antes do arraste começar. preventDefault no "touchstart" desliga esses gestos
+  // do sistema — mas na janela (fim da propagação), depois de o dnd-kit já ter registrado o toque:
+  // ele ignora toques que chegam com defaultPrevented.
+  useEffect(() => {
+    const block = (e: TouchEvent) => {
+      if (e.cancelable && (e.target as Element | null)?.closest?.("[data-drag-handle]")) e.preventDefault();
+    };
+    window.addEventListener("touchstart", block, { passive: false });
+    return () => window.removeEventListener("touchstart", block);
+  }, []);
+  // Só o ícone "Drag Indicator" arrasta — mouse, toque ou teclado —, igual em todos os aparelhos.
+  // O resto do item fica para tocar (editar), rolar a página e deslizar para excluir.
+  // TouchSensor (e não PointerSensor): no celular o navegador cancelava o gesto para rolar a página.
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(StableTouchSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   );
 
-  function onDragStart({ active }: DragStartEvent) {
+  function onDragStart({ active, activatorEvent }: DragStartEvent) {
     setActiveKey(String(active.id));
     setDraft(columns);
+    // Toque: uma vibração curta confirma que o item "levantou" (Android). O Safari do iPhone não deixa
+    // sites vibrarem; lá o item cresce levemente ao ser pego (retorno visual de "levantar").
+    const touch = typeof TouchEvent !== "undefined" && activatorEvent instanceof TouchEvent;
+    const canVibrate = typeof navigator.vibrate === "function";
+    if (touch && canVibrate) navigator.vibrate(10);
+    setLift(touch && !canVibrate);
   }
 
   // Passou para outro dia: o item entra na lista daquele dia (na posição sob o dedo)
@@ -240,7 +284,7 @@ export function Itinerary({
                               ) : (
                                 hasAfter(d) && !last && <Line className="top-[52px] h-[61px]" />
                               ))}
-                            <SwipeToDelete label={`Excluir ${entry.item.title}`} onDelete={() => onDeleteItem(entry.item)}>
+                            <SwipeToDelete label={`Excluir ${entry.item.title}`} onDelete={() => onDeleteItem(entry.item)} disabled={dragging}>
                               <ItemRow entry={entry} cityPhoto={cityPhoto} onOpen={() => onOpenItem(entry.item)} handle={handle} />
                             </SwipeToDelete>
                           </>
@@ -257,7 +301,14 @@ export function Itinerary({
       {/* O item "levantado" acompanha o dedo, com sombra */}
       <DragOverlay dropAnimation={{ duration: 250, easing: "cubic-bezier(0, 0, 0.58, 1)" }}>
         {activeEntry && (
-          <div className="rounded-[12px] bg-white shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)]">
+          // Fica sob o dedo enquanto arrasta: sem receber toque nem oferecer imagens ao menu do iPhone
+          <div
+            className={cn(
+              "pointer-events-none rounded-[12px] bg-white shadow-[0px_4px_16px_0px_rgba(0,0,0,0.2)] select-none",
+              lift && "animate-lift motion-reduce:animate-none",
+              NO_TOUCH_MENU,
+            )}
+          >
             <ItemRow entry={activeEntry} cityPhoto={cityPhoto} handle={<DragIcon />} />
           </div>
         )}
@@ -265,6 +316,14 @@ export function Itinerary({
     </DndContext>
   );
 }
+
+/**
+ * Sem o menu de toque longo do iPhone ("Salvar no App Fotos", "Copiar Objeto"), sem seleção de texto
+ * e sem o "arrastar imagem" nativo: os ícones do item não recebem o toque. Exceção: a foto marcada
+ * com data-preview, que mantém a prévia ampliada do navegador ao ser segurada.
+ */
+const NO_TOUCH_MENU =
+  "[-webkit-touch-callout:none] [-webkit-user-select:none] [&_img]:[-webkit-user-drag:none] [&_img:not([data-preview])]:pointer-events-none [&_img:not([data-preview])]:[-webkit-touch-callout:none]";
 
 /** O dia inteiro aceita o item (inclusive dias vazios). */
 function DayDrop({ day, className, children }: { day: number; className?: string; children: React.ReactNode }) {
@@ -294,15 +353,16 @@ function SortableEntry({
     <button
       type="button"
       ref={setActivatorNodeRef}
+      data-drag-handle
       {...attributes}
-      {...listeners}
+      onMouseDown={(e) => listeners?.onMouseDown?.(e)}
+      onTouchStart={(e) => listeners?.onTouchStart?.(e)}
+      onKeyDown={(e) => listeners?.onKeyDown?.(e)}
       aria-label={`Mover ${label}`}
       // Não deixa o gesto de "arrastar para excluir" começar pelo ícone
-      onPointerDown={(e) => {
-        listeners?.onPointerDown?.(e);
-        e.stopPropagation();
-      }}
-      className="flex size-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-[4px] outline-none focus-visible:ring-3 focus-visible:ring-ring/50 active:cursor-grabbing"
+      onPointerDown={(e) => e.stopPropagation()}
+      // Área de toque de 44px (HIG 44pt / Material 48dp) em volta do ícone de 24px
+      className="relative flex size-6 shrink-0 cursor-grab touch-none items-center justify-center rounded-[4px] outline-none before:absolute before:-inset-[10px] focus-visible:ring-3 focus-visible:ring-ring/50 active:cursor-grabbing"
     >
       <DragIcon />
     </button>
@@ -311,7 +371,7 @@ function SortableEntry({
     <li
       ref={setNodeRef}
       style={{ transform: CSS.Translate.toString(transform), transition }}
-      className={cn("relative", isDragging && "opacity-30", className)}
+      className={cn("relative", NO_TOUCH_MENU, isDragging && "opacity-30", className)}
       onAnimationEnd={(e) => e.target === e.currentTarget && onAnimationEnd()}
     >
       {children(handle)}
@@ -319,9 +379,18 @@ function SortableEntry({
   );
 }
 
-/** "Drag Indicator (W200)" do Figma — 24px, #696969. */
+/**
+ * "Drag Indicator (W200)" do Figma — 24px, #696969. Desenhado em SVG no próprio código (e não
+ * <img>): no iPhone, segurar o dedo numa imagem abre o menu do Safari ("Salvar no App Fotos",
+ * "Copiar Objeto") e o arraste não começa.
+ */
+const DRAG_PATH = "M8.99982 19.2307C8.66135 19.2307 8.37161 19.1102 8.13059 18.8692C7.88956 18.6281 7.76904 18.3384 7.76904 17.9999C7.76904 17.6615 7.88956 17.3717 8.13059 17.1307C8.37161 16.8897 8.66135 16.7692 8.99982 16.7692C9.33828 16.7692 9.62803 16.8897 9.86904 17.1307C10.1101 17.3717 10.2306 17.6615 10.2306 17.9999C10.2306 18.3384 10.1101 18.6281 9.86904 18.8692C9.62803 19.1102 9.33828 19.2307 8.99982 19.2307ZM14.9998 19.2307C14.6614 19.2307 14.3716 19.1102 14.1306 18.8692C13.8896 18.6281 13.769 18.3384 13.769 17.9999C13.769 17.6615 13.8896 17.3717 14.1306 17.1307C14.3716 16.8897 14.6614 16.7692 14.9998 16.7692C15.3383 16.7692 15.628 16.8897 15.869 17.1307C16.1101 17.3717 16.2306 17.6615 16.2306 17.9999C16.2306 18.3384 16.1101 18.6281 15.869 18.8692C15.628 19.1102 15.3383 19.2307 14.9998 19.2307ZM8.99982 13.2307C8.66135 13.2307 8.37161 13.1102 8.13059 12.8692C7.88956 12.6281 7.76904 12.3384 7.76904 11.9999C7.76904 11.6615 7.88956 11.3717 8.13059 11.1307C8.37161 10.8897 8.66135 10.7692 8.99982 10.7692C9.33828 10.7692 9.62803 10.8897 9.86904 11.1307C10.1101 11.3717 10.2306 11.6615 10.2306 11.9999C10.2306 12.3384 10.1101 12.6281 9.86904 12.8692C9.62803 13.1102 9.33828 13.2307 8.99982 13.2307ZM14.9998 13.2307C14.6614 13.2307 14.3716 13.1102 14.1306 12.8692C13.8896 12.6281 13.769 12.3384 13.769 11.9999C13.769 11.6615 13.8896 11.3717 14.1306 11.1307C14.3716 10.8897 14.6614 10.7692 14.9998 10.7692C15.3383 10.7692 15.628 10.8897 15.869 11.1307C16.1101 11.3717 16.2306 11.6615 16.2306 11.9999C16.2306 12.3384 16.1101 12.6281 15.869 12.8692C15.628 13.1102 15.3383 13.2307 14.9998 13.2307ZM8.99982 7.23072C8.66135 7.23072 8.37161 7.1102 8.13059 6.86917C7.88956 6.62815 7.76904 6.33841 7.76904 5.99994C7.76904 5.66147 7.88956 5.37173 8.13059 5.13072C8.37161 4.88968 8.66135 4.76917 8.99982 4.76917C9.33828 4.76917 9.62803 4.88968 9.86904 5.13072C10.1101 5.37173 10.2306 5.66147 10.2306 5.99994C10.2306 6.33841 10.1101 6.62815 9.86904 6.86917C9.62803 7.1102 9.33828 7.23072 8.99982 7.23072ZM14.9998 7.23072C14.6614 7.23072 14.3716 7.1102 14.1306 6.86917C13.8896 6.62815 13.769 6.33841 13.769 5.99994C13.769 5.66147 13.8896 5.37173 14.1306 5.13072C14.3716 4.88968 14.6614 4.76917 14.9998 4.76917C15.3383 4.76917 15.628 4.88968 15.869 5.13072C16.1101 5.37173 16.2306 5.66147 16.2306 5.99994C16.2306 6.33841 16.1101 6.62815 15.869 6.86917C15.628 7.1102 15.3383 7.23072 14.9998 7.23072Z";
 function DragIcon() {
-  return <img src="/icons/drag-indicator.svg" alt="" width={24} height={24} draggable={false} />;
+  return (
+    <svg aria-hidden width={24} height={24} viewBox="0 0 24 24" className="pointer-events-none text-muted-foreground">
+      <path d={DRAG_PATH} fill="currentColor" />
+    </svg>
+  );
 }
 
 const REVEAL = 80; // largura da área vermelha com a lixeira
@@ -332,7 +401,7 @@ const FULL_SWIPE = 180; // arrastar até aqui e soltar exclui direto
  * arrastar longe exclui direto. Tocar fora (ou no próprio item) fecha. Pelo teclado, o botão
  * aparece ao receber foco (Tab).
  */
-function SwipeToDelete({ label, onDelete, children }: { label: string; onDelete: () => void; children: React.ReactNode }) {
+function SwipeToDelete({ label, onDelete, disabled, children }: { label: string; onDelete: () => void; disabled?: boolean; children: React.ReactNode }) {
   const [offset, setOffsetState] = useState(0);
   const offsetRef = useRef(0); // valor atual mesmo antes de renderizar (move e solta no mesmo quadro)
   const setOffset = (v: number) => {
@@ -344,6 +413,23 @@ function SwipeToDelete({ label, onDelete, children }: { label: string; onDelete:
   const drag = useRef<{ x: number; y: number; base: number; axis?: "x" | "y" } | null>(null);
   const swallowClick = useRef(false);
   const open = offset !== 0;
+
+  // Deslizar na horizontal: bloqueia a rolagem do navegador (que cancelaria o gesto). Antes isso era
+  // "touch-action: pan-y", mas no iPhone essa regra deixava o Safari rolar a página mesmo com o item
+  // já levantado para mudar de dia (o arraste só funcionava começando para a esquerda).
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onMove = (e: TouchEvent) => {
+      const d = drag.current;
+      const t = e.touches[0];
+      if (!d || !t || !e.cancelable) return;
+      const dx = Math.abs(t.clientX - d.x);
+      if (d.axis === "x" || (!d.axis && dx > 3 && dx > Math.abs(t.clientY - d.y))) e.preventDefault();
+    };
+    el.addEventListener("touchmove", onMove, { passive: false });
+    return () => el.removeEventListener("touchmove", onMove);
+  }, []);
 
   // Aberto: tocar em qualquer outro lugar fecha
   useEffect(() => {
@@ -358,7 +444,7 @@ function SwipeToDelete({ label, onDelete, children }: { label: string; onDelete:
   return (
     <div
       ref={ref}
-      className="relative touch-pan-y overflow-hidden select-none"
+      className="relative overflow-hidden select-none"
       onDragStart={(e) => e.preventDefault()}
       onPointerDown={(e) => {
         if (e.button !== 0) return;
@@ -368,6 +454,13 @@ function SwipeToDelete({ label, onDelete, children }: { label: string; onDelete:
       onPointerMove={(e) => {
         const d = drag.current;
         if (!d) return;
+        // O item foi "levantado" para mudar de dia: o deslizar para excluir sai do caminho
+        if (disabled) {
+          drag.current = null;
+          if (dragging) setDragging(false);
+          if (offsetRef.current) setOffset(0);
+          return;
+        }
         const dx = e.clientX - d.x;
         const dy = e.clientY - d.y;
         if (!d.axis) {
@@ -473,7 +566,16 @@ function ItemRow({
         </span>
         <span className="ml-6 flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-[8px] bg-tripper-light-300">
           {photo ? (
-            <img src={photo} alt="" width={64} height={64} className="size-full object-cover" />
+            // Segurar a foto abre a prévia ampliada do próprio navegador (menu do iPhone /
+            // "Abrir imagem" no Android) — só na lista, não na cópia que acompanha o dedo
+            <img
+              src={photo}
+              alt=""
+              width={64}
+              height={64}
+              data-preview={onOpen ? "" : undefined}
+              className={cn("size-full object-cover", onOpen && "[-webkit-touch-callout:default]")}
+            />
           ) : (
             <img src={itemCardIcon(item)} alt="" width={32} height={32} />
           )}

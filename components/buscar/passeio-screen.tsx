@@ -36,7 +36,7 @@ export function PasseioScreen({ destination, attraction }: { destination: Destin
   }
 
   return (
-    <main className="flex flex-1 flex-col pt-16">
+    <main className="flex flex-1 flex-col pt-[18px]">
       <div className="px-6">
         <ScreenHeader back={`/app/buscar/passeios/${destination.slug}`} backLabel={`Voltar para ${destination.name}`}>
           <button type="button" onClick={share} aria-label="Compartilhar">
