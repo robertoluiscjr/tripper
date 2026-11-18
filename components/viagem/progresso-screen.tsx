@@ -232,13 +232,11 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
             : `Ainda ${missing.reduce((s, m) => s + m.n, 0) === 1 ? "falta" : "faltam"} ${joinPt(missing.map(({ category, n }) => `${n} ${n === 1 ? ADD_LABEL[category] : PLURAL[category]}`))}.`}
       </p>
       {next && (
-        <>
-          {/* Figma "Progresso da viagem 2": 48px entre o texto e o CTA; o CTA fica preso a 32px da tab bar */}
-          <div aria-hidden className="min-h-12 flex-1" />
-          <Button size="cta" asChild className="sticky bottom-[calc(104px+env(safe-area-inset-bottom))] z-30">
-            <Link href={`/app/viagens/${trip.id}?novo=${next.category}`}>Adicionar {ADD_LABEL[next.category]}</Link>
-          </Button>
-        </>
+        // Figma "Progresso da viagem 2": 48px abaixo do texto e, no fim da página, 32px acima da tab bar.
+        // Rola junto com o conteúdo (não flutua sobre os cards).
+        <Button size="cta" asChild className="mt-12">
+          <Link href={`/app/viagens/${trip.id}?novo=${next.category}`}>Adicionar {ADD_LABEL[next.category]}</Link>
+        </Button>
       )}
     </main>
   );
