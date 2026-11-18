@@ -260,7 +260,7 @@ function DeleteTripSheet({
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent>
-        <div className="flex flex-col px-6 pt-[31px] pb-8">
+        <div className="flex flex-col px-6 pt-[31px] pb-6">
           <DrawerTitle className="text-h5 leading-[1.2] font-medium text-foreground">Excluir viagem?</DrawerTitle>
           <DrawerDescription className="mt-2 text-p16 leading-[1.2] text-muted-foreground">
             {what} Não é possível desfazer.
@@ -273,9 +273,11 @@ function DeleteTripSheet({
           >
             {pending ? "Excluindo..." : "Excluir viagem"}
           </Button>
-          <button type="button" onClick={() => onOpenChange(false)} className="mt-4 self-center p-2 text-p16 font-medium text-foreground">
+          {/* Secundário com o mesmo tamanho de texto e de área de toque do CTA (HIG / Material /
+              NN/g): a hierarquia vem do preenchimento, não do tamanho da letra */}
+          <Button variant="ghost" size="cta" onClick={() => onOpenChange(false)} className="mt-2 text-foreground">
             Cancelar
-          </button>
+          </Button>
         </div>
       </DrawerContent>
     </Drawer>
