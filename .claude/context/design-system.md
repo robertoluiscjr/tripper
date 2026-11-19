@@ -75,5 +75,7 @@ Estados visuais claros (default, foco, preenchido, erro, desabilitado). Campos o
 | | Seus Dados · Seus Dados 2 | 285:1485 · 2718:2680 |
 | | Dados de Pagamento · 2 | 294:1438 · 2718:2743 |
 | | Adicionar Compra (adicionar à viagem) | 296:1732 |
+| Conta | Conta (pré-login) · Conta (logado) | 4986:6153 · 4986:6227 |
+| | Editar perfil · Excluir conta? (bottom sheets) | 4986:6342 · 4986:6366 |
 
 Linhas com y < −2000 no canvas são variações dos fluxos de Buscar/Login/Cadastro (ex.: compra sem login).
