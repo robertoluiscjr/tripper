@@ -41,7 +41,7 @@ export default function TermsPage() {
             Você é responsável por manter o seu e-mail e a sua Conta Google seguros, já que eles dão acesso à sua
             conta no Tripper;
           </li>
-          <li>Você pode pedir a exclusão da sua conta a qualquer momento pelo e-mail de suporte.</li>
+          <li>Você pode excluir sua conta a qualquer momento, na tela Conta (Excluir conta) ou pelo e-mail de suporte.</li>
         </ul>
       </LegalSection>
 

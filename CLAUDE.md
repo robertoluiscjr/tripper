@@ -40,6 +40,8 @@ TanStack Query · Prisma 6 + PostgreSQL (Neon) · Zod 4 · Auth.js v5 (Google + 
   atrações em `data/attractions.json`, geradas da Wikipédia por `node scripts/catalog.mjs` (lista em
   `scripts/catalog-titles.json`). Links de parceiros (Booking, GetYourGuide, Skyscanner, Decolar) em `lib/partners.ts`
   — é lá que entram os códigos de afiliado. Sem preços/avaliações inventados.
+- **LGPD**: Conta tem Baixar meus dados (`/api/account/export`), Editar perfil e Excluir conta (`/api/account`,
+  cancela Stripe e apaga em cascata). Dado pessoal novo/serviço novo → atualizar `app/(public)/privacidade`.
 - Botões: `size="cta"` (56px, texto 20), `size="pill"` (+ nova viagem), `size="fab"` (+ item). Bottom sheet = `Drawer`.
 
 ## Estrutura

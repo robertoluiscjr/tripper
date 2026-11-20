@@ -26,6 +26,11 @@ export default function PrivacyPage() {
           O controlador dos dados é {LEGAL_RESPONSIBLE}, responsável pelo Tripper. Para qualquer assunto sobre
           privacidade, fale com a gente pelo e-mail <SupportEmail />.
         </p>
+        <p>
+          <strong>Canal de privacidade:</strong> como agente de tratamento de pequeno porte, o Tripper não é obrigado a
+          indicar um encarregado (Resolução CD/ANPD nº 2/2022, art. 11). Esse e-mail é o canal oficial para você
+          exercer seus direitos, tirar dúvidas e fazer reclamações sobre o uso dos seus dados.
+        </p>
       </LegalSection>
 
       <LegalSection title="2. Quais dados coletamos">
@@ -47,9 +52,15 @@ export default function PrivacyPage() {
             <strong>Dados de assinatura (quando houver):</strong> se você assinar um plano pago, o pagamento é
             processado pelo Stripe. O Tripper não recebe nem armazena os dados do seu cartão.
           </li>
+          <li>
+            <strong>Localização (opcional):</strong> em Buscar, o botão &quot;Destinos próximos&quot; pede a sua
+            localização ao navegador, só quando você toca nele. Ela é usada apenas no seu aparelho, para ordenar os
+            destinos por distância: não é enviada ao Tripper nem guardada. Você pode negar ou revogar essa permissão
+            nas configurações do navegador.
+          </li>
         </ul>
         <p>
-          Não pedimos acesso aos seus contatos, e-mails, agenda, arquivos ou localização em tempo real, e não
+          Não pedimos acesso aos seus contatos, e-mails, agenda ou arquivos, não guardamos a sua localização e não
           coletamos dados sensíveis.
         </p>
       </LegalSection>
@@ -62,10 +73,26 @@ export default function PrivacyPage() {
           <li>Gerenciar o período de teste e a assinatura, quando houver;</li>
           <li>Manter o app seguro, evitar abusos e corrigir problemas.</li>
         </ul>
+        <p>As bases legais (art. 7º da LGPD) são:</p>
+        <ul>
+          <li>
+            <strong>Execução do serviço que você contratou</strong> (art. 7º, V): conta, viagens, e-mails do
+            serviço e assinatura;
+          </li>
+          <li>
+            <strong>Cumprimento de obrigação legal</strong> (art. 7º, II): registros de pagamento exigidos pela
+            legislação fiscal, quando houver assinatura;
+          </li>
+          <li>
+            <strong>Legítimo interesse</strong> (art. 7º, IX): segurança, prevenção de abusos e correção de erros;
+          </li>
+          <li>
+            <strong>Consentimento</strong> (art. 7º, I): localização para &quot;Destinos próximos&quot;, que você
+            pode revogar a qualquer momento.
+          </li>
+        </ul>
         <p>
-          A base legal é a execução do serviço que você solicitou (art. 7º, V, da LGPD) e o legítimo interesse em
-          manter o app seguro e funcionando (art. 7º, IX). <strong>Não vendemos seus dados</strong> e não os usamos
-          para publicidade.
+          <strong>Não vendemos seus dados</strong> e não os usamos para publicidade.
         </p>
       </LegalSection>
 
@@ -83,23 +110,36 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p>
-          Alguns desses serviços podem processar dados fora do Brasil, sempre com medidas de segurança adequadas,
-          como prevê a LGPD. Também poderemos compartilhar dados se houver obrigação legal ou ordem judicial.
+          <strong>Transferência internacional:</strong> Google, Vercel, Resend e Stripe processam dados em servidores
+          fora do Brasil, principalmente nos Estados Unidos. Essa transferência é necessária para prestar o serviço
+          que você pediu (art. 33, IX, da LGPD) e esses fornecedores seguem padrões reconhecidos de segurança. O
+          banco de dados com as suas viagens fica no Brasil.
         </p>
+        <p>
+          <strong>Parceiros de reserva:</strong> os links da aba Buscar (Booking.com, GetYourGuide, Skyscanner e
+          Decolar) abrem o site do parceiro. O Tripper não envia os seus dados a eles; no site do parceiro vale a
+          política de privacidade dele. Alguns links podem ter um código de afiliado, que só identifica que a visita
+          veio do Tripper.
+        </p>
+        <p>Também poderemos compartilhar dados se houver obrigação legal ou ordem judicial.</p>
       </LegalSection>
 
       <LegalSection title="5. Cookies e armazenamento no aparelho">
         <p>
-          Usamos apenas um cookie essencial, que mantém você conectado, e um registro no seu navegador para
-          lembrar que você já viu a apresentação inicial do app. Não usamos cookies de publicidade nem de
-          rastreamento.
+          Usamos apenas um cookie essencial, que mantém você conectado. No seu navegador também guardamos, sem
+          enviar a ninguém: que você já viu a apresentação inicial do app, a última categoria escolhida em Buscar e,
+          por alguns minutos, o rascunho de uma nova viagem começada antes do login. Não usamos cookies de
+          publicidade nem de rastreamento, por isso o app não precisa de aviso de cookies.
         </p>
       </LegalSection>
 
       <LegalSection title="6. Por quanto tempo guardamos">
         <p>
-          Guardamos os seus dados enquanto a sua conta existir. Se você pedir a exclusão da conta, apagamos a
-          conta e todas as viagens em até 30 dias, exceto o que a lei nos obrigar a manter por mais tempo.
+          Guardamos os seus dados enquanto a sua conta existir. Quando você exclui a conta (em Conta → Excluir
+          conta), a conta, as viagens e os itens do roteiro são apagados na hora e uma assinatura ativa é
+          cancelada. Cópias de segurança automáticas do banco de dados podem manter esses dados por até 30 dias,
+          até serem substituídas. Registros de pagamento ficam com o Stripe pelo prazo que a legislação fiscal
+          exige.
         </p>
       </LegalSection>
 
@@ -111,17 +151,23 @@ export default function PrivacyPage() {
       </LegalSection>
 
       <LegalSection title="8. Seus direitos">
-        <p>Pela LGPD, você pode a qualquer momento:</p>
+        <p>Pela LGPD (art. 18), você pode a qualquer momento:</p>
         <ul>
-          <li>Confirmar se tratamos seus dados e pedir uma cópia deles;</li>
+          <li>Confirmar se tratamos seus dados e ter acesso a eles;</li>
+          <li>Receber uma cópia dos seus dados em formato aberto (portabilidade);</li>
           <li>Corrigir dados incompletos ou desatualizados;</li>
           <li>Pedir a exclusão da sua conta e dos seus dados;</li>
           <li>Pedir informações sobre com quem compartilhamos seus dados;</li>
+          <li>Revogar um consentimento dado (como o da localização) e se opor a um tratamento;</li>
           <li>Revogar o acesso do Tripper à sua Conta Google, nas configurações de segurança do Google.</li>
         </ul>
         <p>
-          Para exercer qualquer direito, escreva para <SupportEmail />. Respondemos em até 15 dias. Você também
-          pode procurar a Autoridade Nacional de Proteção de Dados (ANPD).
+          <strong>Direto no app</strong>, na tela Conta, você pode baixar uma cópia dos seus dados (Baixar meus
+          dados), corrigir seu nome (Editar perfil) e excluir sua conta (Excluir conta), sem precisar pedir.
+        </p>
+        <p>
+          Para os demais pedidos, ou para trocar o e-mail, escreva para <SupportEmail />. Respondemos em até 15
+          dias. Você também pode procurar a Autoridade Nacional de Proteção de Dados (ANPD).
         </p>
       </LegalSection>
 

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Link from "next/link";
 import { getCurrentUser } from "@/lib/session";
 import { signOut } from "@/lib/auth";
-import { Button } from "@/components/ui/button";
+import { db } from "@/lib/db";
+import { daysLeftInTrial, effectivePlan, isSubscribed } from "@/lib/subscription";
+import { ContaScreen, type ContaPlan } from "@/components/conta/conta-screen";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const metadata: Metadata = { title: "Conta" };
@@ -13,53 +14,59 @@ async function logout() {
   await signOut({ redirectTo: "/app" });
 }
 
-// Tela de Conta ainda não desenhada no Figma — versão funcional mínima.
+/** Conta — Figma "Conta (pré-login)" e "Conta (logado)". Lê a sessão dentro do <Suspense>. */
 export default function ContaPage() {
   return (
-    <main className="flex flex-1 flex-col gap-4 px-6 pt-6">
-      <h1 className="text-h2 font-semibold text-foreground">Conta</h1>
-      <Suspense fallback={<Skeleton className="h-28 w-full" />}>
-        <ContaContent />
-      </Suspense>
-    </main>
+    <Suspense fallback={<ContaSkeleton />}>
+      <ContaContent />
+    </Suspense>
   );
 }
 
 async function ContaContent() {
   const user = await getCurrentUser();
+  if (!user) return <ContaScreen user={null} />;
 
-  if (!user) {
-    return (
-      <>
-        <p className="text-p15 text-muted-foreground">Entre para acessar suas viagens em qualquer dispositivo.</p>
-        <Button asChild size="cta">
-          <Link href="/login">Entrar</Link>
-        </Button>
-      </>
-    );
-  }
-
+  const tripsCount = await db.trip.count({ where: { userId: user.id } });
   return (
-    <>
-      <div className="flex items-start justify-between gap-4">
-        <p className="text-p15 text-muted-foreground">
-          {user.name ?? "Viajante"} · {user.email}
-        </p>
-        <Link
-          href="/boas-vindas?editar=1&next=/app/conta"
-          className="shrink-0 text-p14 font-medium text-primary underline-offset-4 hover:underline"
-        >
-          {user.name ? "Alterar nome" : "Adicionar nome"}
-        </Link>
+    <ContaScreen
+      user={{ name: user.name, email: user.email, image: user.image }}
+      plan={planSummary(user)}
+      tripsCount={tripsCount}
+      hasSubscription={isSubscribed(user)}
+      logout={logout}
+    />
+  );
+}
+
+function planSummary(user: NonNullable<Awaited<ReturnType<typeof getCurrentUser>>>): ContaPlan {
+  const plan = effectivePlan(user);
+  if (plan === "PRO") {
+    const end = user.stripeCurrentPeriodEnd?.toLocaleDateString("pt-BR");
+    return { title: "Tripper PRO", detail: end ? `Renova em ${end}` : "Assinatura ativa" };
+  }
+  if (plan === "TRIAL") {
+    const days = daysLeftInTrial(user);
+    return { title: "Teste grátis", detail: `${days === 1 ? "Falta 1 dia" : `Faltam ${days} dias`}` };
+  }
+  return { title: "Plano gratuito", detail: "Conheça o Tripper PRO" };
+}
+
+function ContaSkeleton() {
+  return (
+    <main className="flex flex-1 flex-col px-6 pt-6 pb-8">
+      <h1 className="text-h1 leading-[normal] font-semibold text-foreground">Conta</h1>
+      <div className="mt-8 flex items-center gap-4">
+        <Skeleton className="size-16 rounded-full" />
+        <div className="flex flex-1 flex-col gap-2">
+          <Skeleton className="h-6 w-40" />
+          <Skeleton className="h-4 w-52" />
+        </div>
       </div>
-      <Button asChild variant="outline" size="cta">
-        <Link href="/settings/billing">Meu plano</Link>
-      </Button>
-      <form action={logout}>
-        <Button type="submit" variant="ghost" size="cta" className="text-destructive">
-          Sair
-        </Button>
-      </form>
-    </>
+      <Skeleton className="mt-8 h-7 w-32" />
+      <Skeleton className="mt-4 h-[72px] w-full rounded-[12px]" />
+      <Skeleton className="mt-8 h-7 w-48" />
+      <Skeleton className="mt-4 h-40 w-full" />
+    </main>
   );
 }
