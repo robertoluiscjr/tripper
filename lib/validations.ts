@@ -10,14 +10,21 @@ const money = z.coerce
   .min(0, "O valor não pode ser negativo")
   .optional();
 
+// Campo de data vazio ("") vira "sem data" (o superRefine abaixo pede as datas em português);
+// sem isso, o z.coerce.date() devolvia "Invalid input: expected date, received Date".
+const optionalDate = z.preprocess(
+  (v) => (v === "" || v === null ? undefined : v),
+  z.coerce.date({ message: "Data inválida" }).optional(),
+);
+
 // Tela "Nova Viagem": nome + (datas início/fim) OU (quantidade de dias)
 export const createTripSchema = z
   .object({
     name: z.string().trim().min(2, "Dê um nome para a viagem").max(80),
     destination: z.string().trim().max(120).optional(),
     durationMode: z.enum(["dates", "days"]),
-    startDate: z.coerce.date().optional(),
-    endDate: z.coerce.date().optional(),
+    startDate: optionalDate,
+    endDate: optionalDate,
     daysCount: z.coerce.number().int().min(1).max(90).optional(),
   })
   .superRefine((data, ctx) => {
