@@ -3,8 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { coverPosition } from "@/lib/destination-photos";
 import { ApiError, useTrips } from "@/hooks/use-trips";
+import { useNewTripSubmit } from "@/hooks/use-new-trip";
+import { TripFormSheet } from "@/components/planejar/trip-form-sheet";
 import type { TripDTO } from "@/lib/trips";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,23 +19,57 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from "@/compone
  * "Adicionar à viagem" — Figma "Adicionar Compra" (296:1732). Escolher a viagem abre a Tela da
  * Viagem com o formulário "Passeios e Atrações" já preenchido (nome e endereço); a pessoa só
  * escolhe o dia e salva.
+ * "+ nova viagem" troca esta folha pela "Nova Viagem" sobre o próprio passeio; ao criar, a Tela
+ * da nova viagem abre com o mesmo formulário do passeio já preenchido.
  */
 export function AddToTripSheet({ open, onOpenChange, title, address }: { open: boolean; onOpenChange: (o: boolean) => void; title: string; address: string }) {
+  const query = new URLSearchParams({ novo: "TOUR", titulo: title, endereco: address }).toString();
+  const newTrip = useNewTripSubmit(undefined, query);
+  const [creating, setCreating] = useState(false);
+  // Abre a "Nova Viagem" depois que esta folha desce (duas folhas abertas ao mesmo tempo brigam pelo
+  // foco). 500ms = animação de saída do Vaul; o onAnimationEnd dele não dispara quando o app fecha.
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  useEffect(() => () => clearTimeout(timer.current), []);
+
   return (
-    <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent>{open && <TripPicker title={title} address={address} onPicked={() => onOpenChange(false)} />}</DrawerContent>
-    </Drawer>
+    <>
+      <Drawer open={open} onOpenChange={onOpenChange}>
+        <DrawerContent>
+          {open && (
+            <TripPicker
+              title={title}
+              query={query}
+              onPicked={() => onOpenChange(false)}
+              onNewTrip={() => {
+                onOpenChange(false);
+                timer.current = setTimeout(() => setCreating(true), 500);
+              }}
+            />
+          )}
+        </DrawerContent>
+      </Drawer>
+      <TripFormSheet open={creating} onOpenChange={setCreating} pending={newTrip.pending} onSubmit={newTrip.submit} />
+    </>
   );
 }
 
-function TripPicker({ title, address, onPicked }: { title: string; address: string; onPicked: () => void }) {
+function TripPicker({
+  title,
+  query,
+  onPicked,
+  onNewTrip,
+}: {
+  title: string;
+  query: string;
+  onPicked: () => void;
+  onNewTrip: () => void;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const trips = useTrips(undefined, { enabled: true });
   const loggedOut = trips.error instanceof ApiError && trips.error.status === 401;
 
   function pick(trip: TripDTO) {
-    const query = new URLSearchParams({ novo: "TOUR", titulo: title, endereco: address });
     // Fecha antes de sair: o Next mantém a página anterior guardada (voltar), e o sheet ficaria aberto por cima
     onPicked();
     router.push(`/app/viagens/${trip.id}?${query}`);
@@ -86,11 +123,9 @@ function TripPicker({ title, address, onPicked }: { title: string; address: stri
       )}
 
       {!loggedOut && !trips.isPending && (
-        <Button asChild size="pill" className="mt-8 mr-6 self-end">
-          <Link href="/app/planejar?nova=1" onClick={onPicked}>
-            <img src="/icons/add-white.svg" alt="" width={28} height={28} />
-            nova viagem
-          </Link>
+        <Button size="pill" onClick={onNewTrip} className="mt-8 mr-6 self-end">
+          <img src="/icons/add-white.svg" alt="" width={28} height={28} />
+          nova viagem
         </Button>
       )}
     </div>

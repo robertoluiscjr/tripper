@@ -36,10 +36,9 @@ const PLURAL: Record<ItemCategory, string> = {
 const joinPt = (parts: string[]) => (parts.length < 2 ? parts.join("") : `${parts.slice(0, -1).join(", ")} e ${parts.at(-1)}`);
 
 /**
- * Ver Progresso — Figma "Progresso da viagem 2 (A + C)" (4863:6102): topo do frame original
- * (título, destino • dias, aviso de reservas, próximo passo + CTA de 313px), barra contínua com
- * "5 de 8 itens adicionados" e a % logo acima (opção C) +
- * opções A + C escolhidas na conversa de design para o conteúdo (mesmo card de Estimar Gastos). escolhidas na conversa de design; mesmo visual de Estimar Gastos).
+ * Ver Progresso — Figma "Progresso da viagem 2 (app atual)" (4863:6102): título, destino • dias,
+ * barra contínua com "5 de 8 itens adicionados" e a % logo acima, aviso de reservas, cards por
+ * categoria (mesmo visual de Estimar Gastos) e próximo passo + CTA de 313px.
  * - Topo: barra geral "Planejamento" com % e "5 de 8 itens adicionados".
  * - Um card por categoria: interruptor (vai ter / não vai ter) e quantos itens são previstos (– N +).
  * - Tocar no card ligado mostra as "vagas": itens já no roteiro (✓) e as vazias com "+ Adicionar",
@@ -120,7 +119,8 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
         <p className="mt-2 text-p14 leading-[18px] text-muted-foreground">Itens adicionados não indicam reservas confirmadas.</p>
       </section>
 
-      <h2 className="mt-6 text-h3 leading-[1.2] font-medium tracking-[-0.03em] text-foreground">O que a viagem vai ter</h2>
+      {/* Figma "Progresso da viagem 2 (app atual)": 28px entre os blocos; título da seção 20 Medium, -2% */}
+      <h2 className="mt-7 text-h5 leading-[1.2] font-medium tracking-[-0.02em] text-foreground">O que a viagem vai ter</h2>
       <p className="mt-2 text-p16 leading-[18px] text-muted-foreground">
         {configured || progress.planned === 0
           ? "Ligue as categorias e diga quantos itens você espera em cada uma."
@@ -151,7 +151,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
 
               {on && stats && (
                 <div className="bg-white text-p14 leading-[1.2]">
-                  <div className="flex items-center gap-3 pt-3 pr-4 pb-[11px] pl-3">
+                  <div className="flex items-center gap-2 pt-3 pr-4 pb-[11px] pl-3">
                     <button
                       type="button"
                       aria-expanded={expanded}
@@ -172,7 +172,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
                       <span className="truncate text-muted-foreground">{full ? "completo" : "adicionados"}</span>
                     </button>
                     {/* Itens previstos: – N + (mesmo stepper da Nova Viagem) */}
-                    <div className="flex items-center" role="group" aria-label={`Itens previstos em ${label}`}>
+                    <div className="flex items-center gap-2" role="group" aria-label={`Itens previstos em ${label}`}>
                       <button
                         type="button"
                         aria-label={`Prever menos itens em ${label}`}
@@ -182,7 +182,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
                       >
                         <img src="/icons/menos.svg" alt="" width={24} height={24} />
                       </button>
-                      <span aria-live="polite" className="w-8 text-center text-p16 text-foreground">
+                      <span aria-live="polite" className="w-8 text-center text-p16 leading-5 text-foreground">
                         {stats.planned}
                       </span>
                       <button
@@ -224,7 +224,7 @@ export function ProgressoScreen({ initialTrip, initialItems }: { initialTrip: Tr
       </ul>
 
       {/* Próximo passo (Figma: texto + CTA "Planejar Dia 3") */}
-      <p className="mt-6 text-p16 leading-5 text-muted-foreground">
+      <p className="mt-7 text-p16 leading-5 text-muted-foreground">
         {progress.planned === 0
           ? "Ligue as categorias acima para acompanhar o progresso do planejamento."
           : complete

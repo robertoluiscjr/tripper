@@ -8,8 +8,9 @@ import { saveTripDraft } from "@/lib/trip-draft";
  * "Criar" do bottom sheet Nova Viagem (Home e Planejar).
  * Logado: cria e abre a Tela da Viagem. Sem login (ou sessão expirada → 401): guarda o
  * rascunho e leva ao login; ao voltar, /app/planejar?rascunho=1 cria a viagem.
+ * `query`: anexada à Tela da Viagem recém-criada (ex.: o formulário de um passeio já preenchido).
  */
-export function useNewTripSubmit(loggedIn?: boolean) {
+export function useNewTripSubmit(loggedIn?: boolean, query?: string) {
   const router = useRouter();
   const createTrip = useCreateTrip();
 
@@ -22,7 +23,7 @@ export function useNewTripSubmit(loggedIn?: boolean) {
     if (loggedIn === false) return continueAfterLogin(input);
     try {
       const trip = await createTrip.mutateAsync(input);
-      router.push(`/app/viagens/${trip.id}`);
+      router.push(`/app/viagens/${trip.id}${query ? `?${query}` : ""}`);
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) return continueAfterLogin(input);
       throw err;
