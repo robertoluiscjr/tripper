@@ -61,6 +61,7 @@ Estados visuais claros (default, foco, preenchido, erro, desabilitado). Campos o
 | | Cadastro · Cadastro 2 | 3544:3076 · 3544:3053 |
 | Planejar | Planejar (Próximas / Anteriores) | 214:2250 |
 | | Nova Viagem · Nova Viagem 2 | 3463:2970 · 2139:1794 |
+| | Nova Viagem com Destino (proposta): vazio · sugestões · escolhido · a partir do passeio | 5054:6262 · 5054:6333 · 5054:6423 · 5054:6497 |
 | | Tela da Viagem (1 a 4) | 180:687 · 2098:2018 · 2109:1868 · 3821:4522 |
 | | Novo Item · Novo Item 2 | 3484:3490 · 195:759 |
 | | Transportes · Transportes 2 (dropdown) | 192:316 · 2062:1662 |

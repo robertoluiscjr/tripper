@@ -379,12 +379,12 @@ function TransportPicker({ onPick }: { onPick: (mode: TransportMode) => void }) 
         <img src="/icons/itens/down.svg" alt="" width={22} height={22} className={cn("transition-transform duration-250 ease-figma-out", open && "rotate-180")} />
       </button>
       {open && (
-        // Figma "Container": branco, sombra, cantos inferiores de 4px; itens a cada 47px;
+        // Figma "Container": branco, sombra, cantos inferiores de 12px (como os menus da viagem); itens a cada 47px;
         // 21px antes do primeiro ícone e 22px depois do último. Abre com "Smart animate" de 250ms
         <ul
           role="listbox"
           aria-label="Tipos de Transporte"
-          className="flex animate-in flex-col duration-250 ease-figma-out fade-in rounded-b-[4px] bg-white pt-[21px] pb-[22px] shadow-[0px_1px_4px_1px_rgba(0,0,0,0.25)]"
+          className="flex animate-in flex-col duration-250 ease-figma-out fade-in rounded-b-[12px] bg-white pt-[21px] pb-[22px] shadow-[0px_1px_4px_1px_rgba(0,0,0,0.25)]"
         >
           {TRANSPORT_MODES.map(({ mode, label, icon }, i) => (
             <li key={mode}>
