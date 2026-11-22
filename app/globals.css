@@ -258,3 +258,10 @@
   animation-duration: 300ms;
   animation-timing-function: var(--ease-figma-out);
 }
+
+/* Campo em foco (linha de preenchimento): azul primário com 2px, como o Material 3 (focused
+   indicator de 2dp). A 2ª linha é uma sombra interna, então o campo não muda de altura. */
+@utility line-focus {
+  border-bottom-color: var(--color-primary);
+  box-shadow: inset 0 -1px 0 var(--color-primary);
+}

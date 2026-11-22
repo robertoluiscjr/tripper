@@ -35,7 +35,10 @@ TanStack Query · Prisma 6 + PostgreSQL (Neon) · Zod 4 · Auth.js v5 (Google + 
   (validação de navegação instantânea do Next 16). `getCurrentUser()` já chama `connection()`.
 - **Login de teste local**: `http://localhost:3000/api/dev/login` entra como a persona "Ana Medeiros"
   (só em `next dev`; em produção responde 404).
-- Viagens: foto de capa + coordenadas vêm da Wikipédia (`lib/destination.ts`); mapa = Leaflet + OpenStreetMap.
+- Viagens: foto de capa + coordenadas vêm do **destino**, nunca do nome (que é livre: "Trip dos Brothers").
+  Campo Destino com sugestões (`lib/destination-search.ts`: catálogo + Wikipédia pt + Photon/OSM, via
+  `/api/destinations`); `lib/destination.ts` só usa foto/mapa com certeza (sugestão escolhida ou nome exato),
+  senão a capa fica neutra. Mapa = Leaflet + OpenStreetMap. Foco de campos: utilitário `line-focus` (azul, 2px).
 - Aba Buscar: sem compra no app (checkout/pagamento do Figma ficam para depois). Destinos em `lib/catalog.ts`;
   atrações em `data/attractions.json`, geradas da Wikipédia por `node scripts/catalog.mjs` (lista em
   `scripts/catalog-titles.json`). Links de parceiros (Booking, GetYourGuide, Skyscanner, Decolar) em `lib/partners.ts`

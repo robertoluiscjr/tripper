@@ -373,7 +373,7 @@ function TransportPicker({ onPick }: { onPick: (mode: TransportMode) => void }) 
         aria-expanded={open}
         aria-haspopup="listbox"
         onClick={() => setOpen((o) => !o)}
-        className={cn("mt-8 flex h-6 w-full items-center justify-between border-b text-left", open ? "border-foreground" : "border-input")}
+        className={cn("mt-8 flex h-6 w-full items-center justify-between border-b text-left", open ? "line-focus" : "border-input")}
       >
         <span className="text-p16 leading-[1.2] text-muted-foreground">Tipos de Transporte</span>
         <img src="/icons/itens/down.svg" alt="" width={22} height={22} className={cn("transition-transform duration-250 ease-figma-out", open && "rotate-180")} />
@@ -416,7 +416,7 @@ function FieldBox({ children, error, className }: { children: React.ReactNode; e
 }
 
 const underline =
-  "relative flex h-6 w-full items-end gap-2 border-b border-input pb-1 focus-within:border-primary has-[[aria-invalid=true]]:border-destructive";
+  "relative flex h-6 w-full items-end gap-2 border-b border-input pb-1 focus-within:line-focus has-[[aria-invalid=true]]:border-destructive";
 
 /** Data (viagem com datas) ou "Dia N" (viagem só com quantidade de dias), com ícone de calendário. */
 function DayField({

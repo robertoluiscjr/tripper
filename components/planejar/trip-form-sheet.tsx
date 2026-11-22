@@ -5,16 +5,19 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from "@/components/ui/drawer";
-import { createTripSchema } from "@/lib/validations";
+import { createTripSchema, type DestinationPlace } from "@/lib/validations";
 import { ApiError, type TripFormInput } from "@/hooks/use-trips";
 import type { TripDTO } from "@/lib/trips";
+import { DestinationField } from "./destination-field";
 
 /* eslint-disable @next/next/no-img-element */
 
 /**
- * Bottom sheet "Nova Viagem" (Figma 3463:2970 · 2139:1794): nome da viagem e
- * duração por Datas (inicial/final) ou por quantidade de Dias (– N +).
+ * Bottom sheet "Nova Viagem" (Figma "Nova Viagem 3–6", 5054:6262…): destino (com sugestões de
+ * lugares reais), nome da viagem (opcional; vazio = nome do destino) e duração por Datas
+ * (inicial/final) ou por quantidade de Dias (– N +). A foto de capa e o mapa vêm do destino.
  * Reutilizado para editar a viagem (ícone de edição da Tela da Viagem).
+ * initialPlace: destino já preenchido (ex.: "Adicionar à viagem" de um passeio do Rio).
  */
 export function TripFormSheet({
   open,
@@ -22,11 +25,13 @@ export function TripFormSheet({
   title = "Nova Viagem",
   submitLabel = "Criar",
   trip,
+  initialPlace,
   onSubmit,
   pending,
   footer,
 }: {
   open: boolean;
+  initialPlace?: DestinationPlace;
   onOpenChange: (open: boolean) => void;
   title?: string;
   submitLabel?: string;
@@ -45,6 +50,7 @@ export function TripFormSheet({
             title={title}
             submitLabel={submitLabel}
             trip={trip}
+            initialPlace={initialPlace}
             pending={pending}
             footer={footer}
             onSubmit={async (input) => {
@@ -68,6 +74,7 @@ function TripForm({
   title,
   submitLabel,
   trip,
+  initialPlace,
   pending,
   footer,
   onSubmit,
@@ -75,10 +82,13 @@ function TripForm({
   title: string;
   submitLabel: string;
   trip?: TripDTO;
+  initialPlace?: DestinationPlace;
   pending?: boolean;
   footer?: React.ReactNode;
   onSubmit: (input: TripFormInput) => void;
 }) {
+  const [destination, setDestination] = useState(initialPlace?.label ?? trip?.destination ?? trip?.name ?? "");
+  const [place, setPlace] = useState<DestinationPlace | null>(initialPlace ?? null);
   const [name, setName] = useState(trip?.name ?? "");
   const [mode, setMode] = useState<"dates" | "days">(trip && !trip.startDate ? "days" : "dates");
   const [startDate, setStartDate] = useState(toDateInput(trip?.startDate));
@@ -89,6 +99,8 @@ function TripForm({
   function submit(e: React.FormEvent) {
     e.preventDefault();
     const input: TripFormInput = {
+      destination,
+      ...(place ? { place } : {}),
       name,
       durationMode: mode,
       ...(mode === "dates" ? { startDate, endDate } : { daysCount: days }),
@@ -107,17 +119,29 @@ function TripForm({
   return (
     <form onSubmit={submit} noValidate className="flex flex-col px-6 pt-[31px] pb-8">
       <DrawerTitle className="text-h5 leading-[1.2] font-medium text-foreground">{title}</DrawerTitle>
-      <DrawerDescription className="sr-only">Defina o nome e a duração da viagem</DrawerDescription>
+      <DrawerDescription className="sr-only">Defina o destino, o nome e a duração da viagem</DrawerDescription>
 
-      {/* Nome da Viagem */}
-      <UnderlineInput
+      {/* Destino (com sugestões de lugares reais) */}
+      <DestinationField
         className="mt-8"
+        value={destination}
+        place={place}
+        onChange={setDestination}
+        onSelect={setPlace}
+        error={errors.destination}
+        autoFocus={!trip && !initialPlace}
+      />
+
+      {/* Nome da viagem (opcional) — ícone "sell" (etiqueta de mala), 20px no espaço de 22 */}
+      <IconInput
+        className="mt-6"
+        icon="/icons/sell.svg"
         value={name}
         onChange={setName}
-        placeholder="Nome da Viagem"
-        aria-label="Nome da Viagem"
+        placeholder="Nome da viagem (opcional)"
+        aria-label="Nome da viagem (opcional)"
+        maxLength={80}
         error={errors.name}
-        autoFocus={!trip}
       />
 
       <p className="mt-7 text-p16 leading-[1.2] text-muted-foreground">Duração:</p>
@@ -150,28 +174,32 @@ function TripForm({
   );
 }
 
-function UnderlineInput({
+/** Campo com ícone à esquerda (Figma "Text Field with icon"): ícone 22 + texto 16, linha embaixo. */
+function IconInput({
+  icon,
   value,
   onChange,
   error,
   className,
   ...props
 }: Omit<React.ComponentProps<"input">, "onChange" | "value"> & {
+  icon: string;
   value: string;
   onChange: (v: string) => void;
   error?: string;
 }) {
   return (
     <div className={className}>
-      <input
-        {...props}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        aria-invalid={!!error}
-        className={cn(
-          "h-6 w-full border-b border-input bg-transparent pb-1 text-p16 leading-[1.2] text-foreground outline-none placeholder:text-muted-foreground focus:border-primary aria-invalid:border-destructive",
-        )}
-      />
+      <label className={cn("flex h-6 items-end gap-2 border-b border-input pb-[2px] focus-within:line-focus", error && "border-destructive")}>
+        <img src={icon} alt="" width={22} height={22} className="shrink-0" />
+        <input
+          {...props}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          aria-invalid={!!error}
+          className="h-[19px] min-w-0 flex-1 bg-transparent text-p16 leading-[1.2] text-foreground outline-none placeholder:text-muted-foreground"
+        />
+      </label>
       {error && <FieldError>{error}</FieldError>}
     </div>
   );
@@ -202,7 +230,7 @@ function DateField({
     <div>
       <label
         className={cn(
-          "relative flex h-6 w-full items-end gap-2 border-b border-input pb-[2px] focus-within:border-primary",
+          "relative flex h-6 w-full items-end gap-2 border-b border-input pb-[2px] focus-within:line-focus",
           error && "border-destructive",
         )}
       >

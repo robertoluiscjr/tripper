@@ -17,11 +17,30 @@ const optionalDate = z.preprocess(
   z.coerce.date({ message: "Data inválida" }).optional(),
 );
 
-// Tela "Nova Viagem": nome + (datas início/fim) OU (quantidade de dias)
+/**
+ * Lugar escolhido nas sugestões do campo Destino (OpenStreetMap / Wikipédia).
+ * `name` é o nome limpo ("Florianópolis"), `label` o texto do campo ("Florianópolis, SC") e
+ * `wiki` o título do artigo da Wikipédia em português, quando houver (dele vem a foto da capa).
+ */
+export const destinationPlaceSchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  label: z.string().trim().min(1).max(160),
+  detail: z.string().trim().max(200).optional(),
+  lat: z.number().min(-90).max(90),
+  lon: z.number().min(-180).max(180),
+  wiki: z.string().trim().max(200).optional(),
+});
+export type DestinationPlace = z.infer<typeof destinationPlaceSchema>;
+
+// Tela "Nova Viagem": destino + nome (opcional; vazio = nome do destino) + (datas início/fim) OU (dias)
 export const createTripSchema = z
   .object({
-    name: z.string().trim().min(2, "Dê um nome para a viagem").max(80),
-    destination: z.string().trim().max(120).optional(),
+    destination: z.string().trim().min(2, "Informe para onde você vai").max(160),
+    place: destinationPlaceSchema.optional(),
+    name: z.preprocess(
+      (v) => (typeof v === "string" ? v.trim() : v),
+      z.union([z.literal(""), z.string().min(2, "O nome precisa ter pelo menos 2 letras").max(80)]).optional(),
+    ),
     durationMode: z.enum(["dates", "days"]),
     startDate: optionalDate,
     endDate: optionalDate,
@@ -41,6 +60,11 @@ export const createTripSchema = z
     }
   });
 export type CreateTripInput = z.infer<typeof createTripSchema>;
+
+/** Nome que a viagem recebe: o digitado ou, vazio, o nome do destino ("Florianópolis"). */
+export function tripNameFrom(input: Pick<CreateTripInput, "name" | "destination" | "place">) {
+  return input.name?.trim() || input.place?.name || input.destination.replace(/,\s*[A-Z]{2}$/, "").trim();
+}
 
 export const itemCategorySchema = z.enum([
   "TRANSPORT",

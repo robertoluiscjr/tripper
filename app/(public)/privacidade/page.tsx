@@ -40,7 +40,7 @@ export default function PrivacyPage() {
             você entra com o Google, ou só o e-mail, quando você entra com o link de acesso.
           </li>
           <li>
-            <strong>Dados das suas viagens:</strong> destinos, datas, itens do roteiro (transporte, hospedagem,
+            <strong>Dados das suas viagens:</strong> destino, nome da viagem, datas, itens do roteiro (transporte, hospedagem,
             passeios, alimentação), valores estimados e anotações que você mesmo cadastra.
           </li>
           <li>
@@ -105,8 +105,10 @@ export default function PrivacyPage() {
           <li><strong>Resend:</strong> envio dos e-mails do app;</li>
           <li><strong>Stripe:</strong> processamento de pagamentos, quando houver assinatura;</li>
           <li>
-            <strong>Wikipédia e OpenStreetMap:</strong> foto de capa e localização dos destinos. Recebem apenas o
-            nome do destino ou o pedido das imagens do mapa, nunca os seus dados de conta.
+            <strong>Wikipédia, Wikidata e OpenStreetMap (incluindo o serviço de busca Photon, da Komoot):</strong>{" "}
+            sugestões do campo Destino, foto de capa e localização dos destinos. A busca é feita pelo servidor do
+            Tripper: esses serviços recebem apenas o texto digitado no campo Destino ou o pedido das imagens do mapa,
+            nunca os seus dados de conta nem o seu endereço IP.
           </li>
         </ul>
         <p>

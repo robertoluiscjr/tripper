@@ -1,8 +1,8 @@
 import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 import { checkUsageLimit } from "@/lib/subscription";
-import { createTripSchema } from "@/lib/validations";
-import { lookupDestination } from "@/lib/destination";
+import { createTripSchema, tripNameFrom } from "@/lib/validations";
+import { resolveDestination } from "@/lib/destination";
 import { daysBetween, toTripDTO } from "@/lib/trips";
 
 /** GET → viagens do usuário (Próximas / Anteriores). */
@@ -35,16 +35,16 @@ export async function POST(req: Request) {
     );
   }
 
-  const { name, destination, durationMode, startDate, endDate, daysCount } = parsed.data;
+  const { destination, place, durationMode, startDate, endDate, daysCount } = parsed.data;
   const byDates = durationMode === "dates" && startDate && endDate;
-  // Foto e coordenadas do destino (o nome da viagem costuma ser o destino: "Rio de Janeiro")
-  const info = await lookupDestination(destination || name);
+  // Foto e coordenadas vêm do destino (nunca do nome, que é livre: "Trip dos Brothers")
+  const info = await resolveDestination({ destination, place });
 
   const trip = await db.trip.create({
     data: {
       userId: user.id,
-      name,
-      destination: destination || name,
+      name: tripNameFrom(parsed.data),
+      destination,
       ...info,
       startDate: byDates ? startDate : null,
       endDate: byDates ? endDate : null,

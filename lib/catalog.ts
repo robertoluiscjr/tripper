@@ -1,5 +1,6 @@
 import attractionsData from "@/data/attractions.json";
 import { flightsUrl, hotelsUrl, packagesUrl, toursUrl } from "@/lib/partners";
+import type { DestinationPlace } from "@/lib/validations";
 
 /**
  * Catálogo da aba Buscar: destinos do protótipo (Figma "Buscar" e "Passeios e Atrações")
@@ -67,6 +68,19 @@ export function attractionsOf(destination: string) {
 
 export function getAttraction(destination: string, slug: string) {
   return ATTRACTIONS.find((a) => a.destination === destination && a.slug === slug);
+}
+
+/** Siglas dos estados (campo Destino: "Florianópolis, SC"). */
+export const UF_NAMES: Record<string, string> = {
+  AC: "Acre", AL: "Alagoas", AP: "Amapá", AM: "Amazonas", BA: "Bahia", CE: "Ceará", DF: "Distrito Federal",
+  ES: "Espírito Santo", GO: "Goiás", MA: "Maranhão", MT: "Mato Grosso", MS: "Mato Grosso do Sul", MG: "Minas Gerais",
+  PA: "Pará", PB: "Paraíba", PR: "Paraná", PE: "Pernambuco", PI: "Piauí", RJ: "Rio de Janeiro", RN: "Rio Grande do Norte",
+  RS: "Rio Grande do Sul", RO: "Rondônia", RR: "Roraima", SC: "Santa Catarina", SP: "São Paulo", SE: "Sergipe", TO: "Tocantins",
+};
+
+/** Destino do catálogo como lugar do campo Destino (ex.: "Adicionar à viagem" de um passeio). */
+export function placeFromCatalog(d: Destination): DestinationPlace {
+  return { name: d.name, label: `${d.name}, ${d.state}`, detail: `${UF_NAMES[d.state] ?? d.state}, Brasil`, lat: d.lat, lon: d.lon, wiki: d.name };
 }
 
 /** "Rio de Janeiro", "rio  de janeiro!", "São Luís" → comparação sem acento/caixa */

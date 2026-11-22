@@ -8,6 +8,7 @@ import { coverPosition } from "@/lib/destination-photos";
 import { ApiError, useTrips } from "@/hooks/use-trips";
 import { useNewTripSubmit } from "@/hooks/use-new-trip";
 import { TripFormSheet } from "@/components/planejar/trip-form-sheet";
+import type { DestinationPlace } from "@/lib/validations";
 import type { TripDTO } from "@/lib/trips";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -22,7 +23,20 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerTitle } from "@/compone
  * "+ nova viagem" troca esta folha pela "Nova Viagem" sobre o próprio passeio; ao criar, a Tela
  * da nova viagem abre com o mesmo formulário do passeio já preenchido.
  */
-export function AddToTripSheet({ open, onOpenChange, title, address }: { open: boolean; onOpenChange: (o: boolean) => void; title: string; address: string }) {
+export function AddToTripSheet({
+  open,
+  onOpenChange,
+  title,
+  address,
+  place,
+}: {
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+  title: string;
+  address: string;
+  /** destino do passeio: já vem preenchido na Nova Viagem */
+  place?: DestinationPlace;
+}) {
   const query = new URLSearchParams({ novo: "TOUR", titulo: title, endereco: address }).toString();
   const newTrip = useNewTripSubmit(undefined, query);
   const [creating, setCreating] = useState(false);
@@ -48,7 +62,7 @@ export function AddToTripSheet({ open, onOpenChange, title, address }: { open: b
           )}
         </DrawerContent>
       </Drawer>
-      <TripFormSheet open={creating} onOpenChange={setCreating} pending={newTrip.pending} onSubmit={newTrip.submit} />
+      <TripFormSheet open={creating} onOpenChange={setCreating} initialPlace={place} pending={newTrip.pending} onSubmit={newTrip.submit} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
-import { createTripSchema } from "@/lib/validations";
-import { lookupDestination } from "@/lib/destination";
+import { createTripSchema, tripNameFrom } from "@/lib/validations";
+import { resolveDestination } from "@/lib/destination";
 import { daysBetween, toTripDTO } from "@/lib/trips";
 
 async function findOwnTrip(id: string) {
@@ -20,7 +20,7 @@ export async function GET(_req: Request, ctx: RouteContext<"/api/trips/[id]">) {
   return Response.json({ trip: toTripDTO(found.trip) });
 }
 
-/** PATCH → editar nome/duração (ícone de edição da Tela da Viagem). */
+/** PATCH → editar destino/nome/duração (ícone de edição da Tela da Viagem). */
 export async function PATCH(req: Request, ctx: RouteContext<"/api/trips/[id]">) {
   const { id } = await ctx.params;
   const found = await findOwnTrip(id);
@@ -31,21 +31,19 @@ export async function PATCH(req: Request, ctx: RouteContext<"/api/trips/[id]">) 
     return Response.json({ error: "Dados inválidos", issues: parsed.error.issues }, { status: 422 });
   }
 
-  const { name, destination, durationMode, startDate, endDate, daysCount } = parsed.data;
+  const { destination, place, durationMode, startDate, endDate, daysCount } = parsed.data;
   const byDates = durationMode === "dates" && startDate && endDate;
-  const newDestination = destination || name;
   const days = byDates ? daysBetween(startDate, endDate) : daysCount!;
 
-  // Novo destino → nova foto/coordenadas
-  const info =
-    newDestination !== found.trip.destination ? await lookupDestination(newDestination) : {};
+  // Novo destino (ou outro lugar escolhido nas sugestões) → nova foto/coordenadas
+  const info = destination !== found.trip.destination || place ? await resolveDestination({ destination, place }) : {};
 
   const [trip] = await db.$transaction([
     db.trip.update({
       where: { id },
       data: {
-        name,
-        destination: newDestination,
+        name: tripNameFrom(parsed.data),
+        destination,
         ...info,
         startDate: byDates ? startDate : null,
         endDate: byDates ? endDate : null,

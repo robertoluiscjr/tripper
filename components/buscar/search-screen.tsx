@@ -54,7 +54,7 @@ export function SearchScreen({ mode }: { mode: SearchMode }) {
       <ScreenHeader back="/app/buscar" backLabel="Voltar para Buscar" title={config.label} />
 
       {/* Campo de busca (Figma "Text Field with icon"): ícone 22 + texto 16, linha de preenchimento */}
-      <label className="mt-[39px] flex h-6 items-center gap-2 border-b border-tripper-dark-300 focus-within:border-primary">
+      <label className="mt-[39px] flex h-6 items-center gap-2 border-b border-tripper-dark-300 focus-within:line-focus">
         <img src="/icons/buscar/search.svg" alt="" width={22} height={22} className="size-[22px] shrink-0" />
         <span className="sr-only">Qual seu próximo destino?</span>
         <input

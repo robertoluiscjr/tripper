@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { attractionToursUrl, type Attraction, type Destination } from "@/lib/catalog";
+import { attractionToursUrl, placeFromCatalog, type Attraction, type Destination } from "@/lib/catalog";
 import { PARTNER_NAME } from "@/lib/partners";
 import { Button } from "@/components/ui/button";
 import { ScreenHeader } from "@/components/buscar/screen-header";
@@ -117,6 +117,7 @@ export function PasseioScreen({ destination, attraction }: { destination: Destin
         onOpenChange={setAdding}
         title={attraction.name}
         address={`${attraction.name}, ${destination.name} - ${destination.state}`}
+        place={placeFromCatalog(destination)}
       />
     </main>
   );

@@ -85,7 +85,7 @@ export function CategorySearch() {
       {/* Campo de busca (Figma "Text Field with icon"): abre a busca da categoria escolhida */}
       <Link
         href={current.href}
-        className="mt-8 flex h-6 items-center gap-2 border-b border-tripper-dark-300 text-p16 leading-[1.2] text-muted-foreground outline-none focus-visible:border-primary"
+        className="mt-8 flex h-6 items-center gap-2 border-b border-tripper-dark-300 text-p16 leading-[1.2] text-muted-foreground outline-none focus-visible:line-focus"
       >
         <img src="/icons/buscar/search.svg" alt="" width={22} height={22} className="size-[22px]" />
         Buscar {current.label}
