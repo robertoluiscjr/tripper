@@ -106,9 +106,11 @@ export default function PrivacyPage() {
           <li><strong>Stripe:</strong> processamento de pagamentos, quando houver assinatura;</li>
           <li>
             <strong>Wikipédia, Wikidata e OpenStreetMap (incluindo o serviço de busca Photon, da Komoot):</strong>{" "}
-            sugestões do campo Destino, foto de capa e localização dos destinos. A busca é feita pelo servidor do
-            Tripper: esses serviços recebem apenas o texto digitado no campo Destino ou o pedido das imagens do mapa,
-            nunca os seus dados de conta nem o seu endereço IP.
+            sugestões do campo Destino, fotos e localização dos destinos e dos itens do roteiro, e as imagens do
+            mapa. As buscas (o texto digitado no campo Destino e os nomes e endereços dos itens) são feitas pelo
+            servidor do Tripper, sem os seus dados de conta. Já as imagens do mapa e as fotos dos itens são
+            carregadas diretamente pelo seu navegador, como acontece em qualquer site: por isso o OpenStreetMap e a
+            Wikimedia recebem o seu endereço IP, mas nunca o seu nome, e-mail ou viagens.
           </li>
         </ul>
         <p>
