@@ -73,7 +73,11 @@ export async function exactDestination(text: string): Promise<DestinationPlace |
 function isSamePlace(a: DestinationPlace, b: DestinationPlace) {
   if (a.wiki && a.wiki === b.wiki) return true; // mesmo artigo ("Floripa" e "Florianópolis")
   const na = normalizeText(a.name), nb = normalizeText(b.name);
-  return distanceKm(a, b) < 40 && (na === nb || na.includes(nb) || nb.includes(na));
+  const km = distanceKm(a, b);
+  if (km < 40 && (na === nb || na.includes(nb) || nb.includes(na))) return true;
+  // Grafias diferentes do mesmo lugar ("Cartagena das Índias" / "Cartagena de Indias")
+  const [fa] = na.split(" "), [fb] = nb.split(" ");
+  return km < 25 && fa.length >= 4 && fa === fb;
 }
 
 /** Cada palavra digitada é o começo de alguma palavra do nome ("rio de" → "Rio de Janeiro"). */
