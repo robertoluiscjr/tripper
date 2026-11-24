@@ -89,6 +89,9 @@ function TripForm({
 }) {
   const [destination, setDestination] = useState(initialPlace?.label ?? trip?.destination ?? trip?.name ?? "");
   const [place, setPlace] = useState<DestinationPlace | null>(initialPlace ?? null);
+  // Cursor no Destino ao abrir só com mouse/teclado físico. No celular, cursor = teclado aberto
+  // cobrindo metade da folha: a pessoa vê a folha inteira primeiro e toca no campo quando quiser.
+  const [finePointer] = useState(() => typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches);
   const [name, setName] = useState(trip?.name ?? "");
   const [mode, setMode] = useState<"dates" | "days">(trip && !trip.startDate ? "days" : "dates");
   const [startDate, setStartDate] = useState(toDateInput(trip?.startDate));
@@ -129,7 +132,7 @@ function TripForm({
         onChange={setDestination}
         onSelect={setPlace}
         error={errors.destination}
-        autoFocus={!trip && !initialPlace}
+        autoFocus={!trip && !initialPlace && finePointer}
       />
 
       {/* Nome da viagem (opcional) — ícone "sell" (etiqueta de mala), 20px no espaço de 22 */}
