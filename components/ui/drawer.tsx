@@ -45,79 +45,140 @@ function DrawerOverlay({
 }
 
 /**
- * Teclado do iPhone (Safari): o teclado não encolhe a página, só a "área visível" (visualViewport).
- * O ajuste automático do Vaul (repositionInputs) corta a altura da folha sem deixar o conteúdo rolar
- * e se confunde ao trocar de campo (alterna "teclado aberto/fechado" a cada mudança > 60px, como a
- * barra de sugestões do teclado aparecendo). Resultado: sugestões do Destino atrás do teclado e a
- * folha "pulando" ao tocar em outro campo.
- * Aqui, depois do ajuste do Vaul, a folha passa a ocupar exatamente o espaço acima do teclado, com o
- * conteúdo rolando por dentro, e o campo em foco é trazido para a vista (o Destino vai para o topo,
- * para as 5 sugestões caberem abaixo dele).
+ * Teclado no celular (principalmente Safari do iPhone): o teclado cobre a parte de baixo da tela e o
+ * navegador nem sempre informa direito quanto ele ocupa. O ajuste automático do Vaul
+ * (repositionInputs) depende dessa medida, e quando ela falha a folha fica parada no meio da tela
+ * com as sugestões do Destino atrás do teclado, ou "pula" ao trocar de campo.
+ *
+ * Solução que não depende da medida (padrão de busca do Airbnb e do Google Maps): ao tocar num campo
+ * de texto, a folha sobe até o topo da tela e o campo vai para o alto, com espaço livre logo abaixo
+ * (sugestões). Ao sair do campo, a folha volta ao tamanho normal. Só em telas de toque.
+ * Diagnóstico: abra o app com ?debug=teclado para ver as medidas na tela (fica salvo no aparelho;
+ * ?debug=0 desliga).
  */
-const KEYBOARD_MIN = 80 // abaixo disso é a barra do Safari mudando, não o teclado
-const TOP_GAP = 12 // folga entre o topo da área visível e a folha
+const FIELD = "input:not([type=checkbox]):not([type=radio]):not([type=date]):not([type=hidden]), textarea, [contenteditable=true]"
+const TOP = "calc(env(safe-area-inset-top) + 8px)"
+
+function isTextField(node: EventTarget | null): node is HTMLElement {
+  return node instanceof HTMLElement && node.matches(FIELD)
+}
 
 function useKeyboardAwareSheet(contentRef: React.RefObject<HTMLDivElement | null>) {
   React.useEffect(() => {
-    const vv = window.visualViewport
-    if (!vv) return
+    if (!window.matchMedia("(pointer: coarse)").matches) return
+    const timers: ReturnType<typeof setTimeout>[] = []
     let frame = 0
 
-    const apply = (reveal: boolean) => {
+    // Aplica (de novo) a posição "teclado": depois do Vaul e da animação do teclado (~300 ms)
+    const settle = () => {
+      const el = contentRef.current
+      const field = document.activeElement
+      if (!el || !("keyboard" in el.dataset) || !isTextField(field) || !el.contains(field)) return
+      const vv = window.visualViewport
+      const keyboard = vv ? Math.max(0, window.innerHeight - vv.height - vv.offsetTop) : 0
+      el.style.top = TOP
+      el.style.marginTop = "0px"
+      el.style.height = "auto"
+      el.style.maxHeight = "none"
+      el.style.bottom = `${keyboard > 80 ? keyboard : 0}px`
+      pinToTop(el, field)
+    }
+    const schedule = () => {
       cancelAnimationFrame(frame)
-      // 2 quadros: roda depois do ajuste do próprio Vaul (que reage ao mesmo evento)
-      frame = requestAnimationFrame(() =>
-        requestAnimationFrame(() => {
-          const el = contentRef.current
-          if (!el) return
-          const keyboard = window.innerHeight - vv.height - vv.offsetTop
-          if (keyboard > KEYBOARD_MIN) {
-            el.style.bottom = `${keyboard}px`
-            el.style.height = "auto"
-            el.style.maxHeight = `${vv.height - TOP_GAP}px`
-            if (reveal) revealFocused(el)
-          } else if (el.style.maxHeight) {
-            el.style.bottom = "0px"
-            el.style.height = ""
-            el.style.maxHeight = ""
-          }
-        })
-      )
+      frame = requestAnimationFrame(() => requestAnimationFrame(settle))
+      timers.push(setTimeout(settle, 350), setTimeout(settle, 700))
     }
 
-    const onViewport = () => apply(true)
-    // Trocar de campo com o teclado já aberto: só traz o novo campo para a vista
-    const onFocusIn = (e: FocusEvent) => {
-      if (contentRef.current?.contains(e.target as Node)) apply(true)
+    // Foco num campo, toque num campo que já tinha o foco (o iPhone abre o teclado sem novo
+    // "foco": ex. Destino com foco automático) ou digitação: entra no modo teclado
+    const activate = (e: Event) => {
+      const el = contentRef.current
+      if (!el || !isTextField(e.target) || !el.contains(e.target)) return
+      el.dataset.keyboard = ""
+      settle()
+      schedule()
     }
-    vv.addEventListener("resize", onViewport)
-    vv.addEventListener("scroll", onViewport)
+    const onFocusIn = activate
+    const onFocusOut = () => {
+      // Espera o próximo foco: trocar de campo não deve fazer a folha descer e subir
+      timers.push(
+        setTimeout(() => {
+          const el = contentRef.current
+          const field = document.activeElement
+          if (!el || (isTextField(field) && el.contains(field))) return
+          delete el.dataset.keyboard
+          el.style.top = ""
+          el.style.marginTop = ""
+          el.style.height = ""
+          el.style.maxHeight = ""
+          el.style.bottom = "0px"
+        }, 120)
+      )
+    }
+    const vv = window.visualViewport
     document.addEventListener("focusin", onFocusIn)
+    document.addEventListener("focusout", onFocusOut)
+    document.addEventListener("pointerup", activate, true)
+    document.addEventListener("input", activate, true)
+    vv?.addEventListener("resize", schedule)
     return () => {
       cancelAnimationFrame(frame)
-      vv.removeEventListener("resize", onViewport)
-      vv.removeEventListener("scroll", onViewport)
+      timers.forEach(clearTimeout)
       document.removeEventListener("focusin", onFocusIn)
+      document.removeEventListener("focusout", onFocusOut)
+      document.removeEventListener("pointerup", activate, true)
+      document.removeEventListener("input", activate, true)
+      vv?.removeEventListener("resize", schedule)
     }
   }, [contentRef])
 }
 
-/** Rola só a área interna da folha (nunca a página) para mostrar o campo em foco. */
-function revealFocused(content: HTMLElement) {
-  const field = document.activeElement as HTMLElement | null
+/** Rola só a área interna da folha (nunca a página) para pôr o campo no alto. */
+function pinToTop(content: HTMLElement, field: HTMLElement) {
   const scroller = content.querySelector<HTMLElement>("[data-slot=drawer-scroll]")
-  if (!field || !scroller || !scroller.contains(field)) return
-  const box = scroller.getBoundingClientRect()
-  const target = field.getBoundingClientRect()
-  const margin = 16
-  if (field.getAttribute("role") === "combobox") {
-    // Campo com sugestões: no topo, com a lista inteira visível abaixo
-    scroller.scrollTop += target.top - box.top - margin
-  } else if (target.top < box.top + margin) {
-    scroller.scrollTop += target.top - box.top - margin
-  } else if (target.bottom > box.bottom - margin) {
-    scroller.scrollTop += target.bottom - box.bottom + margin
-  }
+  if (!scroller || !scroller.contains(field)) return
+  const offset = field.getBoundingClientRect().top - scroller.getBoundingClientRect().top - 24
+  if (Math.abs(offset) > 2) scroller.scrollTop += offset
+}
+
+/** Painel de diagnóstico do teclado (?debug=teclado): medidas reais do aparelho, para prints. */
+function KeyboardDebug({ contentRef }: { contentRef: React.RefObject<HTMLDivElement | null> }) {
+  const [text, setText] = React.useState("")
+  React.useEffect(() => {
+    let on = false
+    try {
+      const param = new URLSearchParams(window.location.search).get("debug")
+      if (param === "teclado") localStorage.setItem("tripper:debug-teclado", "1")
+      if (param === "0") localStorage.removeItem("tripper:debug-teclado")
+      on = localStorage.getItem("tripper:debug-teclado") === "1"
+    } catch {
+      // armazenamento bloqueado: sem diagnóstico
+    }
+    if (!on) return
+    const id = setInterval(() => {
+      const vv = window.visualViewport
+      const el = contentRef.current
+      const r = el?.getBoundingClientRect()
+      const scroller = el?.querySelector<HTMLElement>("[data-slot=drawer-scroll]")
+      const a = document.activeElement as HTMLElement | null
+      setText(
+        [
+          `janela ${window.innerHeight} · visível ${vv?.height.toFixed(0)} · desloc. ${vv?.offsetTop.toFixed(0)}`,
+          `folha topo ${r?.top.toFixed(0)} · base ${r?.bottom.toFixed(0)} · altura ${r?.height.toFixed(0)}`,
+          `estilo top ${el?.style.top || "-"} · bottom ${el?.style.bottom || "-"} · height ${el?.style.height || "-"}`,
+          `rolagem ${scroller?.scrollTop.toFixed(0)} · teclado? ${el && "keyboard" in el.dataset ? "sim" : "não"}`,
+          `foco ${a?.tagName.toLowerCase()} ${a?.getAttribute("aria-label") ?? ""} · topo ${a?.getBoundingClientRect().top.toFixed(0)}`,
+        ].join("\n")
+      )
+    }, 300)
+    return () => clearInterval(id)
+  }, [contentRef])
+  if (!text) return null
+  return (
+    <pre className="pointer-events-none fixed top-[env(safe-area-inset-top)] left-1 z-[100] max-w-[96vw] rounded bg-black/80 p-2 text-[10px] leading-tight whitespace-pre-wrap text-white">
+      {text}
+    </pre>
+  )
 }
 
 function DrawerContent({
@@ -144,10 +205,15 @@ function DrawerContent({
             sheet centralizado exatamente sobre a coluna. */}
         {/* "Barra do Bottom Sheet" do Figma: 56 × 2px, #B9B9B9, a 16px do topo */}
         <div className="mx-auto mt-[15px] hidden h-[2px] w-14 shrink-0 rounded-full bg-input group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
-        {/* Conteúdo rola por dentro quando não cabe (ex.: teclado aberto no iPhone) */}
-        <div data-slot="drawer-scroll" className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain">
+        {/* Conteúdo rola por dentro quando não cabe. Com teclado: folga embaixo para qualquer campo
+            poder subir até o alto (o resto fica atrás do teclado) */}
+        <div
+          data-slot="drawer-scroll"
+          className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain group-data-[keyboard]/drawer-content:pb-[60vh]"
+        >
           {children}
         </div>
+        <KeyboardDebug contentRef={contentRef} />
       </DrawerPrimitive.Content>
     </DrawerPortal>
   )
