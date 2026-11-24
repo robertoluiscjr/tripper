@@ -69,14 +69,18 @@ function useKeyboardAwareSheet(contentRef: React.RefObject<HTMLDivElement | null
     const timers: ReturnType<typeof setTimeout>[] = []
     let frame = 0
 
-    // Aplica (de novo) a posição "teclado": depois do Vaul e da animação do teclado (~300 ms)
+    // Aplica (de novo) a posição "teclado": depois do Vaul e da animação do teclado (~300 ms).
+    // A folha ocupa exatamente o que está visível: o Safari "desce" a tela (visualViewport.offsetTop)
+    // para mostrar o campo, e a folha, presa à página, subia junto e sumia acima do topo.
     const settle = () => {
       const el = contentRef.current
       const field = document.activeElement
-      if (!el || !("keyboard" in el.dataset) || !isTextField(field) || !el.contains(field)) return
+      if (!el || !isTextField(field) || !el.contains(field)) return
+      el.dataset.keyboard = "" // também cobre o foco automático (teclado aberto antes da folha "ver")
       const vv = window.visualViewport
-      const keyboard = vv ? Math.max(0, window.innerHeight - vv.height - vv.offsetTop) : 0
-      el.style.top = TOP
+      const offset = vv?.offsetTop ?? 0
+      const keyboard = vv ? Math.max(0, window.innerHeight - vv.height - offset) : 0
+      el.style.top = `calc(${offset}px + ${TOP})`
       el.style.marginTop = "0px"
       el.style.height = "auto"
       el.style.maxHeight = "none"
@@ -99,6 +103,13 @@ function useKeyboardAwareSheet(contentRef: React.RefObject<HTMLDivElement | null
       schedule()
     }
     const onFocusIn = activate
+    // Com o teclado aberto, arrastar não fecha a folha (como as folhas do iPhone): fechar no meio da
+    // digitação apagava o que já estava preenchido. Feche o teclado (✓) e depois arraste.
+    // Bloqueia só o início do arraste do Vaul; rolar, tocar e digitar continuam normais.
+    const onPointerDown = (e: PointerEvent) => {
+      const el = contentRef.current
+      if (el && "keyboard" in el.dataset && el.contains(e.target as Node)) e.stopPropagation()
+    }
     const onFocusOut = () => {
       // Espera o próximo foco: trocar de campo não deve fazer a folha descer e subir
       timers.push(
@@ -120,14 +131,19 @@ function useKeyboardAwareSheet(contentRef: React.RefObject<HTMLDivElement | null
     document.addEventListener("focusout", onFocusOut)
     document.addEventListener("pointerup", activate, true)
     document.addEventListener("input", activate, true)
+    document.addEventListener("pointerdown", onPointerDown, true)
+    // Teclado abrindo/fechando ou o Safari deslocando a tela: reposiciona
     vv?.addEventListener("resize", schedule)
+    vv?.addEventListener("scroll", schedule)
     return () => {
+      vv?.removeEventListener("scroll", schedule)
       cancelAnimationFrame(frame)
       timers.forEach(clearTimeout)
       document.removeEventListener("focusin", onFocusIn)
       document.removeEventListener("focusout", onFocusOut)
       document.removeEventListener("pointerup", activate, true)
       document.removeEventListener("input", activate, true)
+      document.removeEventListener("pointerdown", onPointerDown, true)
       vv?.removeEventListener("resize", schedule)
     }
   }, [contentRef])
